@@ -11,4 +11,4 @@ This tutorial covers:
 * Combining R and Markdown using Jupyter's R kernel
 * Combining R and bash using Jupyter's Python kernel
 
-The tutorial is illustrated in the context of the [BCE virtual machine](bce.berkeley.edu).
+The tutorial is illustrated in the context of the [BCE virtual machine](http://bce.berkeley.edu).
