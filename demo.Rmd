@@ -272,7 +272,7 @@ print(zoo)
 
 # 6) References
 
-We'll just see how you use bibtex style references.  @Bane:etal:2008 proposed a useful method. This was confirmed [@CresJoha2008].
+We'll just see how you use bibtex style references.  @Bane:etal:2008 proposed a useful method. This was confirmed [@Cres:Joha:2008].
 
 
 
