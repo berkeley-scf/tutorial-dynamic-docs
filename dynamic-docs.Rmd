@@ -1,0 +1,63 @@
+Creating Dynamic Documents
+======================================================================================
+Embedding Code Chunks in Scientific Documents
+----------------------------------------------------------
+
+Chris Paciorek, Department of Statistics, UC Berkeley
+
+```{r setup, include=FALSE}
+opts_chunk$set(engine='bash') # because we're using a lot of bash, let's set as default
+```
+
+# 0) This Tutorial
+
+This tutorial covers the basics of creating documents that combine code chunks, mathematical notation, and text. We'll cover R and bash shell chunks (plus a little bit on Python) in the context of documents written with Latex and Markdown. 
+
+A screencast of the material accompanies this document, and the end of this document has questions that test your understanding of the material. 
+
+We'll use a virtual machine developed here at Berkeley, [the Berkeley Common Environment (BCE)](http://bce.berkeley.edu). BCE is a virtual Linux machine - basically it is a Linux computer that you can run within your own computer, regardless of whether you are using Windows, Mac, or Linux. This provides a common environment so that things behave the same for all of us.
+
+Materials for this tutorial, including the R markdown file that was used to create this document are available on github at (https://github.com/berkeley-scf/tutorial-dynamic-docs).  You can download the files by doing a git clone from a terminal window on UNIX-like machine, as we'll demonstrate early in this document:
+```{r, clone, eval=FALSE}
+git clone https://github.com/berkeley-scf/tutorial-dynamic-docs
+```
+
+This is a pull-yourself-up-by-your-bootstraps tutorial as this document itself is generated from an R Markdown file in the same way as we discuss herein.
+
+To create this HTML document, simply compile the corresponding R Markdown file in R as follows (the following will work from within BCE after cloning the repository as above).
+```{r, build-html, eval = FALSE}
+Rscript -e "library(knitr); knit2html('dynamic-docs.Rmd')"
+```
+
+<!--
+#pandoc --number-sections spark.md -o spark.html
+#Rscript -e "library(knitr); knit('spark.Rmd')"
+#pandoc --mathjax --number-sections spark.md -o spark.html
+-->
+
+
+
+# 1) Getting prepared
+
+First, you'll need to get the BCE virtual machine running on your computer. First install the VirtualBox software on your local machine. BCE runs on VirtualBox. Please follow the [BCE installation instructions](http://bce.berkeley.edu/install). Once you've done this, you'll have a Linux computer running within your own machine.
+
+That said, if you'd like to work on your own machine, you can. But you'll need to install the following:
+* a LaTeX installation
+* R (and optionally RStudio)
+* the knitr package for R
+% * Jupyter and the R kernel for Jupyter 
+
+Note that more details on LaTeX are available in our [https://github.com/berkeley-scf/tutorial-latex-intro](quick introduction to LaTeX).
+
+# 5) RMarkdown: Markdown + R
+
+# 1) Latex + R using knitr (Rtex format)
+
+# adding bash or Python chunks
+
+# 1) Latex + R using Sweave formatting (Rnw format)
+
+# adding bash or Python chunks
+
+# 4) Lyx + R
+

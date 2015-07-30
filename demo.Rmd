@@ -1,0 +1,279 @@
+
+---
+title: "A demo RMarkdown file"
+subtitle: "Illustrating use of R, bash, and Python code chunks"
+author: "Christopher Paciorek"
+date: "July 2015"
+bibliography: refs.bib
+---
+
+```{r chunksetup, include=FALSE} 
+# include any code here you don't want to show up in the document,
+# e.g., package and dataset loading
+
+require(ggplot2)
+set.seed(0)
+
+# also a good place to set global chunk options
+
+library(knitr) # need this for opts_chunk command
+opts_chunk$set(fig.width = 5, fig.height = 5)
+# if we wanted chunks by default not to be evaluated
+# opts_chunk$set(eval = FALSE)  
+```
+
+# 0) How to generate a document from this file
+
+In bash, you can run this document through the either the *rmarkdown* or *knitr* package for R to generate an html file, or through the *rmarkdown* package to generate PDF or Word (the latter being useful at times but hopefully avoidable).
+
+```{bash, compile-bash, eval=FALSE}
+Rscript -e "library(rmarkdown); render('demo.Rmd', 'pdf_document')"  # PDF
+Rscript -e "library(rmarkdown); render('demo.Rmd', 'html_document')"  # HTML
+Rscript -e "library(rmarkdown); render('demo.Rmd', 'word_document')"  # Word
+Rscript -e "library(knitr); knit2html('demo.Rmd')"  # HTML alternative
+
+```
+
+Or, start R and run the desired line from amongst following in R:
+
+```{r, compile-R, eval=FALSE}
+library(rmarkdown); render('demo.Rmd', 'pdf_document')"
+library(rmarkdown); render('demo.Rmd', 'html_document')
+library(knitr); knit2html('demo.Rmd')  
+```
+
+This document will focus on embedding math and code and not on standard Markdown formatting. There are lots of sources of information on Markdown. [RStudio has good information on R Markdown](http://rmarkdown.rstudio.com) (including Markdown formatting).
+
+# 1) Embedding equations using LaTeX
+
+This can be done with the following syntax. Note that you can't have a space after the initial $ for the inline equations.
+
+Here is an inline equation $f(x) = \int f(y, x) dy$.
+
+Here's a displayed equation
+$$ f(x) = \int f(y, x) dy.$$ 
+
+
+# 2) Embedding R code
+
+
+
+Here's an R code chunk
+```{r, r-chunk1}
+a <- c(7, 3)
+mean(a)
+b <- a + 3
+mean(b)
+```
+
+Here's another chunk: 
+
+```{r, r-chunk2}
+mean(b)
+```
+
+When running R code, output is printed interspersed with the code, as one would generally want. Also, later chunks have access to result from earlier chunks (i.e., state is preserved between chunks). 
+
+Let's make a plot:
+```{r, r-plot, fig.height = 3}
+hist(rnorm(20))
+```
+
+And here's some inline R code: What is 3 plus 5? `r 3+5`.
+
+You have control over whether code in chunks is echoed into the document and evaluated using the `include`, `echo`, and `eval` flags.
+
+```{r, include, include=FALSE}
+cat("this code is evaluated but nothing is printed in the document")
+library(fields) 
+# fields package should now be loaded for use by later chunks
+```
+
+```{r, echo, echo=FALSE}
+cat("this code is not echoed to the screen but is evaluated")
+```
+```{r, eval, eval=FALSE}
+cat("this code is not evaluated but is printed")
+```
+
+Intensive calculations can be saved using the `cache=TRUE` tag so they don't need to be rerun every time you compile the document. 
+```{r, slow-step, cache=TRUE}
+mean(rnorm(5e7))
+```
+
+
+# 3) Embedding bash and Python code
+
+## 3.1) bash
+
+A bash chunk:
+```{bash, bash-chunk1}
+ls -l
+df -h
+cd /tmp
+pwd
+```
+
+Unfortunately, output from bash chunks occurs after all the code is printed and state is not preserved between chunks.
+
+```{bash, bash-chunk2}
+pwd  # result would be /tmp if state were preserved
+```
+
+Inline bash code won't work: `bash wc demo.Rmd`.
+
+## 3.2) Embedding Python code
+
+```{python, py-chunk1}
+import numpy as np
+x = np.array((3, 5, 7))
+print(x.sum())
+x.min()  # note not printed
+```
+
+```{python, py-chunk2}
+try:
+        print(x[0])
+except NameError:
+       print('x does not exist')
+```
+
+As with bash chunks, all output is grouped after the code is printed and state is not preserved between chunks. Also, you need explicit print statements; you won't see what would normally be printed to the screen.
+
+Nore does inline Python code: `python print(3+5)`
+
+# 4) Reading code from an external file
+
+It's sometimes nice to draw code in from a separate file.
+
+```{r, read-chunk, echo=FALSE}
+library(knitr)
+read_chunk('demo.R')
+```
+
+```{r, external_chunk}
+```
+
+# 5) Formatting of long lines of code and of output
+
+## 5.1) R code
+
+Having long lines be nicely formatted and other aspects of formatting can be a challenge. Also, results can differ depending on your output format (e.g., PDF vs. HTML). In general the code in this section will often overflow the page width in PDF but not in HTML.
+
+```{r, r-long}
+b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"
+b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics."
+tmp <- "In addition to developing fundamental theory and methodology, we are actively"
+b <- paste0(b, tmp)
+# Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
+
+# this should work but doesn't always
+cat(b, fill = TRUE)
+
+tmp1 <- 7
+# there should be a blank line after this
+
+tmp3 <- 9
+tmp4 <- 11
+# a work around if you can't insert a blank line easily
+# is just to put an empty comment line instead
+# there should be two lines with just comment characters next:
+#
+#
+# that creates some space
+
+vecLongName = rnorm(100)
+a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName * vecLongName, na.rm = TRUE))
+a = length(mean(5 * vecLongName + vecLongName)) # this is a comment that goes over the line by a good long ways
+a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName, na.rm = TRUE)) # this is a comment that goes over the line by a good long long long long long long long long ways
+
+# long output usually is fine
+rnorm(100)
+```
+
+Sometimes you can format things manually for better results. You may need to tag the chunk with `tidy=FALSE`, but I have not here.
+
+```{r, r-long-tidy}
+# breaking up a string
+b <- "Statistics at UC Berkeley: We are a community engaged in research
+ and education in probability and statistics. In addition to developing 
+fundamental theory and methodology, we are actively"
+
+# breaking up a comment
+# Statistics at UC Berkeley: We are a community engaged in research and 
+# education in probability and statistics. In addition to developing 
+# fundamental theory and methodology, we are actively
+
+# breaking up code lines
+vecLongName = rnorm(100)
+a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + 
+    vecLongName * vecLongName, na.rm = TRUE))
+a <- length(mean(5 * vecLongName + vecLongName)) # this is a comment that 
+    # goes over the line by a good long ways
+a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + 
+    vecLongName, na.rm = TRUE)) # this is a comment that goes over the line 
+    # by a good long long long long long long long long ways
+```
+
+
+
+## 5.2) bash code
+
+
+Now in bash, we have similar problems with line endings but bash allows us to use a backslash to break lines of code. The one thing that doesn't help us with is long lines of output. Also, we need to break long comments ourselves. And note that all results are printed at the end of a code chunk instead of interspersed immediately after the command generating the output.
+
+```{bash, bash1}
+echo "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively" > tmp.txt
+  
+echo "Second try: Statistics at UC Berkeley: We are a community engaged \
+in research and education in probability and statistics. In addition to \
+developing fundamental theory and methodology, we are actively" \
+>> tmp.txt
+
+cat tmp.txt
+```
+
+We also have problems with long comments, so would need to manually format them.
+
+```{bash, bash2}
+# the following long comment line is not broken in my test:
+# asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
+
+# instead manually break it:
+# asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla 
+# lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa 
+# adlfjaf jkladf afdl
+```
+
+## 5.3) Python code
+
+There is trouble with lines overflowing in Python output too.
+
+```{python, test-python}
+# this overflows the page
+b = "asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl"
+print(b)
+
+# this code overflows the page
+zoo = {"lion": "Simba", "panda": None, "whale": "Moby", "numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", "bunny:": "bugs"}
+print(zoo)
+
+# instead manually break the code
+zoo = {"lion": "Simba", "panda": None, "whale": "Moby", 
+       "numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", 
+       "bunny:": "bugs"}
+print(zoo)
+
+# long comments overflow too
+# asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
+
+# and the long output that will appear next in the resulting document also overflows:
+```
+
+# 6) References
+
+We'll just see how you use bibtex style references.  @Bane:etal:2008 proposed a useful method. This was confirmed [@CresJoha2008].
+
+
+
+# References {-}

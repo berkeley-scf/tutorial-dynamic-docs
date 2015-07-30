@@ -1,15 +1,13 @@
 # tutorial-dynamic-docs
-Tutorial on creating dynamic documents
+Tutorial on creating dynamic documents, focused on R
 
 The video that accompanies this material is available here [on YouTube [UNDER CONSTRUCTION]]().
 
 This tutorial covers:
 
-* The basics of Latex for preparing documents
-* Embedding R and bash code in Latex using knitr and Sweave
-* Embedding R and bash code in Markdown using Rmarkdown
-* Combining R and Markdown using Jupyter's R kernel
-* Combining R and bash using Jupyter's Python kernel
+* Embedding R and bash (and Python) code in Latex using knitr and Sweave
+* Embedding R and bash code in the LyX GUI for Latex using knitr and Sweave
+* Embedding R and bash (and Python) code in Markdown using Rmarkdown
 
 Included in this repository are template documents for the various modalities described above.
 
