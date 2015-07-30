@@ -44,17 +44,27 @@ library(knitr); knit2html('demo.Rmd')
 
 This document will focus on embedding math and code and not on standard Markdown formatting. There are lots of sources of information on Markdown. [RStudio has good information on R Markdown](http://rmarkdown.rstudio.com) (including Markdown formatting).
 
-# 1) Embedding equations using LaTeX
+# 1) Some basic Markdown formatting
+
+Here's an *introduction* to our **critical** discovery. We have some code to display but not evaluate: `7 %% 5` and will embed this in a larger workflow:
+```
+a = 7 %% 5
+b = exp(a)
+```
+
+# 2) Embedding equations using LaTeX
 
 This can be done with the following syntax. Note that you can't have a space after the initial $ for the inline equations.
 
 Here is an inline equation $f(x) = \int f(y, x) dy$.
 
 Here's a displayed equation
-$$ f(x) = \int f(y, x) dy.$$ 
+$$
+f_\theta(x) = \int f_\theta(y, x) dy.
+$$ 
 
 
-# 2) Embedding R code
+# 3) Embedding R code
 
 
 
@@ -102,9 +112,9 @@ mean(rnorm(5e7))
 ```
 
 
-# 3) Embedding bash and Python code
+# 4) Embedding bash and Python code
 
-## 3.1) bash
+## 4.1) bash
 
 A bash chunk:
 ```{bash, bash-chunk1}
@@ -122,7 +132,7 @@ pwd  # result would be /tmp if state were preserved
 
 Inline bash code won't work: `bash wc demo.Rmd`.
 
-## 3.2) Embedding Python code
+## 4.2) Embedding Python code
 
 ```{python, py-chunk1}
 import numpy as np
@@ -142,7 +152,7 @@ As with bash chunks, all output is grouped after the code is printed and state i
 
 Nore does inline Python code: `python print(3+5)`
 
-# 4) Reading code from an external file
+# 5) Reading code from an external file
 
 It's sometimes nice to draw code in from a separate file.
 
@@ -154,9 +164,9 @@ read_chunk('demo.R')
 ```{r, external_chunk}
 ```
 
-# 5) Formatting of long lines of code and of output
+# 6) Formatting of long lines of code and of output
 
-## 5.1) R code
+## 6.1) R code
 
 Having long lines be nicely formatted and other aspects of formatting can be a challenge. Also, results can differ depending on your output format (e.g., PDF vs. HTML). In general the code in this section will often overflow the page width in PDF but not in HTML.
 
@@ -217,7 +227,7 @@ a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) +
 
 
 
-## 5.2) bash code
+## 6.2) bash code
 
 
 Now in bash, we have similar problems with line endings but bash allows us to use a backslash to break lines of code. The one thing that doesn't help us with is long lines of output. Also, we need to break long comments ourselves. And note that all results are printed at the end of a code chunk instead of interspersed immediately after the command generating the output.
@@ -245,7 +255,7 @@ We also have problems with long comments, so would need to manually format them.
 # adlfjaf jkladf afdl
 ```
 
-## 5.3) Python code
+## 6.3) Python code
 
 There is trouble with lines overflowing in Python output too.
 
@@ -270,10 +280,10 @@ print(zoo)
 # and the long output that will appear next in the resulting document also overflows:
 ```
 
-# 6) References
+# 7) References
 
 We'll just see how you use bibtex style references.  @Bane:etal:2008 proposed a useful method. This was confirmed [@Cres:Joha:2008].
 
+The list of references is placed at the end of the document. You'd presumably want a section header like this:
 
-
-# References {-}
+# Literature cited
