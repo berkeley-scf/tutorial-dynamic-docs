@@ -161,7 +161,10 @@ library(knitr)
 read_chunk('demo.R')
 ```
 
-```{r, external_chunk}
+```{r, external_chunk_1}
+```
+
+```{r, external_chunk_2}
 ```
 
 # 6) Formatting of long lines of code and of output

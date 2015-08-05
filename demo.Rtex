@@ -157,7 +157,10 @@ It's sometimes nice to draw code in from a separate file.
 % read_chunk('demo.R')
 %% end.rcode
 
-%% begin.rcode external_chunk
+%% begin.rcode external_chunk_1
+%% end.rcode
+
+%% begin.rcode external_chunk_2
 %% end.rcode
 
 \section{Formatting of long lines of code and of output}
