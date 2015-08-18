@@ -111,7 +111,7 @@ mean(rnorm(5e7))
  
 \subsection{bash}
 A bash chunk:
-<<engine='bash', bash-chunk1>>=
+<<bash-chunk1, engine='bash'>>=
 df -h
 cd /tmp
 pwd
@@ -119,7 +119,7 @@ pwd
 
 Unfortunately, output from bash chunks occurs after all the code is printed and state is not preserved between chunks.
 
-<<engine='bash', bash-chunk2>>=
+<<bash-chunk2, engine='bash'>>=
 pwd  # result would be /tmp if state were preserved
 @
 
@@ -127,14 +127,14 @@ Inline bash code won't work.
 
 \subsection{Embedding Python code}
 
-<<engine='python', py-chunk1>>=
+<<py-chunk1, engine='python'>>=
 import numpy as np
 x = np.array((3, 5, 7))
 print(x.sum())
 x.min()  # note not printed
 @
 
-<<engine='python', py-chunk2>>=
+<<py-chunk2, engine='python'>>=
 try:
         print(x[0])
 except NameError:
@@ -221,12 +221,12 @@ a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) +
     # by a good long long long long long long long long ways
 @
 
-\section{bash code}
+\subsection{bash code}
 
 
 Now in bash, we have similar problems with line endings but bash allows us to use a backslash to break lines of code. The one thing that doesn't help us with is long lines of output. Also, we need to break long comments ourselves. And note that all results are printed at the end of a code chunk instead of interspersed immediately after the command generating the output.
 
-<<engine='bash', bash1>>=
+<<bash1, engine='bash'>>=
 echo "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively" > tmp.txt
   
 echo "Second try: Statistics at UC Berkeley: We are a community engaged \
@@ -239,7 +239,7 @@ cat tmp.txt
 
 We also have problems with long comments, so would need to manually format them.
 
-<<engine='bash', bash2>>=
+<<bash2, engine='bash'>>=
 # the following long comment line is not broken in my test:
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
 
@@ -253,7 +253,7 @@ We also have problems with long comments, so would need to manually format them.
 
 There may be trouble with lines overflowing in Python output too.
 
-<<engine='python', test-python>>=
+<<test-python, engine='python'>>=
 # this overflows the page in some contexts
 b = "asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl"
 print(b)
@@ -271,15 +271,15 @@ print(zoo)
 # long comments overflow too
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
 
-# and the long output that will appear next in the resulting document also overflows:
+# and the long output that will appear next in the resulting document (produced from the evaluation of the code above) also overflows:
 @
 
 
 \section{References}
 
-We'll just see how you use bibtex style references.  \cite{Bane:etal:2008} proposed a useful method. This was confirmed \citep{Cres:Joha:2008}.
+We'll just see how you use BibTeX style references.  \cite{Bane:etal:2008} proposed a useful method. This was confirmed \citep{Cres:Joha:2008}.
 
-The list of references is placed at the end of the document. You'd presumably want a section header like this:
+The list of references is placed at the end of the document. 
 
 
 \bibliographystyle{plainnat}
