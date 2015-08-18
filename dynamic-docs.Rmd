@@ -15,7 +15,7 @@ This tutorial covers the basics of creating documents that combine code chunks, 
 
 A screencast of the material accompanies this document.
 
-We'll use a virtual machine developed here at Berkeley, [the Berkeley Common Environment (BCE)](http://bce.berkeley.edu). BCE is a virtual Linux machine - basically it is a Linux computer that you can run within your own computer, regardless of whether you are using Windows, Mac, or Linux. This provides a common environment so that things behave the same for all of us.
+We'll use a virtual machine developed here at Berkeley, [the Berkeley Common Environment (BCE)](http://bce.berkeley.edu). BCE is a virtual Linux machine - basically it is a Linux computer that you can run within your own computer, regardless of whether you are using Windows, Mac, or Linux. This provides a common environment so that things behave the same for all of us. You'll also need to run the commands in *bce.sh* to make sure all the necessary software for this tutorial is installed.
 
 That said, if you'd like to work on your own machine, you can. But you'll need to install the following:
 * a LaTeX installation such as MacTex (Mac) or MiKTeX (Windows)
@@ -73,11 +73,13 @@ You can embed code chunks in the Sweave format in LyX files and then process the
 
 Jupyter grew out of the IPython Notebook project and provides a more general way of embedding code chunks using a variety of languages within a document where the textual component of the document is written in Markdown. Basically a document is a sequence of chunks, where each chunk is either a code chunk or a Markdown chunk.
 
+To work with a Jupyter notebook, you start Jupyter via `ipython notebook`. This will open up a Jupyter interface in a browser window. From there, you can navigate to and open your notebook file (which will end in extension .ipynb). You can chose the kernel (i.e., the language for the code chunks -- Python, R, etc.) by selecting `Kernel -> Change Kernel` or by selecting the kernel you want when opening a new notebook.
+
 The Jupyter files have some similarities to *demo.Rmd* as both R Markdown and Jupyter rely on Markdown as the format for text input. However, they handle code chunks somewhat differently.
 
 Jupyter does not allow one to insert chunks from multiple languages in the same document, so here we have demo files for inserting R chunks (*demo-R.ipynb*), bash chunks (*demo-bash.ipynb*), and Python chunks (*demo-python.ipynb*). All include instructions for generating HTML output. 
 
-
+To use the bash kernel, you will need to do some setup. In BCE, please run the relevant commands in *bce.sh*.
 
 
 
