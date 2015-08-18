@@ -1,9 +1,9 @@
 
 ---
-title: "A demo RMarkdown file"
+title: "An example RMarkdown file"
 subtitle: "Illustrating use of R, bash, and Python code chunks"
 author: "Christopher Paciorek"
-date: "July 2015"
+date: "August 2015"
 bibliography: refs.bib
 ---
 
@@ -24,7 +24,7 @@ opts_chunk$set(fig.width = 5, fig.height = 5)
 
 # 1) How to generate a document from this file
 
-In bash, you can run this document through the either the *rmarkdown* or *knitr* package for R to generate an html file, or through the *rmarkdown* package to generate PDF or Word (the latter being useful at times but hopefully avoidable).
+From the UNIX command line, you can run this document through the either the *rmarkdown* or *knitr* package for R to generate an html file, or through the *rmarkdown* package to generate PDF or Word (the latter being useful at times but hopefully avoidable).
 
 ```{bash, compile-bash, eval=FALSE}
 Rscript -e "library(rmarkdown); render('demo.Rmd', 'pdf_document')"  # PDF
@@ -34,11 +34,12 @@ Rscript -e "library(knitr); knit2html('demo.Rmd')"  # HTML alternative
 
 ```
 
-Or, start R and run the desired line from amongst following in R:
+Alternatively, start R and run the desired line from amongst following in R:
 
 ```{r, compile-R, eval=FALSE}
 library(rmarkdown); render('demo.Rmd', 'pdf_document')"
 library(rmarkdown); render('demo.Rmd', 'html_document')
+library(rmarkdown); render('demo.Rmd', 'word_document')
 library(knitr); knit2html('demo.Rmd')  
 ```
 
@@ -46,7 +47,7 @@ library(knitr); knit2html('demo.Rmd')
 # 2) Some basic Markdown formatting
 
 
-Here's an *introduction* to our **critical** discovery. We have some code to display but not evaluate: `7 %% 5` and will embed this in a larger workflow:
+Here's an *introduction* to our **critical** discovery. We have some code to display inline but not evaluate: `7 %% 5` and we can embed the code in a static code block as follows:
 ```
 a = 7 %% 5
 b = exp(a)
@@ -94,7 +95,7 @@ hist(rnorm(20))
 
 And here's some inline R code: What is 3 plus 5? `r 3+5`.
 
-You have control over whether code in chunks is echoed into the document and evaluated using the `include`, `echo`, and `eval` flags.
+You have control over whether code in chunks is echoed into the document and evaluated using the `include`, `echo`, and `eval` tags.
 
 ```{r, include, include=FALSE}
 cat("this code is evaluated but nothing is printed in the document")
@@ -106,7 +107,7 @@ library(fields)
 cat("this code is not echoed to the screen but is evaluated")
 ```
 ```{r, eval, eval=FALSE}
-cat("this code is not evaluated but is printed")
+cat("this code is not evaluated but is echoed to the screen")
 ```
 
 Intensive calculations can be saved using the `cache=TRUE` tag so they don't need to be rerun every time you compile the document. 
@@ -127,7 +128,7 @@ cd /tmp
 pwd
 ```
 
-Unfortunately, output from bash chunks occurs after all the code is printed and state is not preserved between chunks.
+Unfortunately, output from bash chunks occurs after all the code is printed. Also, state is not preserved between chunks.
 
 ```{bash, bash-chunk2}
 pwd  # result would be /tmp if state were preserved
@@ -151,13 +152,13 @@ except NameError:
        print('x does not exist')
 ```
 
-As with bash chunks, all output is grouped after the code is printed and state is not preserved between chunks. Also, you need explicit print statements; you won't see what would normally be printed to the screen.
+As with bash chunks, all output occurs after the code is printed. Also, state is not preserved between chunks. Finally, you need explicit print statements; you won't see what would normally be printed to the screen.
 
 There is no facility for inline Python code: `python print(3+5)`
 
 # 6) Reading code from an external file
 
-It's sometimes nice to draw code in from a separate file.
+It's sometimes nice to draw code in from a separate file. Before invoking a chunk, we need to read the chunks from the source file. Note that a good place for reading the source file via `read_chunk()` is in an initial setup chunk at the beginning of the document.
 
 ```{r, read-chunk, echo=FALSE}
 library(knitr)
@@ -174,29 +175,14 @@ read_chunk('demo.R')
 
 ## 7.1) R code
 
-Having long lines be nicely formatted and other aspects of formatting can be a challenge. Also, results can differ depending on your output format (e.g., PDF vs. HTML). In general the code in this section will often overflow the page width in PDF but not in HTML.
+Having long lines be nicely formatted and other aspects of formatting can be a challenge. Also, results can differ depending on your output format (e.g., PDF vs. HTML). In general the code in this section will often overflow the page width in PDF but not in HTML, but even in the HTML the line breaks may be awkwardly positioned.
 
 ```{r, r-long}
 b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"
-b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics."
-tmp <- "In addition to developing fundamental theory and methodology, we are actively"
-b <- paste0(b, tmp)
 # Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
 
 # this should work but doesn't always
 cat(b, fill = TRUE)
-
-tmp1 <- 7
-# there should be a blank line after this
-
-tmp3 <- 9
-tmp4 <- 11
-# a work around if you can't insert a blank line easily
-# is just to put an empty comment line instead
-# there should be two lines with just comment characters next:
-#
-#
-# that creates some space
 
 vecLongName = rnorm(100)
 a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName * vecLongName, na.rm = TRUE))
@@ -207,7 +193,7 @@ a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName, 
 rnorm(100)
 ```
 
-Sometimes you can format things manually for better results. You may need to tag the chunk with `tidy=FALSE`, but I have not here.
+Sometimes you can format things manually for better results. You may need to tag the chunk with `tidy=FALSE`, but I have not done that here.
 
 ```{r, r-long-tidy}
 # breaking up a string
@@ -236,7 +222,7 @@ a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) +
 ## 7.2) bash code
 
 
-Now in bash, we have similar problems with line endings but bash allows us to use a backslash to break lines of code. The one thing that doesn't help us with is long lines of output. Also, we need to break long comments ourselves. And note that all results are printed at the end of a code chunk instead of interspersed immediately after the command generating the output.
+In bash, we have similar problems with lines overflowing in PDF output, but bash allows us to use a backslash to break lines of code. The one thing that doesn't help with is long lines of output. 
 
 ```{bash, bash1}
 echo "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively" > tmp.txt
@@ -263,7 +249,7 @@ We also have problems with long comments, so would need to manually format them.
 
 ## 7.3) Python code
 
-There is trouble with lines overflowing in Python output too.
+In Python, there is similar trouble with lines overflowing in PDF output too.
 
 ```{python, test-python}
 # this overflows the page
@@ -283,7 +269,7 @@ print(zoo)
 # long comments overflow too
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
 
-# and the long output that will appear next in the resulting document (produced from the evaluation of the code above) also overflows:
+# the long output that will appear next in the resulting document (produced from the evaluation of the code above) also overflows:
 ```
 
 # 8) References

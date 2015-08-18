@@ -11,11 +11,11 @@ opts_chunk$set(engine='bash') # because we're using a lot of bash, let's set as 
 
 # 0) This Tutorial
 
-This tutorial covers the basics of creating documents that combine code chunks, mathematical notation, and text. We'll cover R, Python and bash shell chunks in the context of documents written with Latex, Markdown, and Jupyter (formerly IPython Notebook). 
+This tutorial covers the basics of creating documents that combine code chunks, mathematical notation, and text. We'll cover R, Python and bash shell chunks in the context of documents written with LaTeX, Markdown, and Jupyter (formerly IPython Notebook). 
 
 A screencast of the material accompanies this document.
 
-We'll use a virtual machine developed here at Berkeley, [the Berkeley Common Environment (BCE)](http://bce.berkeley.edu). BCE is a virtual Linux machine - basically it is a Linux computer that you can run within your own computer, regardless of whether you are using Windows, Mac, or Linux. This provides a common environment so that things behave the same for all of us. You'll also need to run the commands in *bce.sh* to make sure all the necessary software for this tutorial is installed.
+We'll use a virtual machine developed here at Berkeley, the [Berkeley Common Environment (BCE)](http://bce.berkeley.edu). BCE is a virtual Linux machine - basically it is a Linux computer that you can run within your own computer, regardless of whether you are using Windows, Mac, or Linux. This provides a common environment so that things behave the same for all of us. You'll also need to run the commands in *bce.sh* to make sure all the necessary software for this tutorial is installed.
 
 That said, if you'd like to work on your own machine, you can. But you'll need to install the following:
 * a LaTeX installation such as MacTex (Mac) or MiKTeX (Windows)
@@ -23,11 +23,11 @@ That said, if you'd like to work on your own machine, you can. But you'll need t
 * the knitr and rmarkdown packages for R
 * Jupyter and the R kernel for Jupyter 
 
-Note that more details on LaTeX are available in our [https://github.com/berkeley-scf/tutorial-latex-intro](quick introduction to LaTeX).
 
-This tutorial assumes you are able to use the UNIX command line; we provide a tutorial on the [Basics of UNIX](http://statistics.berkeley.edu/computing/training/tutorials) in the context of BCE.
+This tutorial assumes you are able to use the UNIX command line; we provide a tutorial on the [Basics of UNIX](http://statistics.berkeley.edu/computing/training/tutorials) in the context of BCE. This tutorial also assumes basic familiarity with LaTeX; more details on LaTeX are available in our [quick introduction to LaTeX tutorial](http://statistics.berkeley.edu/computing/training/tutorials).
 
-Materials for this tutorial, including the R markdown file that was used to create this document are available on github at (https://github.com/berkeley-scf/tutorial-dynamic-docs).  You can download the files by doing a git clone from a terminal window on UNIX-like machine, as we'll demonstrate early in this document:
+
+Materials for this tutorial, including the R markdown file that was used to create this document are available on Github at (https://github.com/berkeley-scf/tutorial-dynamic-docs).  You can download the files by doing a git clone from a terminal window on a UNIX-like machine, as follows:
 ```{r, clone, eval=FALSE}
 git clone https://github.com/berkeley-scf/tutorial-dynamic-docs
 ```
@@ -49,15 +49,15 @@ Rscript -e "library(knitr); knit2html('dynamic-docs.Rmd')"
 
 # 1) Overview
 
-In the following sections, we'll present demo files in each of the formats covered in this tutorial, and we'll show how to create PDF and HTML files from the source document. Each demo file covers the same material using a different format, showing basic use of equations and code chunks in R, Python, and bash, In addition, there are tips on formatting code to avoid output that exceeds the width of a page, which is a common problem.
+In the following sections, we'll present example source files in each of the formats covered in this tutorial, and we'll show how to create PDF and HTML files from each source document. Each example file covers the same material, showing basic use of equations and code chunks in R, Python, and bash. In addition, there are tips on formatting code to avoid output that exceeds the width of a page, which is a common problem when generating PDFs.
 
-In general, processing the input file to create an output file involves evaluating the code chunks and creating an intermediate document in which the results of the evaluation are written out (e.g., in standard Markdown or LaTeX syntax), from which the final step is to create the output in the usual way from the intermediate document.
+In general, processing the input file to create an output file involves evaluating the code chunks and creating an intermediate document in which the results of the evaluation are written out (e.g., in standard Markdown or LaTeX syntax), from which the final step is to create the output in the usual way from the intermediate document. Note that these steps take place behind the scenes without you needing to know the details.
 
 # 2) R Markdown
 
-R Markdown is a variant on the Markdown markup language that allows you to embed code chunks that are evaluated before creating the final output. In *demo.Rmd* you'll see examples of embedding R, Python, and bash code chunks. 
+R Markdown is a variant on the Markdown markup language that allows you to embed code chunks that are evaluated before creating the final output, unlike standard static code chunks in Markdown that are not evaluated. 
 
-In *demo.Rmd* you can also see the syntax involved in creating PDF, HTML, and Word output files.
+In *demo.Rmd* you'll see examples of embedding R, Python, and bash code chunks, as ell as the syntax involved in creating PDF, HTML, and Word output files.
 
 # 3) LaTeX plus knitr
 

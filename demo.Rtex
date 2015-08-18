@@ -24,9 +24,9 @@
 
 
 \begin{document} 
-\title{A demo Rtex file\\Illustrating use of R, bash, and Python code chunks}
+\title{An example Rtex file\\Illustrating use of R, bash, and Python code chunks}
 \author{Christopher Paciorek}
-\date{July 2015}
+\date{August 2015}
 
 \maketitle
 
