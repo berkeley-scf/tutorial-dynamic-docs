@@ -61,9 +61,9 @@ In *demo.Rmd* you'll see examples of embedding R, Python, and bash code chunks, 
 
 # 3) LaTeX plus knitr
 
-*knitr* is an R package that allows you to process LaTeX files that contain code chunks. The input files can be in one of two formats, either traditional Sweave files (with extension .Rnw) or a new format introduced by knitr (with extension .Rtex). *demo.Rnw* and *demo.Rtex* provide examples of these formats, with examples of embedding R, Python, and bash code chunks.  
+*knitr* is an R package that allows you to process LaTeX files that contain code chunks. The input files can be in one of two formats, either traditional Sweave files (with extension .Rnw) or a new format introduced by knitr (with extension .Rtex). 
 
-In both *demo.Rnw* and *demo.Rtex* you'll also see the syntax for creating PDF output files.
+*demo.Rnw* and *demo.Rtex* provide examples of these formats, with examples of embedding R, Python, and bash code chunks.  In both *demo.Rnw* and *demo.Rtex* you'll also see the syntax for creating PDF output files.
 
 # 4) LyX plus knitr
 

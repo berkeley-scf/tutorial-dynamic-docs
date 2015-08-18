@@ -104,10 +104,10 @@ library(fields)
 ```
 
 ```{r, echo, echo=FALSE}
-cat("this code is not echoed to the screen but is evaluated")
+cat("this code is not printed in the document but results of evaluating the code are printed")
 ```
 ```{r, eval, eval=FALSE}
-cat("this code is not evaluated but is echoed to the screen")
+cat("this code is not evaluated but the code itself is printed in the document")
 ```
 
 Intensive calculations can be saved using the `cache=TRUE` tag so they don't need to be rerun every time you compile the document. 
@@ -222,7 +222,7 @@ a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) +
 ## 7.2) bash code
 
 
-In bash, we have similar problems with lines overflowing in PDF output, but bash allows us to use a backslash to break lines of code. The one thing that doesn't help with is long lines of output. 
+In bash, we have similar problems with lines overflowing in PDF output, but bash allows us to use a backslash to break lines of code. However that strategy doesn't help with long lines of output. 
 
 ```{bash, bash1}
 echo "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively" > tmp.txt
@@ -235,7 +235,7 @@ developing fundamental theory and methodology, we are actively" \
 cat tmp.txt
 ```
 
-We also have problems with long comments, so would need to manually format them.
+We also have problems with long comments, so we would need to manually format them.
 
 ```{bash, bash2}
 # the following long comment line is not broken in my test:
