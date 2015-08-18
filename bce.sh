@@ -1,5 +1,5 @@
 # for using R Markdown 
-Rscript -e "install.packages(c('rmarkdown'), repos = 'http://cran.cnr.berkeley.edu', lib = '~/R/x86_64-pc-linux-gnu-library/3.2')"
+sudo Rscript -e "install.packages(c('rmarkdown'), repos = 'http://cran.cnr.berkeley.edu')"
 sudo apt-get update
 sudo apt-get install -y pandoc pandoc-citeproc lmodern 
 
