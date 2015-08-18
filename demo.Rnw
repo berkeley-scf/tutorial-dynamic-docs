@@ -51,7 +51,7 @@ The \texttt{knit2pdf} command processes the Rtex format, evaluating the R code c
 
 \section{Embedding equations using LaTeX}
 
-The knitr Rtex format is built on LaTeX, so you can just use LaTeX functionalitydirectly.
+The Sweave format is built on LaTeX, so you can just use LaTeX functionalitydirectly.
 
 Here is an inline equation $f(x) = \int f(y, x) dy$.
 
@@ -173,7 +173,7 @@ Having long lines be nicely formatted and other aspects of formatting can be a c
 b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"
 # Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
 
-# this should work but doesn't always
+# this should work but often doesn't
 cat(b, fill = TRUE)
 
 vecLongName = rnorm(100)
@@ -265,7 +265,7 @@ print(zoo)
 
 \section{References}
 
-We'll just see how you use BibTeX style references.  \cite{Bane:etal:2008} proposed a useful method. This was confirmed \citep{Cres:Joha:2008}.
+Here's how to use BibTeX style references.  \cite{Bane:etal:2008} proposed a useful method. This was confirmed \citep{Cres:Joha:2008}.
 
 The list of references is placed at the end of the document. 
 

@@ -181,7 +181,7 @@ Having long lines be nicely formatted and other aspects of formatting can be a c
 b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"
 # Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
 
-# this should work but doesn't always
+# this should work but often doesn't
 cat(b, fill = TRUE)
 
 vecLongName = rnorm(100)

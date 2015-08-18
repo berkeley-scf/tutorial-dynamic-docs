@@ -32,7 +32,7 @@
 
 \section{How to generate a document from this file}
 
-In bash, you can run this document through the \emph{knitr} package for R to generate a PDF. I don't know of a way to generate HTML directly, but there are tools for converting between various file formats, such as \emph{pandoc}.
+In bash, you can run this document through the \emph{knitr} package for R to generate a PDF. 
 
 %% begin.rcode, compile-bash, eval=FALSE, engine='bash'
 % Rscript -e "library(knitr); knit2pdf('demo.Rtex')"  
@@ -45,9 +45,11 @@ Or, start R and run this:
 % library(knitr); knit2pdf('demo.Rtex')  
 %% end.rcode
 
+I don't know of a way to generate HTML directly, but there are tools for converting between various file formats, such as \emph{pandoc}.
+
 \section{LaTeX}
 
-This document will focus on embedding code and not on standard LaTeX. For a quick introduction to LaTeX, see \href{https://github.com/berkeley-scf/tutorial-latex-intro}{our tutorial}.
+This document will focus on embedding code and not on standard LaTeX. For a quick introduction to LaTeX, see \href{https://github.com/berkeley-scf/tutorial-latex-intro}{our LaTeX tutorial}.
 
 The \texttt{knit2pdf} command processes the Rtex format, evaluating the R code chunks, and creating a standard LaTeX file with the code snippets and output created by the code properly formatted as standard LaTeX. 
 
@@ -88,7 +90,7 @@ Let's make a plot:
 
 And here's some inline R code: What is 3 plus 5? \rinline{3+5}.
 
-You have control over whether code in chunks is echoed into the document and evaluated using the `include`, `echo`, and `eval` flags.
+You have control over whether code in chunks is echoed into the document and evaluated using the \emph{include}, \emph{echo}, and \emph{eval} tags.
 
 %% begin.rcode include, include=FALSE
 % cat("this code is evaluated but nothing is printed in the document")
@@ -97,14 +99,14 @@ You have control over whether code in chunks is echoed into the document and eva
 %% end.rcode
 
 %% begin.rcode, echo, echo=FALSE
-% cat("this code is not echoed to the screen but is evaluated")
+% cat("this code is not printed in the document but results of evaluating the code are printed")
 %% end.rcode
 
 %% begin.rcode, eval, eval=FALSE
-% cat("this code is not evaluated but is printed")
+% cat("this code is not evaluated but the code itself is printed in the document")
 %% end.rcode
 
-Intensive calculations can be saved using the `cache=TRUE' tag so they don't need to be rerun every time you compile the document. 
+Intensive calculations can be saved using the \texttt{cache=TRUE} tag so they don't need to be rerun every time you compile the document. 
 
 %% begin.rcode, slow-step, cache=TRUE
 % mean(rnorm(5e7))
@@ -120,7 +122,8 @@ A bash chunk:
 % pwd
 %% end.rcode
 
-Unfortunately, output from bash chunks occurs after all the code is printed and state is not preserved between chunks.
+Unfortunately, output from bash chunks occurs after all the code is printed. Also, state is not preserved between chunks.
+
 
 %% begin.rcode bash-chunk2, engine='bash'
 % pwd  # result would be /tmp if state were preserved
@@ -144,13 +147,13 @@ Inline bash code won't work.
 %       print('x does not exist')
 %% end.rcode
 
-As with bash chunks, all output is grouped after the code is printed and state is not preserved between chunks. Also, you need explicit print statements; you won't see what would normally be printed to the screen.
+As with bash chunks, all output occurs after the code is printed. Also, state is not preserved between chunks. Finally, you need explicit print statements; you won't see what would normally be printed to the screen.
 
 There is no facility for inline Python code evaluation.
 
 \section{Reading code from an external file}
 
-It's sometimes nice to draw code in from a separate file.
+It's sometimes nice to draw code in from a separate file.  Note that a good place for reading the source file via \texttt{read\_chunk()} is in an initial setup chunk at the beginning of the document.
 
 %% begin.rcode read-chunk, echo=FALSE
 % library(knitr)
@@ -167,29 +170,14 @@ It's sometimes nice to draw code in from a separate file.
 
 \subsection{R code}
 
-Having long lines be nicely formatted and other aspects of formatting can be a challenge. Also, results can differ depending on your output format (e.g., PDF vs. HTML). In general the code in this section will often overflow the page width in PDF but not in HTML.
+Having long lines be nicely formatted and other aspects of formatting can be a challenge. Also, results can differ depending on your output format (e.g., PDF vs. HTML). In general the code in this section will often overflow the page width in PDF but not in HTML, but even in the HTML the line breaks may be awkwardly positioned.
 
 %% begin.rcode r-long
 % b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"
-% b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics."
-% tmp <- "In addition to developing fundamental theory and methodology, we are actively"
-% b <- paste0(b, tmp)
 % # Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
 % 
-% # this should work but doesn't always
+% # this should work but often doesn't
 % cat(b, fill = TRUE)
-% 
-% tmp1 <- 7
-% # there should be a blank line after this
-% 
-% tmp3 <- 9
-% tmp4 <- 11
-% # a work around if you can't insert a blank line easily
-% # is just to put an empty comment line instead
-% # there should be two lines with just comment characters next:
-% #
-% #
-% # that creates some space
 % 
 % vecLongName = rnorm(100)
 % a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName * vecLongName, na.rm = TRUE))
@@ -200,7 +188,7 @@ Having long lines be nicely formatted and other aspects of formatting can be a c
 % rnorm(100)
 %% end.rcode
 
-Sometimes you can format things manually for better results. You may need to tag the chunk with `tidy=FALSE`, but I have not here.
+Sometimes you can format things manually for better results. You may need to tag the chunk with \texttt{tidy=FALSE}, but I have not done that here.
 
 %% begin.rcode r-long-tidy
 % # breaking up a string
@@ -226,8 +214,7 @@ Sometimes you can format things manually for better results. You may need to tag
 
 \subsection{bash code}
 
-
-Now in bash, we have similar problems with line endings but bash allows us to use a backslash to break lines of code. The one thing that doesn't help us with is long lines of output. Also, we need to break long comments ourselves. And note that all results are printed at the end of a code chunk instead of interspersed immediately after the command generating the output.
+In bash, we have similar problems with lines overflowing in PDF output, but bash allows us to use a backslash to break lines of code. However that strategy doesn't help with long lines of output. 
 
 %% begin.rcode engine='bash', bash1
 % echo "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively" > tmp.txt
@@ -240,7 +227,7 @@ Now in bash, we have similar problems with line endings but bash allows us to us
 % cat tmp.txt
 %% end.rcode
 
-We also have problems with long comments, so would need to manually format them.
+We also have problems with long comments, so we would need to manually format them.
 
 %% begin.rcode bash2, engine='bash'
 % # the following long comment line is not broken in my test:
@@ -254,7 +241,7 @@ We also have problems with long comments, so would need to manually format them.
 
 \subsection{Python code}
 
-There may be trouble with lines overflowing in Python output too.
+In Python, there is similar trouble with lines overflowing in PDF output too.
 
 %% begin.rcode test-python, engine='python'
 %# this overflows the page in some contexts
@@ -280,7 +267,7 @@ There may be trouble with lines overflowing in Python output too.
 
 \section{References}
 
-We'll just see how you use BibTeX style references.  \cite{Bane:etal:2008} proposed a useful method. This was confirmed \citep{Cres:Joha:2008}.
+Here's how to use BibTeX style references.  \cite{Bane:etal:2008} proposed a useful method. This was confirmed \citep{Cres:Joha:2008}.
 
 The list of references is placed at the end of the document. 
 
