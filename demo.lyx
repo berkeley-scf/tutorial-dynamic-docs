@@ -96,46 +96,57 @@ August 2015
 \end_layout
 
 \begin_layout Chunk
+
 <<setup, include=FALSE>>=
 \end_layout
 
 \begin_layout Chunk
+
 # include any code here you don't want to show up in the document,
 \end_layout
 
 \begin_layout Chunk
+
 # e.g., package and dataset loading
 \end_layout
 
 \begin_layout Chunk
+
 require(ggplot2)
 \end_layout
 
 \begin_layout Chunk
+
 set.seed(0)
 \end_layout
 
 \begin_layout Chunk
+
 # also a good place to set global chunk options
 \end_layout
 
 \begin_layout Chunk
+
 library(knitr) # need this for opts_chunk command
 \end_layout
 
 \begin_layout Chunk
+
 opts_chunk$set(fig.width = 5, fig.height = 5)
 \end_layout
 
 \begin_layout Chunk
+
 # if we wanted chunks by default not to be evaluated
 \end_layout
 
 \begin_layout Chunk
+
 # opts_chunk$set(eval = FALSE) 
 \end_layout
 
 \begin_layout Chunk
+
 @ 
 \end_layout
 
@@ -254,10 +265,11 @@ target "https://github.com/berkeley-scf/tutorial-latex-intro"
 \end_layout
 
 \begin_layout Standard
-The export process in the previous section processes the LyX + Sweave format,
- evaluating the R code chunks, and creating a standard LaTeX file with the
- code snippets and output created by the code properly formatted as standard
- LaTeX, before compiling the LaTeX file to PDF.
+The process for producing an output document described in the previous section
+ processes the LyX + Sweave format, evaluating the R code chunks, and creating
+ a standard LaTeX file with the code snippets and output created by the
+ code properly formatted as standard LaTeX, before compiling the LaTeX file
+ to PDF.
  
 \end_layout
 
@@ -275,7 +287,11 @@ Here is an inline equation
 \begin_inset Formula $f(x)=\int f(y,x)dy$
 \end_inset
 
-, where I access math mode by entering Ctrl-m (note the lowercase 
+, where I access math mode by entering 
+\family typewriter
+Ctrl-m
+\family default
+ (note the lowercase 
 \begin_inset Quotes eld
 \end_inset
 
@@ -287,7 +303,10 @@ m
 \end_layout
 
 \begin_layout Standard
-Here's a displayed equation, where I enter math mode by entering Ctrl-M
+Here's a displayed equation, where I enter math mode by entering 
+\family typewriter
+Ctrl-M
+\family default
  (note the upper-case 
 \begin_inset Quotes eld
 \end_inset
@@ -312,32 +331,38 @@ Embedding R code
 \end_layout
 
 \begin_layout Standard
-Here's an R code chunk using standard Sweave formatting, but making sure
+Here's an R code chunk using standard Sweave formatting but making sure
  to tag the lines using the Chunk tag from the pulldown menu at the left
  of the toolbar near the top of the LyX window.
 \end_layout
 
 \begin_layout Chunk
+
 <<r-chunk1>>= 
 \end_layout
 
 \begin_layout Chunk
+
 a <- c(7, 3)
 \end_layout
 
 \begin_layout Chunk
+
 mean(a)
 \end_layout
 
 \begin_layout Chunk
+
 b <- a + 3
 \end_layout
 
 \begin_layout Chunk
+
 mean(b)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -365,15 +390,18 @@ noindent
 
 \begin_layout Chunk
 \noindent
+
 <<r-chunk2>>= 
 \end_layout
 
 \begin_layout Chunk
 \noindent
+
 mean(b)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -389,14 +417,17 @@ Let's make a plot
 \end_layout
 
 \begin_layout Chunk
+
 <<r-plot, fig.height = 3>>=
 \end_layout
 
 \begin_layout Chunk
+
 hist(rnorm(20)) 
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -416,9 +447,13 @@ Sexpr{3+5}
 
 .
  Note that we need to use the 
+\family typewriter
+
 \backslash
-Sexpr command within a LaTeX environment, so we need to select the command
- and use the TeX button in the toolbar.
+Sexpr
+\family default
+ command within a LaTeX environment, so we need to select the command and
+ use the TeX button in the toolbar.
 \end_layout
 
 \begin_layout Standard
@@ -439,46 +474,58 @@ eval
 \end_layout
 
 \begin_layout Chunk
+
 <<include, include=FALSE>>=
 \end_layout
 
 \begin_layout Chunk
+
 cat("this code is evaluated but nothing is printed in the document")
 \end_layout
 
 \begin_layout Chunk
+
 library(fields)
 \end_layout
 
 \begin_layout Chunk
+
 # fields package should now be loaded for use by later chunks 
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
 \begin_layout Chunk
+
 <<echo, echo=FALSE>>=
 \end_layout
 
 \begin_layout Chunk
-cat("this code is not echoed to the screen but is evaluated")
+
+cat("this code is not printed in the document but results of evaluating
+ the code are printed")
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
 \begin_layout Chunk
+
 <<eval, eval=FALSE>>=
 \end_layout
 
 \begin_layout Chunk
-cat("this code is not evaluated but is printed")
+
+cat("this code is not evaluated but the code itself is printed in the document")
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -495,14 +542,17 @@ cache=TRUE
 \end_layout
 
 \begin_layout Chunk
+
 <<slow-step, cache=TRUE>>=
 \end_layout
 
 \begin_layout Chunk
+
 mean(rnorm(5e7))
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -519,39 +569,48 @@ A bash chunk:
 \end_layout
 
 \begin_layout Chunk
+
 <<bash-chunk1, engine='bash'>>=
 \end_layout
 
 \begin_layout Chunk
+
 df -h 
 \end_layout
 
 \begin_layout Chunk
+
 cd /tmp 
 \end_layout
 
 \begin_layout Chunk
+
 pwd
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
 \begin_layout Standard
-Unfortunately, output from bash chunks occurs after all the code is printed
- and state is not preserved between chunks.
+Unfortunately, output from bash chunks occurs after all the code is printed.
+ Also, state is not preserved between chunks.
+ 
 \end_layout
 
 \begin_layout Chunk
+
 <<bash-chunk2, engine='bash'>>=
 \end_layout
 
 \begin_layout Chunk
+
 pwd
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -564,58 +623,71 @@ Embedding Python code
 \end_layout
 
 \begin_layout Chunk
+
 <<py-chunk1, engine='python'>>=
 \end_layout
 
 \begin_layout Chunk
+
 import numpy as np 
 \end_layout
 
 \begin_layout Chunk
+
 x = np.array((3, 5, 7)) 
 \end_layout
 
 \begin_layout Chunk
+
 print(x.sum()) 
 \end_layout
 
 \begin_layout Chunk
+
 x.min() # note not printed 
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
 \begin_layout Chunk
+
 <<py-chunk2, engine='python'>>= 
 \end_layout
 
 \begin_layout Chunk
+
 try: 
 \end_layout
 
 \begin_layout Chunk
+
 	print(x[0]) 
 \end_layout
 
 \begin_layout Chunk
+
 except NameError: 
 \end_layout
 
 \begin_layout Chunk
+
 	print('x does not exist') 
 \end_layout
 
 \begin_layout Chunk
+
 @ 
 \end_layout
 
 \begin_layout Standard
-As with bash chunks, all output is grouped after the code is printed and
- state is not preserved between chunks.
- Also, you need explicit print statements; you won't see what would normally
+As with bash chunks, all output occurs after the code is printed.
+ Also, state is not preserved between chunks.
+ Finally, you need explicit print statements; you won't see what would normally
  be printed to the screen.
+ 
 \end_layout
 
 \begin_layout Standard
@@ -628,37 +700,50 @@ Reading code from an external file
 
 \begin_layout Standard
 It's sometimes nice to draw code in from a separate file.
+ Note that a good place for reading the source file via 
+\backslash
+texttt{read
+\backslash
+_chunk()} is in an initial setup chunk at the beginning of the document.
 \end_layout
 
 \begin_layout Chunk
+
 <<read-chunk, echo=FALSE>>=
 \end_layout
 
 \begin_layout Chunk
+
 library(knitr)
 \end_layout
 
 \begin_layout Chunk
+
 read_chunk('demo.R')
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
 \begin_layout Chunk
+
 <<external_chunk_1>>=
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
 \begin_layout Chunk
+
 <<external_chunk_2>>=
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -676,34 +761,25 @@ Having long lines be nicely formatted and other aspects of formatting can
  Also, results can differ depending on your output format (e.g., PDF vs.
  HTML).
  In general the code in this section will often overflow the page width
- in PDF but not in HTML.
+ in PDF but not in HTML, but even in the HTML the line breaks may be awkwardly
+ positioned.
+ 
 \end_layout
 
 \begin_layout Chunk
+
 <<r-long>>=
 \end_layout
 
 \begin_layout Chunk
+
 b <- "Statistics at UC Berkeley: We are a community engaged in research
  and education in probability and statistics.
  In addition to developing fundamental theory and methodology, we are actively"
 \end_layout
 
 \begin_layout Chunk
-b <- "Statistics at UC Berkeley: We are a community engaged in research
- and education in probability and statistics."
-\end_layout
 
-\begin_layout Chunk
-tmp <- "In addition to developing fundamental theory and methodology, we
- are actively"
-\end_layout
-
-\begin_layout Chunk
-b <- paste0(b, tmp)
-\end_layout
-
-\begin_layout Chunk
 # Statistics at UC Berkeley: We are a community engaged in research and
  education in probability and statistics.
  In addition to developing fundamental theory and methodology, we are actively
@@ -714,10 +790,12 @@ b <- paste0(b, tmp)
 \end_layout
 
 \begin_layout Chunk
-# this should work but doesn't always
+
+# this should work but often doesn't
 \end_layout
 
 \begin_layout Chunk
+
 cat(b, fill = TRUE)
 \end_layout
 
@@ -726,68 +804,24 @@ cat(b, fill = TRUE)
 \end_layout
 
 \begin_layout Chunk
-tmp1 <- 7 
-\end_layout
 
-\begin_layout Chunk
-# there should be a blank line after this
-\end_layout
-
-\begin_layout Chunk
-
-\end_layout
-
-\begin_layout Chunk
-tmp3 <- 9
-\end_layout
-
-\begin_layout Chunk
-tmp4 <- 11
-\end_layout
-
-\begin_layout Chunk
-# a work around if you can't insert a blank line easily
-\end_layout
-
-\begin_layout Chunk
-# is just to put an empty comment line instead
-\end_layout
-
-\begin_layout Chunk
-# there should be two lines with just comment characters next:
-\end_layout
-
-\begin_layout Chunk
-#
-\end_layout
-
-\begin_layout Chunk
-# 
-\end_layout
-
-\begin_layout Chunk
-# that creates some space
-\end_layout
-
-\begin_layout Chunk
-
-\end_layout
-
-\begin_layout Chunk
 vecLongName = rnorm(100)
 \end_layout
 
 \begin_layout Chunk
+
 a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName
  * vecLongName, na.rm = TRUE))
 \end_layout
 
 \begin_layout Chunk
+
 a = length(mean(5 * vecLongName + vecLongName)) # this is a comment that
  goes over the line by a good long ways
 \end_layout
 
 \begin_layout Chunk
+
 a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName,
  na.rm = TRUE)) # this is a comment that goes over the line by a good long
  long long long long long long long ways
@@ -798,14 +832,17 @@ a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName,
 \end_layout
 
 \begin_layout Chunk
+
 # long output usually is fine
 \end_layout
 
 \begin_layout Chunk
+
 rnorm(100)
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -819,24 +856,29 @@ tidy=FALSE
 \end_layout
 
 \begin_layout Chunk
+
 <<r-long-tidy>>=
 \end_layout
 
 \begin_layout Chunk
+
 # breaking up a string
 \end_layout
 
 \begin_layout Chunk
+
 b <- "Statistics at UC Berkeley: We are a community engaged in research
  
 \end_layout
 
 \begin_layout Chunk
+
 and education in probability and statistics.
  In addition to developing 
 \end_layout
 
 \begin_layout Chunk
+
 fundamental theory and methodology, we are actively"
 \end_layout
 
@@ -845,19 +887,23 @@ fundamental theory and methodology, we are actively"
 \end_layout
 
 \begin_layout Chunk
+
 # breaking up a comment
 \end_layout
 
 \begin_layout Chunk
+
 # Statistics at UC Berkeley: We are a community engaged in research and
 \end_layout
 
 \begin_layout Chunk
+
 # education in probability and statistics.
  In addition to developing
 \end_layout
 
 \begin_layout Chunk
+
 # fundamental theory and methodology, we are actively
 \end_layout
 
@@ -866,43 +912,53 @@ fundamental theory and methodology, we are actively"
 \end_layout
 
 \begin_layout Chunk
+
 # breaking up code lines
 \end_layout
 
 \begin_layout Chunk
+
 vecLongName = rnorm(100)
 \end_layout
 
 \begin_layout Chunk
+
 a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + 
 \end_layout
 
 \begin_layout Chunk
+
 vecLongName * vecLongName, na.rm = TRUE))
 \end_layout
 
 \begin_layout Chunk
+
 a <- length(mean(5 * vecLongName + vecLongName)) # this is a comment that
  
 \end_layout
 
 \begin_layout Chunk
+
 # goes over the line by a good long ways
 \end_layout
 
 \begin_layout Chunk
+
 a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + 
 \end_layout
 
 \begin_layout Chunk
+
 vecLongName, na.rm = TRUE)) # this is a comment that goes over the line
 \end_layout
 
 \begin_layout Chunk
+
 # by a good long long long long long long long long ways 
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -911,19 +967,19 @@ bash code
 \end_layout
 
 \begin_layout Standard
-Now in bash, we have similar problems with line endings but bash allows
- us to use a backslash to break lines of code.
- The one thing that doesn't help us with is long lines of output.
- Also, we need to break long comments ourselves.
- And note that all results are printed at the end of a code chunk instead
- of interspersed immediately after the command generating the output.
+In bash, we have similar problems with lines overflowing in PDF output,
+ but bash allows us to use a backslash to break lines of code.
+ However that strategy doesn't help with long lines of output.
+ 
 \end_layout
 
 \begin_layout Chunk
+
 <<bash1, engine='bash'>>=
 \end_layout
 
 \begin_layout Chunk
+
 echo "Statistics at UC Berkeley: We are a community engaged in research
  and education in probability and statistics.
  In addition to developing fundamental theory and methodology, we are actively"
@@ -935,6 +991,7 @@ echo "Statistics at UC Berkeley: We are a community engaged in research
 \end_layout
 
 \begin_layout Chunk
+
 echo "Second try: Statistics at UC Berkeley: We are a community engaged
  
 \backslash
@@ -942,6 +999,7 @@ echo "Second try: Statistics at UC Berkeley: We are a community engaged
 \end_layout
 
 \begin_layout Chunk
+
 in research and education in probability and statistics.
  In addition to 
 \backslash
@@ -949,12 +1007,14 @@ in research and education in probability and statistics.
 \end_layout
 
 \begin_layout Chunk
+
 developing fundamental theory and methodology, we are actively" 
 \backslash
 
 \end_layout
 
 \begin_layout Chunk
+
 >> tmp.txt
 \end_layout
 
@@ -963,10 +1023,12 @@ developing fundamental theory and methodology, we are actively"
 \end_layout
 
 \begin_layout Chunk
+
 cat tmp.txt
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -976,14 +1038,17 @@ We also have problems with long comments, so would need to manually format
 \end_layout
 
 \begin_layout Chunk
+
 <<bash2, engine='bash'>>=
 \end_layout
 
 \begin_layout Chunk
+
 # the following long comment line is not broken in my test:
 \end_layout
 
 \begin_layout Chunk
+
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad
  kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
 \end_layout
@@ -993,22 +1058,27 @@ We also have problems with long comments, so would need to manually format
 \end_layout
 
 \begin_layout Chunk
+
 # instead manually break it:
 \end_layout
 
 \begin_layout Chunk
+
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla 
 \end_layout
 
 \begin_layout Chunk
+
 # lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa 
 \end_layout
 
 \begin_layout Chunk
+
 # adlfjaf jkladf afdl
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -1017,7 +1087,9 @@ Python code
 \end_layout
 
 \begin_layout Standard
-There may be trouble with lines overflowing in Python output too.
+In Python, there is similar trouble with lines overflowing in PDF output
+ too.
+ 
 \end_layout
 
 \begin_layout Chunk
@@ -1025,6 +1097,7 @@ There may be trouble with lines overflowing in Python output too.
 \end_layout
 
 \begin_layout Chunk
+
 <<test-python, engine='python'>>=
 \end_layout
 
@@ -1033,15 +1106,18 @@ There may be trouble with lines overflowing in Python output too.
 \end_layout
 
 \begin_layout Chunk
+
 # this overflows the page in some contexts
 \end_layout
 
 \begin_layout Chunk
+
 b = "asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad
  kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl"
 \end_layout
 
 \begin_layout Chunk
+
 print(b)
 \end_layout
 
@@ -1050,15 +1126,18 @@ print(b)
 \end_layout
 
 \begin_layout Chunk
+
 # this code overflows the page in some contexts
 \end_layout
 
 \begin_layout Chunk
+
 zoo = {"lion": "Simba", "panda": None, "whale": "Moby", "numAnimals": 3,
  "bear": "Yogi", "killer whale": "shamu", "bunny:": "bugs"}
 \end_layout
 
 \begin_layout Chunk
+
 print(zoo)
 \end_layout
 
@@ -1067,22 +1146,27 @@ print(zoo)
 \end_layout
 
 \begin_layout Chunk
+
 # instead manually break the code
 \end_layout
 
 \begin_layout Chunk
+
 zoo = {"lion": "Simba", "panda": None, "whale": "Moby", 
 \end_layout
 
 \begin_layout Chunk
+
 	"numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", 
 \end_layout
 
 \begin_layout Chunk
+
 	"bunny:": "bugs"}
 \end_layout
 
 \begin_layout Chunk
+
 print(zoo)
 \end_layout
 
@@ -1091,10 +1175,12 @@ print(zoo)
 \end_layout
 
 \begin_layout Chunk
+
 # long comments overflow too
 \end_layout
 
 \begin_layout Chunk
+
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad
  kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
 \end_layout
@@ -1104,11 +1190,13 @@ print(zoo)
 \end_layout
 
 \begin_layout Chunk
+
 # and the long output that will appear next in the resulting document (from
  evaluation of the code above) also overflows:
 \end_layout
 
 \begin_layout Chunk
+
 @
 \end_layout
 
@@ -1117,7 +1205,7 @@ References
 \end_layout
 
 \begin_layout Standard
-We'll just see how you use BibTeX style references.
+Here's how to use BibTeX style references.
  
 \begin_inset CommandInset citation
 LatexCommand citet
