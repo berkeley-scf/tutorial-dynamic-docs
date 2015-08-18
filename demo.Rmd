@@ -42,15 +42,18 @@ library(rmarkdown); render('demo.Rmd', 'html_document')
 library(knitr); knit2html('demo.Rmd')  
 ```
 
-This document will focus on embedding math and code and not on standard Markdown formatting. There are lots of sources of information on Markdown. [RStudio has good information on R Markdown](http://rmarkdown.rstudio.com) (including Markdown formatting).
 
 # 2) Some basic Markdown formatting
+
 
 Here's an *introduction* to our **critical** discovery. We have some code to display but not evaluate: `7 %% 5` and will embed this in a larger workflow:
 ```
 a = 7 %% 5
 b = exp(a)
 ```
+
+This document will focus on embedding math and code and not on standard Markdown formatting. There are lots of sources of information on Markdown. [RStudio has good information on R Markdown](http://rmarkdown.rstudio.com) (including Markdown formatting).
+
 
 # 3) Embedding equations using LaTeX
 
@@ -150,7 +153,7 @@ except NameError:
 
 As with bash chunks, all output is grouped after the code is printed and state is not preserved between chunks. Also, you need explicit print statements; you won't see what would normally be printed to the screen.
 
-Nore does inline Python code: `python print(3+5)`
+There is no facility for inline Python code: `python print(3+5)`
 
 # 6) Reading code from an external file
 
