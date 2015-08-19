@@ -97,67 +97,57 @@ August 2015
 
 \begin_layout Chunk
 
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
-
 <<setup, include=FALSE>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # include any code here you don't want to show up in the document,
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # e.g., package and dataset loading
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 require(ggplot2)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 set.seed(0)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # also a good place to set global chunk options
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 library(knitr) # need this for opts_chunk command
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 opts_chunk$set(fig.width = 5, fig.height = 5)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # if we wanted chunks by default not to be evaluated
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # opts_chunk$set(eval = FALSE) 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
-@
-\end_layout
-
-\end_inset
-
- 
+@ 
 \end_layout
 
 \begin_layout Section
@@ -200,11 +190,8 @@ There are other options using that same menu to export in a variety of formats,
 \end_layout
 
 \begin_layout Standard
-Note that to use code chunks in LyX, you need to enable the 
-\emph on
-knitr
-\emph default
- module in the file.
+Note that to use code chunks in LyX, you need to enable the knitr module
+ in the file.
  After opening a new or existing LyX document, you'll need to go to
 \begin_inset ERT
 status open
@@ -344,60 +331,39 @@ Embedding R code
 \end_layout
 
 \begin_layout Standard
-Here's an R code chunk using standard Sweave formatting.
- To create a chunk, select 
-\family typewriter
-Insert -> TeX code
-\family default
- (or use the TeX button in the LyX toolbar) and then type in your code as
- seen here.
- (Note that in older versions of LyX, rather than inserting as TeX code,
- you may need to tag the lines using the Chunk tag from the pulldown menu
- at the left of the toolbar near the top of the LyX window -- in that case,
- see 
-\emph on
-demo_oldlyx.lyx
-\emph default
-).
+Here's an R code chunk using standard Sweave formatting but making sure
+ to tag the lines using the Chunk tag from the pulldown menu at the left
+ of the toolbar near the top of the LyX window.
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
+\begin_layout Chunk
 
-\begin_layout Plain Layout
-
-<<r-chunk1>>=
+<<r-chunk1>>= 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 a <- c(7, 3)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 mean(a)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 b <- a + 3
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 mean(b)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -422,28 +388,21 @@ noindent
  Here's another chunk:
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
+\begin_layout Chunk
+\noindent
 
-\begin_layout Plain Layout
-
-<<r-chunk2>>=
+<<r-chunk2>>= 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
+\noindent
 
 mean(b)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -457,28 +416,19 @@ When running R code, output is printed interspersed with the code, as one
 Let's make a plot
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
+\begin_layout Chunk
 
-\begin_layout Plain Layout
-
-<<r-plot, fig.height=3>>=
+<<r-plot, fig.height = 3>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
-hist(rnorm(20))
+hist(rnorm(20)) 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -523,90 +473,63 @@ eval
  flags.
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 <<include, include=FALSE>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 cat("this code is evaluated but nothing is printed in the document")
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 library(fields)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # fields package should now be loaded for use by later chunks 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 <<echo, echo=FALSE>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 cat("this code is not printed in the document but results of evaluating
  the code are printed")
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 <<eval, eval=FALSE>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 cat("this code is not evaluated but the code itself is printed in the document")
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
+\begin_layout Chunk
 
 \end_layout
 
@@ -618,28 +541,19 @@ cache=TRUE
  tag so they don't need to be rerun every time you compile the document.
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 <<slow-step, cache=TRUE>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 mean(rnorm(5e7))
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -654,38 +568,29 @@ bash
 A bash chunk:
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 <<bash-chunk1, engine='bash'>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 df -h 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 cd /tmp 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 pwd
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -694,28 +599,19 @@ Unfortunately, output from bash chunks occurs after all the code is printed.
  
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 <<bash-chunk2, engine='bash'>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 pwd
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -726,83 +622,64 @@ Inline bash code won't work.
 Embedding Python code
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 <<py-chunk1, engine='python'>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 import numpy as np 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 x = np.array((3, 5, 7)) 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 print(x.sum()) 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 x.min() # note not printed 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
 \begin_layout Chunk
-
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
 
 <<py-chunk2, engine='python'>>= 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 try: 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 	print(x[0]) 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 except NameError: 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 	print('x does not exist') 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @ 
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -824,79 +701,50 @@ Reading code from an external file
 \begin_layout Standard
 It's sometimes nice to draw code in from a separate file.
  Note that a good place for reading the source file via 
-\family typewriter
-read
 \backslash
-_chunk()
-\family default
- is in an initial setup chunk at the beginning of the document.
+texttt{read
+\backslash
+_chunk()} is in an initial setup chunk at the beginning of the document.
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 <<read-chunk, echo=FALSE>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 library(knitr)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 read_chunk('demo.R')
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 <<external_chunk_1>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
 \end_layout
 
-\end_inset
-
-
-\end_layout
-
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 <<external_chunk_2>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section
@@ -918,93 +766,84 @@ Having long lines be nicely formatted and other aspects of formatting can
  
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 <<r-long>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 b <- "Statistics at UC Berkeley: We are a community engaged in research
  and education in probability and statistics.
  In addition to developing fundamental theory and methodology, we are actively"
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # Statistics at UC Berkeley: We are a community engaged in research and
  education in probability and statistics.
  In addition to developing fundamental theory and methodology, we are actively
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # this should work but often doesn't
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 cat(b, fill = TRUE)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 vecLongName = rnorm(100)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName
  * vecLongName, na.rm = TRUE))
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 a = length(mean(5 * vecLongName + vecLongName)) # this is a comment that
  goes over the line by a good long ways
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName,
  na.rm = TRUE)) # this is a comment that goes over the line by a good long
  long long long long long long long ways
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # long output usually is fine
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 rnorm(100)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -1016,120 +855,111 @@ tidy=FALSE
 , but I have not done that here.
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 <<r-long-tidy>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # breaking up a string
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 b <- "Statistics at UC Berkeley: We are a community engaged in research
  
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 and education in probability and statistics.
  In addition to developing 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 fundamental theory and methodology, we are actively"
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # breaking up a comment
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # Statistics at UC Berkeley: We are a community engaged in research and
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # education in probability and statistics.
  In addition to developing
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # fundamental theory and methodology, we are actively
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # breaking up code lines
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 vecLongName = rnorm(100)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 vecLongName * vecLongName, na.rm = TRUE))
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 a <- length(mean(5 * vecLongName + vecLongName)) # this is a comment that
  
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # goes over the line by a good long ways
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 vecLongName, na.rm = TRUE)) # this is a comment that goes over the line
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
-# by a good long long long long long long long long ways
+# by a good long long long long long long long long ways 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -1143,16 +973,12 @@ In bash, we have similar problems with lines overflowing in PDF output,
  
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 <<bash1, engine='bash'>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 echo "Statistics at UC Berkeley: We are a community engaged in research
  and education in probability and statistics.
@@ -1160,11 +986,11 @@ echo "Statistics at UC Berkeley: We are a community engaged in research
  > tmp.txt
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 echo "Second try: Statistics at UC Berkeley: We are a community engaged
  
@@ -1172,7 +998,7 @@ echo "Second try: Statistics at UC Berkeley: We are a community engaged
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 in research and education in probability and statistics.
  In addition to 
@@ -1180,35 +1006,30 @@ in research and education in probability and statistics.
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 developing fundamental theory and methodology, we are actively" 
 \backslash
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 >> tmp.txt
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 cat tmp.txt
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Standard
@@ -1216,58 +1037,49 @@ We also have problems with long comments, so would need to manually format
  them.
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
-
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 <<bash2, engine='bash'>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # the following long comment line is not broken in my test:
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad
  kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # instead manually break it:
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # adlfjaf jkladf afdl
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Subsection
@@ -1280,113 +1092,112 @@ In Python, there is similar trouble with lines overflowing in PDF output
  
 \end_layout
 
-\begin_layout Standard
-\begin_inset ERT
-status open
+\begin_layout Chunk
 
-\begin_layout Plain Layout
+\end_layout
+
+\begin_layout Chunk
 
 <<test-python, engine='python'>>=
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
+
+\end_layout
+
+\begin_layout Chunk
 
 # this overflows the page in some contexts
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 b = "asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad
  kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl"
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 print(b)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # this code overflows the page in some contexts
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 zoo = {"lion": "Simba", "panda": None, "whale": "Moby", "numAnimals": 3,
  "bear": "Yogi", "killer whale": "shamu", "bunny:": "bugs"}
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 print(zoo)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # instead manually break the code
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 zoo = {"lion": "Simba", "panda": None, "whale": "Moby", 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 	"numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 	"bunny:": "bugs"}
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 print(zoo)
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # long comments overflow too
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad
  kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 # and the long output that will appear next in the resulting document (from
  evaluation of the code above) also overflows:
 \end_layout
 
-\begin_layout Plain Layout
+\begin_layout Chunk
 
 @
-\end_layout
-
-\end_inset
-
-
 \end_layout
 
 \begin_layout Section

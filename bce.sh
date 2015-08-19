@@ -6,6 +6,9 @@ sudo apt-get install -y pandoc pandoc-citeproc lmodern
 # for using knitr+LaTeX
 sudo apt-get install -y texinfo highlight
 
+# for using LyX
+sudo apt-get install -y lyx
+
 # for the bash kernel for Jupyter
 pip install bash_kernel
 python -m bash_kernel.install
