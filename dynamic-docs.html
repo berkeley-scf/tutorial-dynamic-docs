@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+
+<title>Creating Dynamic Documents</title>
+
+<script type="text/javascript">
+window.onload = function() {
+  var imgs = document.getElementsByTagName('img'), i, img;
+  for (i = 0; i < imgs.length; i++) {
+    img = imgs[i];
+    // center an image if it is the only element of its parent
+    if (img.parentElement.childElementCount === 1)
+      img.parentElement.style.textAlign = 'center';
+  }
+};
+</script>
+
+
+
+
+
+<style type="text/css">
+body, td {
+   font-family: sans-serif;
+   background-color: white;
+   font-size: 13px;
+}
+
+body {
+  max-width: 800px;
+  margin: auto;
+  padding: 1em;
+  line-height: 20px;
+}
+
+tt, code, pre {
+   font-family: 'DejaVu Sans Mono', 'Droid Sans Mono', 'Lucida Console', Consolas, Monaco, monospace;
+}
+
+h1 {
+   font-size:2.2em;
+}
+
+h2 {
+   font-size:1.8em;
+}
+
+h3 {
+   font-size:1.4em;
+}
+
+h4 {
+   font-size:1.0em;
+}
+
+h5 {
+   font-size:0.9em;
+}
+
+h6 {
+   font-size:0.8em;
+}
+
+a:visited {
+   color: rgb(50%, 0%, 50%);
+}
+
+pre, img {
+  max-width: 100%;
+}
+pre {
+  overflow-x: auto;
+}
+pre code {
+   display: block; padding: 0.5em;
+}
+
+code {
+  font-size: 92%;
+  border: 1px solid #ccc;
+}
+
+code[class] {
+  background-color: #F8F8F8;
+}
+
+table, td, th {
+  border: none;
+}
+
+blockquote {
+   color:#666666;
+   margin:0;
+   padding-left: 1em;
+   border-left: 0.5em #EEE solid;
+}
+
+hr {
+   height: 0px;
+   border-bottom: none;
+   border-top-width: thin;
+   border-top-style: dotted;
+   border-top-color: #999999;
+}
+
+@media print {
+   * {
+      background: transparent !important;
+      color: black !important;
+      filter:none !important;
+      -ms-filter: none !important;
+   }
+
+   body {
+      font-size:12pt;
+      max-width:100%;
+   }
+
+   a, a:visited {
+      text-decoration: underline;
+   }
+
+   hr {
+      visibility: hidden;
+      page-break-before: always;
+   }
+
+   pre, blockquote {
+      padding-right: 1em;
+      page-break-inside: avoid;
+   }
+
+   tr, img {
+      page-break-inside: avoid;
+   }
+
+   img {
+      max-width: 100% !important;
+   }
+
+   @page :left {
+      margin: 15mm 20mm 15mm 10mm;
+   }
+
+   @page :right {
+      margin: 15mm 10mm 15mm 20mm;
+   }
+
+   p, h2, h3 {
+      orphans: 3; widows: 3;
+   }
+
+   h2, h3 {
+      page-break-after: avoid;
+   }
+}
+</style>
+
+
+
+</head>
+
+<body>
+<h1>Creating Dynamic Documents</h1>
+
+<h2>Embedding Code Chunks in Scientific Documents</h2>
+
+<p>Chris Paciorek, Department of Statistics, UC Berkeley</p>
+
+<h1>0) This Tutorial</h1>
+
+<p>This tutorial covers the basics of creating documents that combine code chunks, mathematical notation, and text. We&#39;ll cover R, Python and bash shell chunks in the context of documents written with LaTeX, Markdown, and Jupyter (formerly IPython Notebook). </p>
+
+<p>In the future, a screencast of the material may accompany this document.</p>
+
+<p>We&#39;ll use a virtual machine developed here at Berkeley, the <a href="http://bce.berkeley.edu">Berkeley Common Environment (BCE)</a>. BCE is a virtual Linux machine - basically it is a Linux computer that you can run within your own computer, regardless of whether you are using Windows, Mac, or Linux. This provides a common environment so that things behave the same for all of us. You&#39;ll also need to run the commands in <em>bce.sh</em> to make sure all the necessary software for this tutorial is installed.</p>
+
+<p>That said, if you&#39;d like to work on your own machine, you can. But you&#39;ll need to install the following:</p>
+
+<ul>
+<li>a LaTeX installation such as MacTex (Mac) or MiKTeX (Windows)</li>
+<li>R (and optionally RStudio)</li>
+<li>the knitr and rmarkdown packages for R</li>
+<li>Jupyter and the R kernel for Jupyter </li>
+</ul>
+
+<p>This tutorial assumes you are able to use the UNIX command line; we provide a tutorial on the <a href="http://statistics.berkeley.edu/computing/training/tutorials">Basics of UNIX</a> in the context of BCE. This tutorial also assumes basic familiarity with LaTeX; more details on LaTeX are available in our <a href="http://statistics.berkeley.edu/computing/training/tutorials">quick introduction to LaTeX tutorial</a>.</p>
+
+<p>Materials for this tutorial, including the R markdown file that was used to create this document are available on Github at (<a href="https://github.com/berkeley-scf/tutorial-dynamic-docs">https://github.com/berkeley-scf/tutorial-dynamic-docs</a>).  You can download the files by doing a git clone from a terminal window on a UNIX-like machine, as follows:</p>
+
+<pre><code class="bash">git clone https://github.com/berkeley-scf/tutorial-dynamic-docs
+</code></pre>
+
+<p>This is a pull-yourself-up-by-your-bootstraps tutorial as this document itself is generated from an R Markdown file in the same way as we discuss herein.</p>
+
+<p>To create this HTML document, simply compile the corresponding R Markdown file in R as follows (the following will work from within BCE after cloning the repository as above).</p>
+
+<pre><code class="bash">Rscript -e &quot;library(knitr); knit2html(&#39;dynamic-docs.Rmd&#39;)&quot;
+</code></pre>
+
+<p>This tutorial by Christopher Paciorek is licensed under a Creative Commons Attribution 3.0 Unported License.</p>
+
+<h1>1) Overview</h1>
+
+<p>In the following sections, we&#39;ll present example source files in each of the formats covered in this tutorial, and we&#39;ll show how to create PDF and HTML files from each source document. Each example file covers the same material, showing basic use of equations and code chunks in R, Python, and bash. In addition, there are tips on formatting code to avoid output that exceeds the width of a page, which is a common problem when generating PDFs.</p>
+
+<p>In general, processing the input file to create an output file involves evaluating the code chunks and creating an intermediate document in which the results of the evaluation are written out (e.g., in standard Markdown or LaTeX syntax), from which the final step is to create the output in the usual way from the intermediate document. Note that these steps take place behind the scenes without you needing to know the details.</p>
+
+<h1>2) R Markdown</h1>
+
+<p>R Markdown is a variant on the Markdown markup language that allows you to embed code chunks that are evaluated before creating the final output, unlike standard static code chunks in Markdown that are not evaluated. R Markdown files are simple text files.</p>
+
+<p>In <em>demo.Rmd</em> you&#39;ll see examples of embedding R, Python, and bash code chunks, as ell as the syntax involved in creating PDF, HTML, and Word output files.</p>
+
+<h1>3) LaTeX plus knitr</h1>
+
+<p><em>knitr</em> is an R package that allows you to process LaTeX files that contain code chunks. The input files can be in one of two formats, either traditional Sweave files (with extension .Rnw) or a new format introduced by knitr (with extension .Rtex). Files in either format are simple text files.</p>
+
+<p><em>demo.Rnw</em> and <em>demo.Rtex</em> provide examples of these formats, with examples of embedding R, Python, and bash code chunks.  In both <em>demo.Rnw</em> and <em>demo.Rtex</em> you&#39;ll also see the syntax for creating PDF output files.</p>
+
+<h1>4) LyX plus knitr</h1>
+
+<p>You can embed code chunks in the Sweave format in LyX files and then process the file using knitr to create PDF output. <em>demo.lyx</em> provides an example, including the syntax for creating PDF output files. To use LyX, you&#39;ll need to start the LyX application and open an existing or create a new LyX file.</p>
+
+<h1>5) Jupyter</h1>
+
+<p>Jupyter grew out of the IPython Notebook project and provides a general way of embedding code chunks, using a variety of languages, within a document where the textual component of the document is written in Markdown. Basically a document is a sequence of chunks, where each chunk is either a code chunk or a Markdown chunk.</p>
+
+<p>To work with a Jupyter notebook, you start Jupyter by running <code>ipython notebook</code>from the UNIX command line. This will open up a Jupyter interface in a browser window. From there, you can navigate to and open your notebook file (which will end in extension .ipynb). You can choose the kernel (i.e., the language for the code chunks &ndash; Python, R, etc.) by selecting <code>Kernel -&gt; Change Kernel</code> or by selecting the kernel you want when opening a new notebook.</p>
+
+<p>The Jupyter files have some similarities to <em>demo.Rmd</em> as both R Markdown and Jupyter rely on Markdown as the format for text input. However, they handle code chunks somewhat differently.</p>
+
+<p>Jupyter does not allow one to insert chunks from multiple languages in the same document, so here we have demo files for inserting R chunks (<em>demo-R.ipynb</em>), bash chunks (<em>demo-bash.ipynb</em>), and Python chunks (<em>demo-python.ipynb</em>). All include instructions for generating HTML output. </p>
+
+<p>To use the bash kernel, you will need to do some additional installation. In particular, in BCE please run the relevant commands in <em>bce.sh</em>.</p>
+
+</body>
+
+</html>
