@@ -1,8 +1,6 @@
 # tutorial-dynamic-docs
 Tutorial on creating dynamic documents, focused on R
 
-The video that accompanies this material is available here [on YouTube [UNDER CONSTRUCTION]]().
-
 This tutorial covers:
 
 * Embedding R and bash (and Python) code in Markdown using Rmarkdown
