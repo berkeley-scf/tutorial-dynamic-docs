@@ -38,7 +38,7 @@ Rscript -e "library(knitr); knit2pdf('demo.Rnw')"
 Alternatively, start R and run this:
 
 <<compile-R, eval=FALSE>>=
-library(knitr); knit2pdf('demo.Rtex')  
+library(knitr); knit2pdf('demo.Rnw')  
 @ 
 
 I don't know of a way to generate HTML directly, but there are tools for converting between various file formats, such as \emph{pandoc}.
@@ -47,7 +47,7 @@ I don't know of a way to generate HTML directly, but there are tools for convert
 
 This document will focus on embedding code and not on standard LaTeX. For a quick introduction to LaTeX, see \href{https://github.com/berkeley-scf/tutorial-latex-intro}{our LaTeX tutorial}.
 
-The \texttt{knit2pdf} command processes the Rtex format, evaluating the R code chunks, and creating a standard LaTeX file with the code snippets and results of evaluating the code properly formatted as standard LaTeX. 
+The \texttt{knit2pdf} command processes the Rnw format, evaluating the R code chunks, and creating a standard LaTeX file with the code snippets and results of evaluating the code properly formatted as standard LaTeX. 
 
 \section{Embedding equations using LaTeX}
 
@@ -105,7 +105,8 @@ cat("this code is not evaluated but the code itself is printed in the document")
 Intensive calculations can be saved using the \texttt{cache=TRUE} tag so they don't need to be rerun every time you compile the document. 
 
 <<slow-step, cache=TRUE>>=
-mean(rnorm(5e7))
+a <- mean(rnorm(5e7))
+a
 @
 
 \section{Embedding bash and Python code}

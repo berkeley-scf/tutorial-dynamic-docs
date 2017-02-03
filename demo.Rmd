@@ -112,7 +112,8 @@ cat("this code is not evaluated but the code itself is printed in the document")
 
 Intensive calculations can be saved using the `cache=TRUE` tag so they don't need to be rerun every time you compile the document. 
 ```{r, slow-step, cache=TRUE}
-mean(rnorm(5e7))
+a <- mean(rnorm(5e7))
+a
 ```
 
 

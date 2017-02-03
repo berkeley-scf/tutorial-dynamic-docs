@@ -67,7 +67,7 @@ You can embed code chunks in the Sweave format in LyX files and then process the
 
 Jupyter grew out of the IPython Notebook project and provides a general way of embedding code chunks, using a variety of languages, within a document where the textual component of the document is written in Markdown. Basically a document is a sequence of chunks, where each chunk is either a code chunk or a Markdown chunk.
 
-To work with a Jupyter notebook, you start Jupyter by running `ipython notebook`from the UNIX command line. This will open up a Jupyter interface in a browser window. From there, you can navigate to and open your notebook file (which will end in extension .ipynb). You can choose the kernel (i.e., the language for the code chunks -- Python, R, etc.) by selecting `Kernel -> Change Kernel` or by selecting the kernel you want when opening a new notebook.
+To work with a Jupyter notebook, you start Jupyter by running `jupyter notebook` (possibly `ipython notebook` if you have an old version of IPython) from the UNIX command line. This will open up a Jupyter interface in a browser window. From there, you can navigate to and open your notebook file (which will end in extension .ipynb). You can choose the kernel (i.e., the language for the code chunks -- Python, R, etc.) by selecting `Kernel -> Change Kernel` or by selecting the kernel you want when opening a new notebook.
 
 The Jupyter files have some similarities to *demo.Rmd* as both R Markdown and Jupyter rely on Markdown as the format for text input. However, they handle code chunks somewhat differently.
 
