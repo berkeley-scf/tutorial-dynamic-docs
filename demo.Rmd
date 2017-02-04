@@ -43,6 +43,7 @@ library(rmarkdown); render('demo.Rmd', 'word_document')
 library(knitr); knit2html('demo.Rmd')  
 ```
 
+Or in RStudio, click on the 'Knit' pull-down menu and choose to knit to HTML, PDF, or Word.
 
 # 2) Some basic Markdown formatting
 

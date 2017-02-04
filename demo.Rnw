@@ -21,7 +21,7 @@ opts_chunk$set(fig.width = 5, fig.height = 5)
 
 
 \begin{document} 
-\title{An example Rtex file\\Illustrating use of R, bash, and Python code chunks}
+\title{An example Rnw (Sweave format) file\\Illustrating use of R, bash, and Python code chunks}
 \author{Christopher Paciorek}
 \date{August 2015}
 
@@ -42,6 +42,8 @@ library(knitr); knit2pdf('demo.Rnw')
 @ 
 
 I don't know of a way to generate HTML directly, but there are tools for converting between various file formats, such as \emph{pandoc}.
+
+Or in RStudio, simply click the 'Compile PDF' button. Important: make sure that RStudio knows to use knitr rather than Sweave to compile your document. Click on Preferences in the RStudio drop-down menu, select 'Sweave' and then choose 'knitr' after 'Weave Rnw files using'. If you choose 'Sweave' you may find the line \begin{verbatim}\SweaveOpts{concordance=TRUE}\end{verbatim} inserted in your document and resulting problems with generating the pdf may ensue.
 
 \section{LaTeX}
 
