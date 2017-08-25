@@ -18,7 +18,7 @@ set.seed(0)
 
 library(knitr) # need this for opts_chunk command
 opts_chunk$set(fig.width = 5, fig.height = 5)
-# if we wanted chunks by default not to be evaluated
+# if we wanted chunks by default not to be evaluated, uncomment next line
 # opts_chunk$set(eval = FALSE)  
 ```
 
@@ -48,7 +48,7 @@ Or in RStudio, click on the 'Knit' pull-down menu and choose to knit to HTML, PD
 # 2) Some basic Markdown formatting
 
 
-Here's an *introduction* to our **critical** discovery. We have some code to display inline but not evaluate: `7 %% 5` and we can embed the code in a static code block as follows:
+Here's an *introduction* to our **critical** discovery. We have some code to display inline but not evaluate: `exp(7)` and we can embed the code in a static code block as follows:
 ```
 a = 7 %% 5
 b = exp(a)
@@ -98,16 +98,16 @@ And here's some inline R code: What is 3 plus 5? `r 3+5`.
 
 You have control over whether code in chunks is echoed into the document and evaluated using the `include`, `echo`, and `eval` tags.
 
-```{r, include, include=FALSE}
+```{r, includeChunk, include=FALSE}
 cat("this code is evaluated but nothing is printed in the document")
 library(fields) 
-# fields package should now be loaded for use by later chunks
+## fields package should now be loaded for use by later chunks
 ```
 
-```{r, echo, echo=FALSE}
+```{r, echoChunk, echo=FALSE}
 cat("this code is not printed in the document but results of evaluating the code are printed")
 ```
-```{r, eval, eval=FALSE}
+```{r, evalChunk, eval=FALSE}
 cat("this code is not evaluated but the code itself is printed in the document")
 ```
 
@@ -181,9 +181,9 @@ Having long lines be nicely formatted and other aspects of formatting can be a c
 
 ```{r, r-long}
 b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"
-# Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
+## Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
 
-# this should work but often doesn't
+## this should work to give decent formatting, but often doesn't
 cat(b, fill = TRUE)
 
 vecLongName = rnorm(100)
@@ -191,32 +191,32 @@ a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName *
 a = length(mean(5 * vecLongName + vecLongName)) # this is a comment that goes over the line by a good long ways
 a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName, na.rm = TRUE)) # this is a comment that goes over the line by a good long long long long long long long long ways
 
-# long output usually is fine
+## long output usually is fine
 rnorm(100)
 ```
 
 Sometimes you can format things manually for better results. You may need to tag the chunk with `tidy=FALSE`, but I have not done that here.
 
 ```{r, r-long-tidy}
-# breaking up a string
+## breaking up a string
 b <- "Statistics at UC Berkeley: We are a community engaged in research
  and education in probability and statistics. In addition to developing 
 fundamental theory and methodology, we are actively"
 
-# breaking up a comment
-# Statistics at UC Berkeley: We are a community engaged in research and 
-# education in probability and statistics. In addition to developing 
-# fundamental theory and methodology, we are actively
+## breaking up a comment
+## Statistics at UC Berkeley: We are a community engaged in research and 
+## education in probability and statistics. In addition to developing 
+## fundamental theory and methodology, we are actively
 
-# breaking up code lines
+## breaking up code lines
 vecLongName = rnorm(100)
 a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + 
     vecLongName * vecLongName, na.rm = TRUE))
 a <- length(mean(5 * vecLongName + vecLongName)) # this is a comment that 
-    # goes over the line by a good long ways
+    ## goes over the line by a good long ways
 a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + 
     vecLongName, na.rm = TRUE)) # this is a comment that goes over the line 
-    # by a good long long long long long long long long ways
+    ## by a good long long long long long long long long ways
 ```
 
 
@@ -277,6 +277,8 @@ print(zoo)
 # 8) References
 
 We'll just see how you use bibtex style references.  @Bane:etal:2008 proposed a useful method. This was confirmed [@Cres:Joha:2008].
+
+Note the indication of the `refs.bib` file in the initial lines of this document so that the bibliographic information for these citations can be found.
 
 The list of references is placed at the end of the document. You'd presumably want a section header like this:
 

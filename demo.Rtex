@@ -269,6 +269,8 @@ In Python, there is similar trouble with lines overflowing in PDF output too.
 
 Here's how to use BibTeX style references.  \cite{Bane:etal:2008} proposed a useful method. This was confirmed \citep{Cres:Joha:2008}.
 
+Note the use of the bibliography keyword below to indicate the \emph{refs.bib} file as the source of the bibliographic information for the references above.
+
 The list of references is placed at the end of the document. 
 
 

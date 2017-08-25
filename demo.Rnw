@@ -53,7 +53,7 @@ The \texttt{knit2pdf} command processes the Rnw format, evaluating the R code ch
 
 \section{Embedding equations using LaTeX}
 
-The Sweave format is built on LaTeX, so you can just use LaTeX functionalitydirectly.
+The Sweave format is built on LaTeX, so you can just use LaTeX functionality directly.
 
 Here is an inline equation $f(x) = \int f(y, x) dy$.
 
@@ -90,17 +90,17 @@ And here's some inline R code: What is 3 plus 5? \Sexpr{3+5}.
 
 You have control over whether code in chunks is echoed into the document and evaluated using the \emph{include}, \emph{echo}, and \emph{eval} tags.
 
-<<include, include=FALSE>>=
+<<includeChunk, include=FALSE>>=
 cat("this code is evaluated but nothing is printed in the document")
 library(fields) 
 # fields package should now be loaded for use by later chunks
 @
 
-<<echo, echo=FALSE>>=
+<<echoChunk, echo=FALSE>>=
 cat("this code is not printed in the document but results of evaluating the code are printed")
 @
 
-<<eval, eval=FALSE>>=
+<<evalChunk, eval=FALSE>>=
 cat("this code is not evaluated but the code itself is printed in the document")
 @
 
@@ -269,6 +269,8 @@ print(zoo)
 \section{References}
 
 Here's how to use BibTeX style references.  \cite{Bane:etal:2008} proposed a useful method. This was confirmed \citep{Cres:Joha:2008}.
+
+Note the use of the bibliography keyword below to indicate the \emph{refs.bib} file as the source of the bibliographic information for the references above.
 
 The list of references is placed at the end of the document. 
 
