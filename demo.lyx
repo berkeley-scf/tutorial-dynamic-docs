@@ -366,13 +366,25 @@ Insert -> TeX code
 \family default
  (or use the TeX button in the LyX toolbar) and then type in your code as
  seen here.
- Alternatively, rather than inserting as TeX code, you can tag your code
+ 
+\begin_inset Note Note
+status open
+
+\begin_layout Plain Layout
+Alternatively, rather than inserting as TeX code, you can tag your code
  using the Chunk tag from the pulldown menu at the left of the toolbar near
  the top of the LyX window -- in that case, see 
 \emph on
 demo_alt.lyx
 \emph default
 ).
+ NOTE: as of August 2017 I'm noticing that the chunk tag doesn't seem to
+ be available in more recent versions of LyX.
+\end_layout
+
+\end_inset
+
+
 \end_layout
 
 \begin_layout Standard
