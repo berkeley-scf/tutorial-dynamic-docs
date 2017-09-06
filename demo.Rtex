@@ -19,6 +19,7 @@
 % opts_chunk$set(fig.width = 5, fig.height = 5)
 % # if we wanted chunks by default not to be evaluated
 % # opts_chunk$set(eval = FALSE)  
+% myControlVar <- TRUE   # used later to control chunk behavior
 % 
 %% end.rcode
 
@@ -111,6 +112,13 @@ Intensive calculations can be saved using the \texttt{cache=TRUE} tag so they do
 %% begin.rcode, slow-step, cache=TRUE
 % mean(rnorm(5e7))
 %% end.rcode
+
+You can use R variables to control the chunk options. Note that the variable \emph{myControlVar} is defined in the first chunk of this document.
+
+%% begin.rcode, use-var-in-chunk-option, echo=myControlVar, eval=!myControlVar
+print("hi")
+%% end.rcode
+
 
 \section{Embedding bash and Python code}
  

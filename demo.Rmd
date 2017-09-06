@@ -19,7 +19,8 @@ set.seed(0)
 library(knitr) # need this for opts_chunk command
 opts_chunk$set(fig.width = 5, fig.height = 5)
 # if we wanted chunks by default not to be evaluated, uncomment next line
-# opts_chunk$set(eval = FALSE)  
+# opts_chunk$set(eval = FALSE)
+myControlVar <- TRUE   # used later to control chunk behavior
 ```
 
 # 1) How to generate a document from this file
@@ -115,6 +116,12 @@ Intensive calculations can be saved using the `cache=TRUE` tag so they don't nee
 ```{r, slow-step, cache=TRUE}
 a <- mean(rnorm(5e7))
 a
+```
+
+You can use R variables to control the chunk options. Note that the variable `myControlVar` is defined in the first chunk of this document.
+
+```{r, use-var-in-chunk-option, echo=myControlVar, eval=!myControlVar}
+print("hi")
 ```
 
 

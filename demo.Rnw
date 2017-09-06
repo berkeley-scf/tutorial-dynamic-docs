@@ -17,6 +17,7 @@ library(knitr) # need this for opts_chunk command
 opts_chunk$set(fig.width = 5, fig.height = 5)
 # if we wanted chunks by default not to be evaluated
 # opts_chunk$set(eval = FALSE)  
+myControlVar <- TRUE   # used later to control chunk behavior
 @ 
 
 
@@ -110,6 +111,12 @@ Intensive calculations can be saved using the \texttt{cache=TRUE} tag so they do
 a <- mean(rnorm(5e7))
 a
 @
+
+You can use R variables to control the chunk options. Note that the variable \emph{myControlVar} is defined in the first chunk of this document.
+
+<<use-var-in-chunk-option, echo=myControlVar, eval=!myControlVar>>=
+print("hi")
+@ 
 
 \section{Embedding bash and Python code}
  
