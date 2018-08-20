@@ -150,7 +150,7 @@ Inline bash code won't work.
 
 %% begin.rcode py-chunk2, engine='python'
 %try:
-%        print(x[0])
+%       print(x[0])
 %except NameError:
 %       print('x does not exist')
 %% end.rcode

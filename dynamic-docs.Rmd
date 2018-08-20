@@ -13,9 +13,7 @@ opts_chunk$set(engine='bash') # because we're using a lot of bash, let's set as 
 
 This tutorial covers the basics of creating documents that combine code chunks, mathematical notation, and text. We'll cover R, Python and bash shell chunks in the context of documents written with LaTeX, Markdown, and Jupyter (formerly IPython Notebook). 
 
-This tutorial was developed using a virtual machine developed here at Berkeley, the [Berkeley Common Environment (BCE)](http://bce.berkeley.edu). BCE is a virtual Linux machine - basically it is a Linux computer that you can run within your own computer, regardless of whether you are using Windows, Mac, or Linux. This provides a common environment so that things behave the same for all of us. You'll also need to run the commands in *bce.sh* to make sure all the necessary software for this tutorial is installed. You're welcome to try using BCE with this tutorial, but I should not that we haven't updated BCE recently and the VirtualBox software on which BCE will run can be a pain.
-
-If you'd like to work on your own machine, you can, but you'll need to install the following:
+For this tutorial you'll need to install the following:
 * a LaTeX installation such as MacTex (Mac) or MiKTeX (Windows).
 * R (and optionally RStudio).
 * the knitr and rmarkdown packages for R.
@@ -25,6 +23,7 @@ Department and university servers that you may have access to may also have some
 
 This tutorial assumes you are able to use the UNIX command line; we provide a tutorial on the [Basics of UNIX](http://statistics.berkeley.edu/computing/training/tutorials). This tutorial also assumes basic familiarity with LaTeX; more details on LaTeX are available in our [quick introduction to LaTeX tutorial](http://statistics.berkeley.edu/computing/training/tutorials).
 
+This tutorial was developed using a virtual machine developed here at Berkeley, the [Berkeley Common Environment (BCE)](http://bce.berkeley.edu). BCE is a virtual Linux machine - basically it is a Linux computer that you can run within your own computer, regardless of whether you are using Windows, Mac, or Linux. This provides a common environment so that things behave the same for all of us. You'll also need to run the commands in *bce.sh* to make sure all the necessary software for this tutorial is installed. You're welcome to try using BCE with this tutorial, but we haven't updated BCE recently and the VirtualBox software on which BCE will run can be a pain.
 
 Materials for this tutorial, including the R markdown file that was used to create this document are available on Github at (https://github.com/berkeley-scf/tutorial-dynamic-docs).  You can download the files by doing a git clone from a terminal window on a UNIX-like machine, as follows:
 ```{r, clone, eval=FALSE}
@@ -72,9 +71,9 @@ You may have web-based access to Jupyter notebooks via a service called JupyterH
 
 The Jupyter files have some similarities to *demo.Rmd* as both R Markdown and Jupyter rely on Markdown as the format for text input. However, they handle code chunks somewhat differently.
 
-Jupyter does not allow one to insert chunks from multiple languages in the same document, so here we have demo files for inserting R chunks (*demo-R.ipynb*), bash chunks (*demo-bash.ipynb*), and Python chunks (*demo-python.ipynb*). All include instructions for generating HTML output. 
+In the past Jupyter has not allowed one to insert chunks from multiple languages in the same document, so here we have demo files for inserting R chunks (*demo-R.ipynb*), bash chunks (*demo-bash.ipynb*), and Python chunks (*demo-python.ipynb*). All include instructions for generating HTML output. 
 
-To use the bash kernel in BCE or on your own machine, you will need to do some additional installation. In particular, in BCE please run the relevant commands in *bce.sh*.
+
 
 
 
