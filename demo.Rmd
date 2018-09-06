@@ -38,7 +38,7 @@ Rscript -e "library(knitr); knit2html('demo.Rmd')"  # HTML alternative
 Alternatively, start R and run the desired line from amongst following in R:
 
 ```{r, compile-R, eval=FALSE}
-library(rmarkdown); render('demo.Rmd', 'pdf_document')"
+library(rmarkdown); render('demo.Rmd', 'pdf_document')
 library(rmarkdown); render('demo.Rmd', 'html_document')
 library(rmarkdown); render('demo.Rmd', 'word_document')
 library(knitr); knit2html('demo.Rmd')  
