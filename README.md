@@ -11,4 +11,5 @@ It also illustrates some work-arounds to the common problem of lines of code or 
 
 Included in this repository are template documents for the various modalities described above.
 
-The tutorial is illustrated in the context of the [BCE virtual machine](http://bce.berkeley.edu).
+Please see [the dynamic-docs.html document](https://htmlpreview.github.io/?https://github.com/berkeley-scf/tutorial-dynamic-docs/dynamic-docs.html) to get started.
+
