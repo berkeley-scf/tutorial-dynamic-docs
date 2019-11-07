@@ -3,7 +3,7 @@
 title: "An example RMarkdown file"
 subtitle: "Illustrating use of R, bash, and Python code chunks"
 author: "Christopher Paciorek"
-date: "August 2015"
+date: "November 2019"
 bibliography: refs.bib
 ---
 
@@ -147,23 +147,31 @@ Inline bash code won't work: `bash wc demo.Rmd`.
 
 ## 5.2) Embedding Python code
 
+You can embed Python code. As with R, state is preserved so later chunks can use objects from earlier chunks, if you have a sufficiently up-to-date version of the `rmarkdown` package (and of RStudio if you are working with Python chunks within RStudio). 
+
 ```{python, py-chunk1}
 import numpy as np
 x = np.array((3, 5, 7))
 print(x.sum())
-x.min()  # note not printed
+x.min()    # this will print with more recent versions of rmarkdown 
 ```
 
 ```{python, py-chunk2}
 try:
         print(x[0])
 except NameError:
-       print('x does not exist')
+       print('state is not preserved: x does not exist')
 ```
 
-As with bash chunks, all output occurs after the code is printed. Also, state is not preserved between chunks. Finally, you need explicit print statements; you won't see what would normally be printed to the screen.
-
 There is no facility for inline Python code: `python print(3+5)`
+
+Note that on older versions of RStudio and with older versions of the `rmarkdown` package, the functionality for running Python chunks was much more limited:
+
+ - as with bash chunks, all output occurred after all the code in a chunk was printed.
+ - state was not preserved between chunks
+ - one needed an explicit print statement to see the value of an object
+
+
 
 # 6) Reading code from an external file
 
@@ -260,25 +268,30 @@ We also have problems with long comments, so we would need to manually format th
 
 In Python, there is similar trouble with lines overflowing in PDF output too.
 
-```{python, test-python}
+```{python, test-python1}
 # this overflows the page
 b = "asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl"
 print(b)
+```
 
+```{python, test-python2}
 # this code overflows the page
 zoo = {"lion": "Simba", "panda": None, "whale": "Moby", "numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", "bunny:": "bugs"}
 print(zoo)
+```
 
+```{python, test-python3}
 # instead manually break the code
 zoo = {"lion": "Simba", "panda": None, "whale": "Moby", 
        "numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", 
        "bunny:": "bugs"}
 print(zoo)
+```
 
+
+```{python, test-python4}
 # long comments overflow too
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
-
-# the long output that will appear next in the resulting document (produced from the evaluation of the code above) also overflows:
 ```
 
 # 8) References
