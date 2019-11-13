@@ -184,9 +184,9 @@ hr {
 
 <p>Department and university servers that you may have access to may also have some or all of this software already installed.</p>
 
-<p>This tutorial assumes you are able to use the UNIX command line; we provide a tutorial on the <a href="http://statistics.berkeley.edu/computing/training/tutorials">Basics of UNIX</a>. This tutorial also assumes basic familiarity with LaTeX; more details on LaTeX are available in our <a href="http://statistics.berkeley.edu/computing/training/tutorials">quick introduction to LaTeX tutorial</a>.</p>
+<p>This tutorial assumes basic familiarity with LaTeX; more details on LaTeX are available in our <a href="http://statistics.berkeley.edu/computing/training/tutorials">quick introduction to LaTeX tutorial</a>.</p>
 
-<p>This tutorial was developed using a virtual machine developed here at Berkeley, the <a href="http://bce.berkeley.edu">Berkeley Common Environment (BCE)</a>. BCE is a virtual Linux machine - basically it is a Linux computer that you can run within your own computer, regardless of whether you are using Windows, Mac, or Linux. This provides a common environment so that things behave the same for all of us. You&#39;ll also need to run the commands in <em>bce.sh</em> to make sure all the necessary software for this tutorial is installed. You&#39;re welcome to try using BCE with this tutorial, but we haven&#39;t updated BCE recently and the VirtualBox software on which BCE will run can be a pain.</p>
+<p>You should be able to follow the tutorial on any of MacOS, Windows or Linux. This tutorial was developed using a virtual machine developed here at Berkeley, the <a href="http://bce.berkeley.edu">Berkeley Common Environment (BCE)</a>. BCE is a virtual Linux machine - basically it is a Linux computer that you can run within your own computer, regardless of whether you are using Windows, Mac, or Linux. This provides a common environment so that things behave the same for all of us. You&#39;ll also need to run the commands in <em>bce.sh</em> to make sure all the necessary software for this tutorial is installed. You&#39;re welcome to try using BCE with this tutorial, but we don&#39;t recommend it as we haven&#39;t updated BCE recently and the VirtualBox software on which BCE will run can be a pain.</p>
 
 <p>Materials for this tutorial, including the R markdown file that was used to create this document are available on Github at (<a href="https://github.com/berkeley-scf/tutorial-dynamic-docs">https://github.com/berkeley-scf/tutorial-dynamic-docs</a>).  You can download the files by doing a git clone from a terminal window on a UNIX-like machine, as follows:</p>
 
@@ -195,10 +195,12 @@ hr {
 
 <p>This is a pull-yourself-up-by-your-bootstraps (eat your own dog food) tutorial as this document itself is generated from an R Markdown file in the same way as we discuss herein.</p>
 
-<p>To create this HTML document, simply compile the corresponding R Markdown file in R as follows (the following will work from within BCE after cloning the repository as above).</p>
+<p>To create this HTML document, simply compile the corresponding R Markdown file in R as follows.</p>
 
 <pre><code class="bash">Rscript -e &quot;library(knitr); knit2html(&#39;dynamic-docs.Rmd&#39;)&quot;
 </code></pre>
+
+<p>Or from within R, run <code>library(knitr); knit2html(&#39;dynamic-docs.Rmd&#39;)</code>.</p>
 
 <p>This tutorial by Christopher Paciorek is licensed under a Creative Commons Attribution 3.0 Unported License.</p>
 
