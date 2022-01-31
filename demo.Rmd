@@ -1,9 +1,9 @@
 
 ---
-title: "An example RMarkdown file"
+title: "An example R Markdown file"
 subtitle: "Illustrating use of R, bash, and Python code chunks"
 author: "Christopher Paciorek"
-date: "November 2019"
+date: "February 2022"
 bibliography: refs.bib
 ---
 
@@ -12,7 +12,7 @@ bibliography: refs.bib
 # e.g., package and dataset loading
 
 require(ggplot2)
-set.seed(0)
+set.seed(1)
 
 # also a good place to set global chunk options
 
@@ -44,18 +44,20 @@ library(rmarkdown); render('demo.Rmd', 'word_document')
 library(knitr); knit2html('demo.Rmd')  
 ```
 
+
 Or in RStudio, click on the 'Knit' pull-down menu and choose to knit to HTML, PDF, or Word.
 
 # 2) Some basic Markdown formatting
 
 
 Here's an *introduction* to our **critical** discovery. We have some code to display inline but not evaluate: `exp(7)` and we can embed the code in a static code block as follows:
+
 ```
 a = 7 %% 5
 b = exp(a)
 ```
 
-This document will focus on embedding math and code and not on standard Markdown formatting. There are lots of sources of information on Markdown. [RStudio has good information on R Markdown](http://rmarkdown.rstudio.com) (including Markdown formatting).
+This document will focus on embedding math and code and not on standard Markdown formatting. There are lots of sources of information on Markdown. [RStudio has good information on R Markdown](https://rmarkdown.rstudio.com) (including Markdown formatting).
 
 
 # 3) Embedding equations using LaTeX
@@ -65,16 +67,15 @@ This can be done with the following syntax. Note that you can't have a space aft
 Here is an inline equation $f(x) = \int f(y, x) dy$.
 
 Here's a displayed equation
+
 $$
 f_\theta(x) = \int f_\theta(y, x) dy.
 $$ 
 
-
 # 4) Embedding R code
 
-
-
 Here's an R code chunk
+
 ```{r, r-chunk1}
 a <- c(7, 3)
 mean(a)
@@ -124,6 +125,14 @@ You can use R variables to control the chunk options. Note that the variable `my
 print("hi")
 ```
 
+An alternative, nice way to specify chunk options is within the chunk, like this:
+
+```{r}
+#| label: put-options-in-chunk
+#| eval: FALSE
+#| echo: FALSE
+cat("this code is not printed in the document nor are results of evaluating the code printed")
+```
 
 # 5) Embedding bash and Python code
 
