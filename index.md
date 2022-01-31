@@ -27,7 +27,7 @@ You should be able to follow the tutorial on any of MacOS, Windows or Linux.
 
 Materials for this tutorial, including the R Markdown file that was used to create this document are available on [GitHub](https://github.com/berkeley-scf/tutorial-dynamic-docs).  You can download the files by doing a git clone from a terminal window on a UNIX-like machine, as follows:
 
-```{r, clone, eval=FALSE}
+```bash
 git clone https://github.com/berkeley-scf/tutorial-dynamic-docs
 ```
 
