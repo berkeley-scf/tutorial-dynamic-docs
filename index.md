@@ -1,6 +1,5 @@
 ---
 title: Creating Dynamic Documents
-subtitle: Embedding Code Chunks in Scientific Documents
 layout: default
 author: Christopher Paciorek
 ---
