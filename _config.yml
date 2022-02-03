@@ -3,5 +3,5 @@ plugins:
 - jekyll-remote-theme # add this line to the plugins list if you already have one
 title: Dynamic documents tutorial
 description: Training materials for creating reproducible documents containing code chunks, mathematical notation, simple text, and more. See the top menu for example formats.
-show_downloads: false
+show_downloads: true
 logo: assets/img/logo.svg
