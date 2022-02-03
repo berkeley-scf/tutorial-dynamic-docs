@@ -21,7 +21,7 @@ For this tutorial you'll need to install the following software:
 
 Department and university servers that you may have access to may also have some or all of this software already installed.
 
-This tutorial assumes basic familiarity with LaTeX syntax (most simply just with some basic math syntax); more details on LaTeX are available in our [quick introduction to LaTeX tutorial](http://statistics.berkeley.edu/computing/training/tutorials).
+This tutorial assumes basic familiarity with LaTeX syntax (most simply just with some basic math syntax); more details on LaTeX are available in our [quick introduction to LaTeX tutorial](https://statistics.berkeley.edu/computing/training/tutorials).
 
 You should be able to follow the tutorial on any of MacOS, Windows or Linux. 
 
@@ -48,7 +48,7 @@ R Markdown is a variant on the Markdown markup language that allows you to embed
 
 In [demo.Rmd](demo.Rmd), you'll see examples of embedding R, Python, and bash code chunks, as well as the syntax involved in creating PDF, HTML, and Word output files. [demo.pdf](demo.pdf) shows how it looks as a final output file, after "rendering" the input Rmd document. 
 
-### 3.1 Quarto and qmd files
+### Quarto and qmd files
 
 Quarto is a relatively new project meant to extend R Markdown and also work with Jupyter notebooks. You can create `qmd` files that use the same syntax as R Markdown (`Rmd`) files. Quarto also allows you to easily render output files from qmd, R Markdown, and Jupyter notebook files. And you can use Quarto to convert Jupyter notebooks to the qmd format. This is nice in part because qmd (like Rmd) is more easily handled by version control and with shell commands than the JSON format of .ipynb files.
 
@@ -58,7 +58,7 @@ Quarto is a relatively new project meant to extend R Markdown and also work with
 
 [demo.Rtex](demo.Rtex) and [demo.Rnw](demo.Rnw) are examples of these formats, with examples of embedding R, Python, and bash code chunks.  In both *demo.Rnw* and *demo.Rtex* you'll also see the syntax for creating PDF output files.
 
-### 4.1 Overleaf
+### Overleaf
 
 [Overleaf](overleaf.com) allows you to [use either Rtex or Rnw style code chunk formatting](https://www.overleaf.com/learn/latex/Knitr) within a LaTeX document (and note that documentation only shows the Rnw format). 
 
@@ -80,7 +80,7 @@ The Jupyter files have some similarities to *demo.Rmd* as both R Markdown and Ju
 
 You can insert code chunks in a different language using the `%%` magic syntax, as shown in [demo-python.ipynb](demo-python.ipynb). We also have specific demo files for bash and R: [demo-bash.ipynb](demo-bash.ipynb) and [demo-R.ipynb](demo-R.ipynb).  All include instructions for generating HTML output. 
 
-### 6.1 Quarto and qmd files
+### Quarto and qmd files
 
 You can use Quarto to convert Jupyter notebooks to the qmd format. 
 
