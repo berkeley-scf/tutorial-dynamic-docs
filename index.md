@@ -25,11 +25,7 @@ This tutorial assumes basic familiarity with LaTeX syntax (most simply just with
 
 You should be able to follow the tutorial on any of MacOS, Windows or Linux. 
 
-Materials for this tutorial, in particular the demonstration input files in various formats, are available from [this GitHub repository](https://github.com/berkeley-scf/tutorial-dynamic-docs).  You can download the files as a [zip file of the repository](https://github.com/berkeley-scf/tutorial-dynamic-docs/archive/refs/heads/gh-pages.zip) or using standard methods for cloning a Git repository, e.g., from a terminal window on a UNIX-like machine, as follows:
-
-```bash
-git clone https://github.com/berkeley-scf/tutorial-dynamic-docs
-```
+Materials for this tutorial, in particular the demonstration input files in various formats, are available from the underlying GitHub repository via the links in the left sidebar.```
 
 This tutorial by Christopher Paciorek is licensed under a Creative Commons Attribution 3.0 Unported License.
 
@@ -40,13 +36,13 @@ In the following sections, we'll point to example source files in each of the fo
 
 In general, processing the input file to create an output file involves evaluating the code chunks and creating an intermediate document in which the results of the evaluation are written out (e.g., a standard Markdown file from Rmd files and a standard LaTeX file from Rtex files), from which the final step is to create the output in the usual way from the intermediate document (e.g., `pandoc` for Markdown and `pdflatex` for LaTeX). Note that these steps take place behind the scenes without you needing to know the details.
 
-[demo.html](demo.html) and [demo.pdf](demo.pdf) shows how the various input demo files ([demo.Rmd](demo.Rmd), [demo.Rtex](demo.Rtex), etc.) look as final output, after "rendering" the input document. 
+As a specific example, [demo.html](demo.html) and [demo.pdf](demo.pdf) show the final output, after "rendering" the input document (specifically in this case from the .Rmd input, but output from the other input formats looks essentially the same). 
 
 ## 3 R Markdown
 
 R Markdown is a variant on the Markdown markup language that allows you to embed code chunks that are evaluated before creating the final output, unlike standard static code chunks in Markdown that are not evaluated. R Markdown files are simple text files.
 
-In [demo.Rmd](demo.Rmd), you'll see examples of embedding R, Python, and bash code chunks, as well as the syntax involved in creating PDF, HTML, and Word output files. [demo.pdf](demo.pdf) shows how it looks as a final output file, after "rendering" the input Rmd document. 
+In [demo.Rmd](demo.Rmd), you'll see examples of embedding R, Python, and bash code chunks, as well as the syntax involved in creating PDF, HTML, and Word output files. [demo.html](demo.html) and [demo.pdf](demo.pdf) show how it looks as a final output file, after "rendering" the input Rmd document. 
 
 ### Quarto and qmd files
 
@@ -60,9 +56,9 @@ Quarto is a relatively new project meant to extend R Markdown and also work with
 
 ### Overleaf
 
-[Overleaf](overleaf.com) allows you to [use either Rtex or Rnw style code chunk formatting](https://www.overleaf.com/learn/latex/Knitr) within a LaTeX document (and note that documentation only shows the Rnw format). 
+[Overleaf](overleaf.com) allows you to [use either Rtex or Rnw style code chunk formatting](https://www.overleaf.com/learn/latex/Knitr) within a LaTeX document (but note that documentation only shows the Rnw format). 
 
-Strangely, regardless of which format you use, you need to have your document name end in the .Rtex extension for the code chunks to be intepreted as code.
+Strangely, regardless of which format you use, you need to have your document name end in the .Rtex extension for the code chunks to be interpreted as code.
 
 ## 5 LyX plus knitr
 
