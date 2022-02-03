@@ -1,7 +1,9 @@
-#LyX 2.1 created this file. For more info see http://www.lyx.org/
-\lyxformat 474
+#LyX 2.3 created this file. For more info see http://www.lyx.org/
+\lyxformat 544
 \begin_document
 \begin_header
+\save_transient_properties true
+\origin unavailable
 \textclass article
 \begin_preamble
 
@@ -15,16 +17,18 @@ knitr
 \language_package none
 \inputencoding auto
 \fontencoding default
-\font_roman default
-\font_sans default
-\font_typewriter default
-\font_math auto
+\font_roman "default" "default"
+\font_sans "default" "default"
+\font_typewriter "default" "default"
+\font_math "auto" "auto"
 \font_default_family default
 \use_non_tex_fonts false
 \font_sc false
 \font_osf false
-\font_sf_scale 100
-\font_tt_scale 100
+\font_sf_scale 100 100
+\font_tt_scale 100 100
+\use_microtype false
+\use_dash_ligatures true
 \graphics default
 \default_output_format default
 \output_sync 0
@@ -63,6 +67,7 @@ knitr
 \suppress_date false
 \justification true
 \use_refstyle 0
+\use_minted 0
 \index Index
 \shortcut idx
 \color #008000
@@ -75,7 +80,10 @@ knitr
 \tocdepth 3
 \paragraph_separation indent
 \paragraph_indentation default
-\quotes_language english
+\is_math_indent 0
+\math_numbering_side default
+\quotes_style english
+\dynamic_quotes 0
 \papercolumns 1
 \papersides 1
 \paperpagestyle default
@@ -89,7 +97,8 @@ knitr
 \begin_body
 
 \begin_layout Title
-An example LyX file
+An example \SpecialChar LyX
+ file
 \begin_inset Newline newline
 \end_inset
 
@@ -101,7 +110,7 @@ Christopher Paciorek
 \end_layout
 
 \begin_layout Date
-August 2015
+February 2022
 \end_layout
 
 \begin_layout Standard
@@ -130,7 +139,7 @@ require(ggplot2)
 
 \begin_layout Plain Layout
 
-set.seed(0)
+set.seed(1)
 \end_layout
 
 \begin_layout Plain Layout
@@ -173,7 +182,8 @@ How to generate a document from this file
 \end_layout
 
 \begin_layout Standard
-If you open this file in LyX, you can run this document through the 
+If you open this file in \SpecialChar LyX
+, you can run this document through the 
 \emph on
 knitr
 \emph default
@@ -208,12 +218,14 @@ There are other options using that same menu to export in a variety of formats,
 \end_layout
 
 \begin_layout Standard
-Note that to use code chunks in LyX, you need to enable the 
+Note that to use code chunks in \SpecialChar LyX
+, you need to enable the 
 \emph on
 knitr
 \emph default
  module in the file.
- After opening a new or existing LyX document, you'll need to go to
+ After opening a new or existing \SpecialChar LyX
+ document, you'll need to go to
 \begin_inset ERT
 status open
 
@@ -268,17 +280,22 @@ Chunk
 \end_layout
 
 \begin_layout Section
-LaTeX
+\SpecialChar LaTeX
+
 \end_layout
 
 \begin_layout Standard
-This document will focus on embedding code and not on standard LaTeX or
- LyX.
- For a quick introduction to LaTeX, including some details on LyX, see 
+This document will focus on embedding code and not on standard \SpecialChar LaTeX
+ or \SpecialChar LyX
+.
+ For a quick introduction to \SpecialChar LaTeX
+, including some details on \SpecialChar LyX
+, see 
 \begin_inset CommandInset href
 LatexCommand href
 name "our tutorial"
 target "https://github.com/berkeley-scf/tutorial-latex-intro"
+literal "false"
 
 \end_inset
 
@@ -287,27 +304,41 @@ target "https://github.com/berkeley-scf/tutorial-latex-intro"
 
 \begin_layout Standard
 The process for producing an output document described in the previous section
- processes the LyX + Sweave format, evaluating the R code chunks, and creating
- a standard LaTeX file with the code snippets and output created by the
- code properly formatted as standard LaTeX, before compiling the LaTeX file
- to PDF.
+ processes the \SpecialChar LyX
+ + Sweave (Rnw) format, evaluating the R code chunks, and
+ creating a standard \SpecialChar LaTeX
+ file with the code snippets and output created by
+ the code properly formatted as standard \SpecialChar LaTeX
+, before compiling the \SpecialChar LaTeX
+ file to
+ PDF.
  
 \end_layout
 
 \begin_layout Standard
-Note that if you wish to embed pure LaTeX into a LyX document, that's easy
- to do with the TeX button on the LyX toolbar.
- So you can always fall back on using what you know about LaTeX even if
- you're not sure how to do something in LyX.
+Note that if you wish to embed pure \SpecialChar LaTeX
+ into a \SpecialChar LyX
+ document, that's easy to do
+ with the \SpecialChar TeX
+ button on the \SpecialChar LyX
+ toolbar.
+ So you can always fall back on using what you know about \SpecialChar LaTeX
+ even if you're
+ not sure how to do something in \SpecialChar LyX
+.
 \end_layout
 
 \begin_layout Section
-Embedding equations using LaTeX
+Embedding equations using \SpecialChar LaTeX
+
 \end_layout
 
 \begin_layout Standard
-LyX is a front end for LaTeX, so you can just use LaTeX math syntax after
- entering math mode.
+\SpecialChar LyX
+ is a front end for \SpecialChar LaTeX
+, so you can just use \SpecialChar LaTeX
+ math syntax after entering math
+ mode.
 \end_layout
 
 \begin_layout Standard
@@ -362,24 +393,30 @@ Embedding R code
 Here's an R code chunk using standard Sweave formatting.
  To create a chunk, select 
 \family typewriter
-Insert -> TeX code
+Insert -> \SpecialChar TeX
+ code
 \family default
- (or use the TeX button in the LyX toolbar) and then type in your code as
- seen here.
+ (or use the \SpecialChar TeX
+ button in the \SpecialChar LyX
+ toolbar) and then type in your code as seen
+ here.
  
 \begin_inset Note Note
 status open
 
 \begin_layout Plain Layout
-Alternatively, rather than inserting as TeX code, you can tag your code
- using the Chunk tag from the pulldown menu at the left of the toolbar near
- the top of the LyX window -- in that case, see 
+Alternatively, rather than inserting as \SpecialChar TeX
+ code, you can tag your code using
+ the Chunk tag from the pulldown menu at the left of the toolbar near the
+ top of the \SpecialChar LyX
+ window – in that case, see 
 \emph on
 demo_alt.lyx
 \emph default
 ).
  NOTE: as of August 2017 I'm noticing that the chunk tag doesn't seem to
- be available in more recent versions of LyX.
+ be available in more recent versions of \SpecialChar LyX
+.
 \end_layout
 
 \end_inset
@@ -443,7 +480,8 @@ noindent
 \emph on
 noindent
 \emph default
- command (in LaTeX mode) to prevent the text after a chunk from being considered
+ command (in \SpecialChar LaTeX
+ mode) to prevent the text after a chunk from being considered
  as a new paragraph.
  Here's another chunk:
 \end_layout
@@ -528,8 +566,10 @@ Sexpr{3+5}
 \backslash
 Sexpr
 \family default
- command within a LaTeX environment, so we need to select the command and
- use the TeX button in the toolbar.
+ command within a \SpecialChar LaTeX
+ environment, so we need to select the command and use
+ the \SpecialChar TeX
+ button in the toolbar.
 \end_layout
 
 \begin_layout Standard
@@ -560,7 +600,7 @@ status open
 
 \begin_layout Plain Layout
 
-cat("this code is evaluated but nothing is printed in the document")
+cat("This code is evaluated, but nothing is printed in the document.")
 \end_layout
 
 \begin_layout Plain Layout
@@ -594,8 +634,8 @@ status open
 
 \begin_layout Plain Layout
 
-cat("this code is not printed in the document but results of evaluating
- the code are printed")
+cat("This code is not printed in the document, but results of evaluating
+ the code are printed.")
 \end_layout
 
 \begin_layout Plain Layout
@@ -619,7 +659,8 @@ status open
 
 \begin_layout Plain Layout
 
-cat("this code is not evaluated but the code itself is printed in the document")
+cat("This code is not evaluated, but the code itself is printed in the document."
+)
 \end_layout
 
 \begin_layout Plain Layout
@@ -629,10 +670,6 @@ cat("this code is not evaluated but the code itself is printed in the document")
 
 \end_inset
 
-
-\end_layout
-
-\begin_layout Standard
 
 \end_layout
 
@@ -691,6 +728,11 @@ status open
 
 \begin_layout Plain Layout
 
+ls -l
+\end_layout
+
+\begin_layout Plain Layout
+
 df -h 
 \end_layout
 
@@ -718,6 +760,11 @@ pwd
 Unfortunately, output from bash chunks occurs after all the code is printed.
  Also, state is not preserved between chunks.
  
+\end_layout
+
+\begin_layout Standard
+We can see that state is not preserved here, where the current working directory
+ is NOT the directory that we changed to in the chunk above.
 \end_layout
 
 \begin_layout Standard
@@ -753,6 +800,13 @@ Embedding Python code
 \end_layout
 
 \begin_layout Standard
+You can embed Python code.
+ As with R, state is preserved so later chunks can use objects from earlier
+ chunks.
+ 
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -773,12 +827,12 @@ x = np.array((3, 5, 7))
 
 \begin_layout Plain Layout
 
-print(x.sum()) 
+x.sum() 
 \end_layout
 
 \begin_layout Plain Layout
 
-x.min() # note not printed 
+x.min()  
 \end_layout
 
 \begin_layout Plain Layout
@@ -807,7 +861,7 @@ try:
 
 \begin_layout Plain Layout
 
-	print(x[0]) 
+    x[0] 
 \end_layout
 
 \begin_layout Plain Layout
@@ -817,7 +871,7 @@ except NameError:
 
 \begin_layout Plain Layout
 
-	print('x does not exist') 
+    print('x does not exist') 
 \end_layout
 
 \begin_layout Plain Layout
@@ -828,14 +882,6 @@ except NameError:
 \end_inset
 
 
-\end_layout
-
-\begin_layout Standard
-As with bash chunks, all output occurs after the code is printed.
- Also, state is not preserved between chunks.
- Finally, you need explicit print statements; you won't see what would normally
- be printed to the screen.
- 
 \end_layout
 
 \begin_layout Standard
@@ -944,6 +990,10 @@ Having long lines be nicely formatted and other aspects of formatting can
 \end_layout
 
 \begin_layout Standard
+Here are some examples that overflow in PDF output.
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -972,7 +1022,7 @@ b <- "Statistics at UC Berkeley: We are a community engaged in research
 
 \begin_layout Plain Layout
 
-# this should work but often doesn't
+# This should work to give decent formatting in HTML but doesn't in PDF..
 \end_layout
 
 \begin_layout Plain Layout
@@ -986,26 +1036,26 @@ cat(b, fill = TRUE)
 
 \begin_layout Plain Layout
 
-vecLongName = rnorm(100)
+vecWithALongName <- rnorm(100)
 \end_layout
 
 \begin_layout Plain Layout
 
-a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName
- * vecLongName, na.rm = TRUE))
+a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName)
+ + vecWithALongName * vecWithALongName, na.rm = TRUE))
 \end_layout
 
 \begin_layout Plain Layout
 
-a = length(mean(5 * vecLongName + vecLongName)) # this is a comment that
- goes over the line by a good long ways
+a <- length(mean(5 * vecWithALongName + vecWithALongName)) # this is a comment
+ that goes over the line by a good long ways
 \end_layout
 
 \begin_layout Plain Layout
 
-a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName,
- na.rm = TRUE)) # this is a comment that goes over the line by a good long
- long long long long long long long ways
+a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName)
+ + vecWithALongName, na.rm = TRUE)) # this is a comment that goes over the
+ line by a good long long long long long long long long ways
 \end_layout
 
 \begin_layout Plain Layout
@@ -1014,12 +1064,12 @@ a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName,
 
 \begin_layout Plain Layout
 
-# long output usually is fine
+# In contrast, long output usually is fine, even in PDF.
 \end_layout
 
 \begin_layout Plain Layout
 
-rnorm(100)
+rnorm(30)
 \end_layout
 
 \begin_layout Plain Layout
@@ -1108,23 +1158,24 @@ fundamental theory and methodology, we are actively"
 
 \begin_layout Plain Layout
 
-vecLongName = rnorm(100)
+vecWithALongName = rnorm(100)
 \end_layout
 
 \begin_layout Plain Layout
 
-a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + 
+a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName)
+ + 
 \end_layout
 
 \begin_layout Plain Layout
 
-vecLongName * vecLongName, na.rm = TRUE))
+vecWithALongName * vecWithALongName, na.rm = TRUE))
 \end_layout
 
 \begin_layout Plain Layout
 
-a <- length(mean(5 * vecLongName + vecLongName)) # this is a comment that
- 
+a <- length(mean(5 * vecWithALongName + vecWithALongName)) # this is a comment
+ that 
 \end_layout
 
 \begin_layout Plain Layout
@@ -1134,12 +1185,13 @@ a <- length(mean(5 * vecLongName + vecLongName)) # this is a comment that
 
 \begin_layout Plain Layout
 
-a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + 
+a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName)
+ + 
 \end_layout
 
 \begin_layout Plain Layout
 
-vecLongName, na.rm = TRUE)) # this is a comment that goes over the line
+vecWithALongName, na.rm = TRUE)) # this is a comment that goes over the line
 \end_layout
 
 \begin_layout Plain Layout
@@ -1242,6 +1294,10 @@ We also have problems with long comments, so would need to manually format
 \end_layout
 
 \begin_layout Standard
+Here is a long comment line that overflows in PDF:
+\end_layout
+
+\begin_layout Standard
 \begin_inset ERT
 status open
 
@@ -1252,7 +1308,7 @@ status open
 
 \begin_layout Plain Layout
 
-# the following long comment line is not broken in my test:
+# The following long comment line is not broken in my test:
 \end_layout
 
 \begin_layout Plain Layout
@@ -1263,11 +1319,25 @@ status open
 
 \begin_layout Plain Layout
 
+@
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Instead manually break the comment into multiple lines: 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
-# instead manually break it:
+<<bash2-manual, engine='bash'>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -1316,7 +1386,7 @@ status open
 
 \begin_layout Plain Layout
 
-# this overflows the page in some contexts
+# This overflows the page:
 \end_layout
 
 \begin_layout Plain Layout
@@ -1336,7 +1406,7 @@ print(b)
 
 \begin_layout Plain Layout
 
-# this code overflows the page in some contexts
+# This code overflows the page:
 \end_layout
 
 \begin_layout Plain Layout
@@ -1352,11 +1422,27 @@ print(zoo)
 
 \begin_layout Plain Layout
 
+@
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+To fix the issue, we can manually break the code into multiple lines, but
+ long output still overflows.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
-# instead manually break the code
+<<test-python-manual, engine='python'>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -1381,11 +1467,27 @@ print(zoo)
 
 \begin_layout Plain Layout
 
+@
 \end_layout
+
+\end_inset
+
+
+\end_layout
+
+\begin_layout Standard
+Long comments overflow as well, but you can always manually break into multiple
+ lines.
+ 
+\end_layout
+
+\begin_layout Standard
+\begin_inset ERT
+status open
 
 \begin_layout Plain Layout
 
-# long comments overflow too
+<<test-python-manual2, engine='python'>>=
 \end_layout
 
 \begin_layout Plain Layout
@@ -1400,8 +1502,13 @@ print(zoo)
 
 \begin_layout Plain Layout
 
-# and the long output that will appear next in the resulting document (from
- evaluation of the code above) also overflows:
+# asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad
+ 
+\end_layout
+
+\begin_layout Plain Layout
+
+# kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl 
 \end_layout
 
 \begin_layout Plain Layout
@@ -1419,11 +1526,13 @@ References
 \end_layout
 
 \begin_layout Standard
-Here's how to use BibTeX style references.
+Here's how to use Bib\SpecialChar TeX
+ style references.
  
 \begin_inset CommandInset citation
 LatexCommand citet
 key "Bane:etal:2008"
+literal "true"
 
 \end_inset
 
@@ -1432,6 +1541,7 @@ key "Bane:etal:2008"
 \begin_inset CommandInset citation
 LatexCommand citep
 key "Cres:Joha:2008"
+literal "true"
 
 \end_inset
 

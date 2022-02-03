@@ -9,7 +9,7 @@
 # e.g., package and dataset loading
 
 require(ggplot2)
-set.seed(0)
+set.seed(1)
 
 # also a good place to set global chunk options
 
@@ -24,7 +24,7 @@ myControlVar <- TRUE   # used later to control chunk behavior
 \begin{document} 
 \title{An example Rnw (Sweave format) file\\Illustrating use of R, bash, and Python code chunks}
 \author{Christopher Paciorek}
-\date{August 2015}
+\date{February 2022}
 
 \maketitle
 
@@ -92,17 +92,17 @@ And here's some inline R code: What is 3 plus 5? \Sexpr{3+5}.
 You have control over whether code in chunks is echoed into the document and evaluated using the \emph{include}, \emph{echo}, and \emph{eval} tags.
 
 <<includeChunk, include=FALSE>>=
-cat("this code is evaluated but nothing is printed in the document")
+cat("This code is evaluated, but nothing is printed in the document.")
 library(fields) 
 # fields package should now be loaded for use by later chunks
 @
 
 <<echoChunk, echo=FALSE>>=
-cat("this code is not printed in the document but results of evaluating the code are printed")
+cat("This code is not printed in the document, but results of evaluating the code are printed.")
 @
 
 <<evalChunk, eval=FALSE>>=
-cat("this code is not evaluated but the code itself is printed in the document")
+cat("this code is not evaluated, but the code itself is printed in the document.")
 @
 
 Intensive calculations can be saved using the \texttt{cache=TRUE} tag so they don't need to be rerun every time you compile the document. 
@@ -123,6 +123,7 @@ print("hi")
 \subsection{bash}
 A bash chunk:
 <<bash-chunk1, engine='bash'>>=
+ls -l
 df -h
 cd /tmp
 pwd
@@ -130,6 +131,7 @@ pwd
 
 Unfortunately, output from bash chunks occurs after all the code is printed. Also, state is not preserved between chunks.
 
+We can see that state is not preserved here, where the current working directory is NOT the directory that we changed to in the chunk above.
 
 <<bash-chunk2, engine='bash'>>=
 pwd  # result would be /tmp if state were preserved
@@ -139,21 +141,21 @@ Inline bash code won't work.
 
 \subsection{Embedding Python code}
 
+You can embed Python code. As with R, state is preserved so later chunks can use objects from earlier chunks. 
+
 <<py-chunk1, engine='python'>>=
 import numpy as np
 x = np.array((3, 5, 7))
-print(x.sum())
-x.min()  # note not printed
+x.sum()
+x.min() 
 @
 
 <<py-chunk2, engine='python'>>=
 try:
-        print(x[0])
+       x[0]
 except NameError:
        print('x does not exist')
 @
-
-As with bash chunks, all output occurs after the code is printed. Also, state is not preserved between chunks. Finally, you need explicit print statements; you won't see what would normally be printed to the screen.
 
 There is no facility for inline Python code evaluation.
 
@@ -178,46 +180,77 @@ read_chunk('demo.R')
 
 Having long lines be nicely formatted and other aspects of formatting can be a challenge. Also, results can differ depending on your output format (e.g., PDF vs. HTML). In general the code in this section will often overflow the page width in PDF but not in HTML, but even in the HTML the line breaks may be awkwardly positioned.
 
+Here are some examples that overflow in PDF output.
 
 <<r-long>>=
 b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"
-# Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
+## Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
 
-# this should work but often doesn't
+## This should work to give decent formatting in HTML but doesn't in PDF.
 cat(b, fill = TRUE)
 
-vecLongName = rnorm(100)
-a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName * vecLongName, na.rm = TRUE))
-a = length(mean(5 * vecLongName + vecLongName)) # this is a comment that goes over the line by a good long ways
-a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName, na.rm = TRUE)) # this is a comment that goes over the line by a good long long long long long long long long ways
-
-# long output usually is fine
-rnorm(100)
+vecWithALongName <- rnorm(100)
+a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName) + vecWithALongName * vecWithALongName, na.rm = TRUE))
+a <- length(mean(5 * vecWithALongName + vecWithALongName)) # this is a comment that goes over the line by a good long ways
+a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName) + vecWithALongName, na.rm = TRUE)) # this is a comment that goes over the line by a good long long long long long long long long ways
 @
 
-Sometimes you can format things manually for better results. You may need to tag the chunk with \texttt{tidy=FALSE}, but I have not done that here.
 
-<<r-long-tidy>>=
-# breaking up a string
+In contrast, long output is usually fine, even in PDF.
+
+<<r-long-output>>=
+rnorm(30)
+@
+
+
+Adding the `tidy=TRUE` chunk option and setting the width (as shown in the Rmd version of this document) can help with long comment lines or lines of code, but doesn't help for some of the cases above.
+
+<<r-long-tidy, tidy=TRUE, tidy.opts=list(width.cutoff=80)>>=
+## Long strings and long comments:
+
+b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"
+## Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
+
+## This should work to give decent formatting in HTML but doesn't in PDF:
+
+cat(b, fill = TRUE)
+
+## Now consider long lines of code:
+
+vecWithALongName <- rnorm(100)
+a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName) + vecWithALongName * vecWithALongName, na.rm = TRUE))
+a <- length(mean(5 * vecWithALongName + vecWithALongName)) # this is a comment that goes over the line by a good long ways
+a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName) + vecWithALongName, na.rm = TRUE)) # this is a comment that goes over the line by a good long long long long long long long long ways
+@
+
+
+To address the problems seen above, sometimes you can format things manually for better results. You may need to tag the chunk with `tidy=FALSE`, but I have not done that here.
+
+<<<r-long-manual>>=
+## Breaking up a string:
+
 b <- "Statistics at UC Berkeley: We are a community engaged in research
  and education in probability and statistics. In addition to developing 
 fundamental theory and methodology, we are actively"
 
-# breaking up a comment
-# Statistics at UC Berkeley: We are a community engaged in research and
-# education in probability and statistics. In addition to developing 
-# fundamental theory and methodology, we are actively
+## Breaking up a comment:
 
-# breaking up code lines
-vecLongName = rnorm(100)
-a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + 
-  vecLongName * vecLongName, na.rm = TRUE))
-a <- length(mean(5 * vecLongName + vecLongName)) # this is a comment that 
-    # goes over the line by a good long ways
-a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + 
-    vecLongName, na.rm = TRUE)) # this is a comment that goes over the line 
-    # by a good long long long long long long long long ways
+## Statistics at UC Berkeley: We are a community engaged in research and 
+## education in probability and statistics. In addition to developing 
+## fundamental theory and methodology, we are actively
+
+## Breaking up code lines:
+
+vecWithALongName = rnorm(100)
+a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName) + 
+    vecWithALongName * vecWithALongName, na.rm = TRUE))
+a <- length(mean(5 * vecWithALongName + vecWithALongName)) # this is a comment that 
+    ## goes over the line by a good long ways
+a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName) + 
+    vecWithALongName, na.rm = TRUE)) # this is a comment that goes over the line 
+    ## by a good long long long long long long long long ways
 @
+
 
 \subsection{bash code}
 
@@ -235,12 +268,16 @@ cat tmp.txt
 @
 
 We also have problems with long comments, so we would need to manually format them.
+Here is a long comment line that overflows in PDF:
 
 <<bash2, engine='bash'>>=
-# the following long comment line is not broken in my test:
+# The following long comment line is not broken in my test:
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
+@
 
-# instead manually break it:
+Instead manually break the comment into multiple lines:
+
+<<bash2-manual, engine='bash'>>=
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla 
 # lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa 
 # adlfjaf jkladf afdl
@@ -250,27 +287,36 @@ We also have problems with long comments, so we would need to manually format th
 
 In Python, there is similar trouble with lines overflowing in PDF output too.
 
-
 <<test-python, engine='python'>>=
-# this overflows the page in some contexts
+# This overflows the page:
 b = "asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl"
 print(b)
 
-# this code overflows the page in some contexts
+# This code overflows the page:
 zoo = {"lion": "Simba", "panda": None, "whale": "Moby", "numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", "bunny:": "bugs"}
 print(zoo)
+@
 
-# instead manually break the code
+
+To fix the issue, we can manually break the code into multiple lines, but long
+output still overflows.
+
+<<test-python-manual, engine='python'>>=
 zoo = {"lion": "Simba", "panda": None, "whale": "Moby", 
-      "numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", 
-      "bunny:": "bugs"}
+       "numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", 
+       "bunny:": "bugs"}
 print(zoo)
+@
 
-# long comments overflow too
+Long comments overflow as well, but you can always manually break into multiple lines.
+
+<<test-python-manual2, engine='python'>>=
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
 
-# and the long output that will appear next in the resulting document (produced from the evaluation of the code above) also overflows:
+# asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad
+# kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
 @
+
 
 
 \section{References}

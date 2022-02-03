@@ -20,20 +20,12 @@ library(knitr) # need this for opts_chunk command
 opts_chunk$set(fig.width = 5, fig.height = 5)
 # if we wanted chunks by default not to be evaluated, uncomment next line
 # opts_chunk$set(eval = FALSE)
-myControlVar <- TRUE   # used later to control chunk behavior
+myControlVar <- TRUE   # R variable used later to control chunk behavior
 ```
 
 # 1) How to generate a document from this file
 
-From the UNIX command line, you can run this document through the either the *rmarkdown* or *knitr* package for R to generate an html file, or through the *rmarkdown* package to generate PDF or Word (the latter being useful at times but hopefully avoidable).
-
-```{bash, compile-bash, eval=FALSE}
-Rscript -e "library(rmarkdown); render('demo.Rmd', 'pdf_document')"  # PDF
-Rscript -e "library(rmarkdown); render('demo.Rmd', 'html_document')"  # HTML
-Rscript -e "library(rmarkdown); render('demo.Rmd', 'word_document')"  # Word
-Rscript -e "library(knitr); knit2html('demo.Rmd')"  # HTML alternative
-
-```
+From within R,  you can run the document through the either the *rmarkdown* or *knitr* package for R to generate an html file, or through the *rmarkdown* package to generate PDF or Word (the latter being useful at times but hopefully avoidable).
 
 Alternatively, start R and run the desired line from amongst following in R:
 
@@ -44,13 +36,24 @@ library(rmarkdown); render('demo.Rmd', 'word_document')
 library(knitr); knit2html('demo.Rmd')  
 ```
 
+Or in RStudio, click on the 'Knit' pull-down menu and choose to knit to HTML, PDF, or Word (for R Markdown).
 
-Or in RStudio, click on the 'Knit' pull-down menu and choose to knit to HTML, PDF, or Word.
+Alternatively, from the UNIX command line, run one of these:
+
+```{bash, compile-bash, eval=FALSE}
+Rscript -e "library(rmarkdown); render('demo.Rmd', 'pdf_document')"  # PDF
+Rscript -e "library(rmarkdown); render('demo.Rmd', 'html_document')"  # HTML
+Rscript -e "library(rmarkdown); render('demo.Rmd', 'word_document')"  # Word
+Rscript -e "library(knitr); knit2html('demo.Rmd')"  # HTML alternative
+
+```
+
+
 
 # 2) Some basic Markdown formatting
 
 
-Here's an *introduction* to our **critical** discovery. We have some code to display inline but not evaluate: `exp(7)` and we can embed the code in a static code block as follows:
+Here's an *introduction* to our **critical** discovery. Here we have some code to display inline but not evaluate: `exp(7)` and we can embed the code in a static code block as follows:
 
 ```
 a = 7 %% 5
@@ -58,6 +61,8 @@ b = exp(a)
 ```
 
 This document will focus on embedding math and code and not on standard Markdown formatting. There are lots of sources of information on Markdown. [RStudio has good information on R Markdown](https://rmarkdown.rstudio.com) (including Markdown formatting).
+
+For documents whose output format is HTML, you can use HTML formatting within your Markdown-based text.
 
 
 # 3) Embedding equations using LaTeX
@@ -101,19 +106,21 @@ And here's some inline R code: What is 3 plus 5? `r 3+5`.
 You have control over whether code in chunks is echoed into the document and evaluated using the `include`, `echo`, and `eval` tags.
 
 ```{r, includeChunk, include=FALSE}
-cat("this code is evaluated but nothing is printed in the document")
-library(fields) 
-## fields package should now be loaded for use by later chunks
+cat("This code is evaluated but nothing is printed in the document.")
+library(fields)
+myVar <- 7
+## fields package should now be loaded for use by later chunks and
+## myVar should now be available
 ```
 
 ```{r, echoChunk, echo=FALSE}
-cat("this code is not printed in the document but results of evaluating the code are printed")
+cat("This code is not printed in the document, but results of evaluating the code are printed.")
 ```
 ```{r, evalChunk, eval=FALSE}
-cat("this code is not evaluated but the code itself is printed in the document")
+cat("This code is not evaluated, but the code itself is printed in the document.")
 ```
 
-Intensive calculations can be saved using the `cache=TRUE` tag so they don't need to be rerun every time you compile the document. 
+Results of intensive calculations can be saved using the `cache=TRUE` tag so they don't need to be rerun every time you compile the document. 
 ```{r, slow-step, cache=TRUE}
 a <- mean(rnorm(5e7))
 a
@@ -130,8 +137,8 @@ An alternative, nice way to specify chunk options is within the chunk, like this
 ```{r}
 #| label: put-options-in-chunk
 #| eval: FALSE
-#| echo: FALSE
-cat("this code is not printed in the document nor are results of evaluating the code printed")
+#| echo: TRUE
+cat("This code is printed in the document, but the code is not evaluated.")
 ```
 
 # 5) Embedding bash and Python code
@@ -148,15 +155,17 @@ pwd
 
 Unfortunately, output from bash chunks occurs after all the code is printed. Also, state is not preserved between chunks.
 
+We can see that state is not preserved here, where the current working directory is NOT the directory that we changed to in the chunk above.
+
 ```{bash, bash-chunk2}
-pwd  # result would be /tmp if state were preserved
+pwd  # result would be /tmp if state were preserved 
 ```
 
-Inline bash code won't work: `bash wc demo.Rmd`.
+Inline bash code won't work: `bash wc demo.Rmd`, unlike with R code.
 
 ## 5.2) Embedding Python code
 
-You can embed Python code. As with R, state is preserved so later chunks can use objects from earlier chunks, if you have a sufficiently up-to-date version of the `rmarkdown` package (and of RStudio if you are working with Python chunks within RStudio). 
+You can embed Python code. As with R, state is preserved so later chunks can use objects from earlier chunks. 
 
 ```{python, py-chunk1}
 import numpy as np
@@ -174,21 +183,14 @@ except NameError:
 
 There is no facility for inline Python code: `python print(3+5)`
 
-Note that on older versions of RStudio and with older versions of the `rmarkdown` package, the functionality for running Python chunks was much more limited:
-
- - as with bash chunks, all output occurred after all the code in a chunk was printed.
- - state was not preserved between chunks
- - one needed an explicit print statement to see the value of an object
-
-
 
 # 6) Reading code from an external file
 
-It's sometimes nice to draw code in from a separate file. Before invoking a chunk, we need to read the chunks from the source file. Note that a good place for reading the source file via `read_chunk()` is in an initial setup chunk at the beginning of the document.
+It's sometimes nice to draw code in from a separate file. Before invoking a chunk, we need to read the chunks from the source file, which contains the chunks tagged with some special formatting. Note that a good place for reading the source file via `read_chunk()` is in an initial setup chunk at the beginning of the document.
 
 ```{r, read-chunk, echo=FALSE}
 library(knitr)
-read_chunk('demo.R')
+read_chunk('demo.R')  ## contains external_chunk_1 and external_chunk_1
 ```
 
 ```{r, external_chunk_1}
@@ -203,43 +205,72 @@ read_chunk('demo.R')
 
 Having long lines be nicely formatted and other aspects of formatting can be a challenge. Also, results can differ depending on your output format (e.g., PDF vs. HTML). In general the code in this section will often overflow the page width in PDF but not in HTML, but even in the HTML the line breaks may be awkwardly positioned.
 
+Here are some examples that overflow in PDF output.
+
 ```{r, r-long}
 b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"
 ## Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
 
-## this should work to give decent formatting, but often doesn't
+## This should work to give decent formatting in HTML but doesn't in PDF.
 cat(b, fill = TRUE)
 
-vecLongName = rnorm(100)
-a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName * vecLongName, na.rm = TRUE))
-a = length(mean(5 * vecLongName + vecLongName)) # this is a comment that goes over the line by a good long ways
-a = length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + vecLongName, na.rm = TRUE)) # this is a comment that goes over the line by a good long long long long long long long long ways
-
-## long output usually is fine
-rnorm(100)
+vecWithALongName = rnorm(100)
+a = length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName) + vecWithALongName * vecWithALongName, na.rm = TRUE))
+a = length(mean(5 * vecWithALongName + vecWithALongName)) # this is a comment that goes over the line by a good long ways
+a = length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName) + vecWithALongName, na.rm = TRUE)) # this is a comment that goes over the line by a good long long long long long long long long ways
 ```
 
-Sometimes you can format things manually for better results. You may need to tag the chunk with `tidy=FALSE`, but I have not done that here.
+In contrast, long output is usually fine, even in PDF.
 
-```{r, r-long-tidy}
-## breaking up a string
+```{r, r-long-output}
+rnorm(30)
+```
+
+Adding the `tidy=TRUE` chunk option and setting the width (as shown in the Rmd version of this document) can help with long comment lines or lines of code, but doesn't help for some of the cases above.
+
+```{r, r-long-tidy, tidy=TRUE, tidy.opts=list(width.cutoff=80)}
+## Long strings and long comments:
+
+b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"
+## Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
+
+## This should work to give decent formatting in HTML but doesn't in PDF:
+
+cat(b, fill = TRUE)
+
+## Now consider long lines of code:
+
+vecWithALongName <- rnorm(100)
+a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName) + vecWithALongName * vecWithALongName, na.rm = TRUE))
+a <- length(mean(5 * vecWithALongName + vecWithALongName)) # this is a comment that goes over the line by a good long ways
+a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName) + vecWithALongName, na.rm = TRUE)) # this is a comment that goes over the line by a good long long long long long long long long ways
+```
+
+
+To address the problems seen above, sometimes you can format things manually for better results. You may need to tag the chunk with `tidy=FALSE`, but I have not done that here.
+
+```{r, r-long-manual}
+## Breaking up a string:
+
 b <- "Statistics at UC Berkeley: We are a community engaged in research
  and education in probability and statistics. In addition to developing 
 fundamental theory and methodology, we are actively"
 
-## breaking up a comment
+## Breaking up a comment:
+
 ## Statistics at UC Berkeley: We are a community engaged in research and 
 ## education in probability and statistics. In addition to developing 
 ## fundamental theory and methodology, we are actively
 
-## breaking up code lines
-vecLongName = rnorm(100)
-a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + 
-    vecLongName * vecLongName, na.rm = TRUE))
-a <- length(mean(5 * vecLongName + vecLongName)) # this is a comment that 
+## Breaking up code lines:
+
+vecWithALongName = rnorm(100)
+a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName) + 
+    vecWithALongName * vecWithALongName, na.rm = TRUE))
+a <- length(mean(5 * vecWithALongName + vecWithALongName)) # this is a comment that 
     ## goes over the line by a good long ways
-a <- length(mean(5 * vecLongName + vecLongName - exp(vecLongName) + 
-    vecLongName, na.rm = TRUE)) # this is a comment that goes over the line 
+a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName) + 
+    vecWithALongName, na.rm = TRUE)) # this is a comment that goes over the line 
     ## by a good long long long long long long long long ways
 ```
 
@@ -263,11 +294,15 @@ cat tmp.txt
 
 We also have problems with long comments, so we would need to manually format them.
 
-```{bash, bash2}
-# the following long comment line is not broken in my test:
-# asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
+Here is a long comment line that overflows in PDF:
 
-# instead manually break it:
+```{bash, bash2}
+# asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
+```
+
+Instead manually break the comment into multiple lines:
+
+```{bash, bash3}
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla 
 # lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa 
 # adlfjaf jkladf afdl
@@ -278,34 +313,42 @@ We also have problems with long comments, so we would need to manually format th
 In Python, there is similar trouble with lines overflowing in PDF output too.
 
 ```{python, test-python1}
-# this overflows the page
+# This overflows the page:
+
 b = "asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl"
 print(b)
 ```
 
 ```{python, test-python2}
-# this code overflows the page
+# This code overflows the page:
+
 zoo = {"lion": "Simba", "panda": None, "whale": "Moby", "numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", "bunny:": "bugs"}
 print(zoo)
 ```
 
+To fix the issue, we can manually break the code into multiple lines, but long
+output still overflows.
+
+
 ```{python, test-python3}
-# instead manually break the code
 zoo = {"lion": "Simba", "panda": None, "whale": "Moby", 
        "numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", 
        "bunny:": "bugs"}
 print(zoo)
 ```
 
+Long comments overflow as well, but you can always manually break into multiple lines.
 
 ```{python, test-python4}
-# long comments overflow too
 # asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
+
+# asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad
+# kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
 ```
 
 # 8) References
 
-We'll just see how you use bibtex style references.  @Bane:etal:2008 proposed a useful method. This was confirmed [@Cres:Joha:2008].
+We'll just see how you use BibTeX style references.  @Bane:etal:2008 proposed a useful method. This was confirmed [@Cres:Joha:2008].
 
 Note the indication of the `refs.bib` file in the initial lines of this document so that the bibliographic information for these citations can be found.
 
