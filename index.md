@@ -58,7 +58,9 @@ Quarto is a relatively new project meant to extend R Markdown and also work with
 
 [Overleaf](overleaf.com) allows you to [use either Rtex or Rnw style code chunk formatting](https://www.overleaf.com/learn/latex/Knitr) within a LaTeX document (but note that documentation only shows the Rnw format). 
 
-Strangely, regardless of which format you use, you need to have your document name end in the .Rtex extension for the code chunks to be interpreted as code.
+> **Warning**
+>
+> Strangely, regardless of which format you use, you need to have your document name end in the .Rtex extension for the code chunks to be interpreted as code.
 
 ## 5 LyX plus knitr
 
