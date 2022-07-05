@@ -1,8 +1,10 @@
 ---
-author: Christopher Paciorek
-date: February 2022
-title: Notes on using Python within RStudio
+title: "Notes on using Python within RStudio"
+author: "Christopher Paciorek"
+date: "February 2022"
 ---
+
+# Notes on using Python within RStudio
 
 In addition to basic use of Python chunks in R Markdown documents,
 RStudio has developed the `reticulate` package, which greatly enhances
@@ -12,7 +14,7 @@ Rmd documents with Python chunks can be rendered to an output file by
 ‘knitting’ the document using the `Knit` button (which invokes
 `rmarkdown::render`) or by invoking `rmarkdown::render` yourself.
 
-### With the notebook (inline output) functionality turned off
+#### With the notebook (inline output) functionality turned off
 
 If you run a Python chunk from an R Markdown document in RStudio it will
 run the code in a Python process and show the result in the Console
@@ -26,7 +28,7 @@ from earlier chunks. To exit from the Python REPL to return to the R
 REPL, you can either type exit at the Python prompt or simply execute an
 R chunk.
 
-### With the notebook (inline output) functionality turned on
+#### With the notebook (inline output) functionality turned on
 
 In the RStudio Global Tools options, under `R Markdown`, you can select
 `Show output inline for all R Markdown documents`. This causes the
@@ -34,7 +36,7 @@ output from Python chunks (as well as chunks in other languages) to show
 up in the editor window (i.e., notebook style) rather than in the
 console.
 
-### Reticulate and working in both R and Python
+#### Reticulate and working in both R and Python
 
 `reticulate` allows you to work on objects in both R and Python, moving
 seamlessly between the two languages. Lots more detail in the reticulate
@@ -50,7 +52,7 @@ devs <- rnorm(5)
 r.devs[0]
 ```
 
-    ## -0.6898073442676634
+    ## -0.39953369346004153
 
 ``` python
 pyvals = {"a": 0, "b": 1}

@@ -5,6 +5,8 @@ layout: default
 author: Christopher Paciorek
 ---
 
+# Creating dynamic documents
+
 ## 1 This tutorial
 
 This tutorial covers the basics of creating documents that combine code chunks, mathematical notation, and text. We'll cover R, Python and bash shell chunks in the context of documents written with LaTeX, Markdown, and Jupyter notebooks.
