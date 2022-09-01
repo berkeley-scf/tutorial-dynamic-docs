@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>An example R Markdown file | Dynamic documents tutorial</title>
+<meta name="generator" content="Jekyll v3.9.2" />
+<meta property="og:title" content="An example R Markdown file" />
+<meta name="author" content="Christopher Paciorek" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="Training materials for creating reproducible documents containing code chunks, mathematical notation, simple text, and more. See the left sidebar for example formats." />
+<meta property="og:description" content="Training materials for creating reproducible documents containing code chunks, mathematical notation, simple text, and more. See the left sidebar for example formats." />
+<link rel="canonical" href="http://berkeley-scf.github.io/tutorial-dynamic-docs/demo.html" />
+<meta property="og:url" content="http://berkeley-scf.github.io/tutorial-dynamic-docs/demo.html" />
+<meta property="og:site_name" content="Dynamic documents tutorial" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2022-02-01T00:00:00+00:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="An example R Markdown file" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":"Christopher Paciorek"},"dateModified":"2022-02-01T00:00:00+00:00","datePublished":"2022-02-01T00:00:00+00:00","description":"Training materials for creating reproducible documents containing code chunks, mathematical notation, simple text, and more. See the left sidebar for example formats.","headline":"An example R Markdown file","mainEntityOfPage":{"@type":"WebPage","@id":"http://berkeley-scf.github.io/tutorial-dynamic-docs/demo.html"},"publisher":{"@type":"Organization","logo":{"@type":"ImageObject","url":"http://berkeley-scf.github.io/tutorial-dynamic-docs/assets/img/logo.svg"},"name":"Christopher Paciorek"},"url":"http://berkeley-scf.github.io/tutorial-dynamic-docs/demo.html"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <link rel="stylesheet" href="/tutorial-dynamic-docs/assets/css/style.css?v=2557de7794176ec7fbb4957e59384b708429bec9">
+    <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <![endif]-->
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/tutorial-dynamic-docs/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        
+        <a href="http://statistics.berkeley.edu">
+           <img style="margin-bottom:3mm;" src="/tutorial-dynamic-docs/assets/img/logo.svg" height=25 alt="Berkeley Statistics Logo">
+        </a>
+        
+
+        <h1><a href="http://berkeley-scf.github.io/tutorial-dynamic-docs/">Dynamic documents tutorial</a></h1>
+
+        <p>Training materials for creating reproducible documents containing code chunks, mathematical notation, simple text, and more. See the left sidebar for example formats.</p>
+
+        <ul class="docs_toc"><li><a href="#51-bash">5.1) bash</a></li><li><a href="#52-embedding-python-code">5.2) Embedding Python code</a></li><li><a href="#71-r-code">7.1) R code</a></li><li><a href="#72-bash-code">7.2) bash code</a></li><li><a href="#73-python-code">7.3) Python code</a></li></ul>
+
+
+        
+        <p class="view"><a href="https://github.com/berkeley-scf/tutorial-dynamic-docs">View the Project on GitHub <small>berkeley-scf/tutorial-dynamic-docs</small></a></p>
+        
+
+        
+
+        
+        <ul class="downloads">
+          <li><a href="https://github.com/berkeley-scf/tutorial-dynamic-docs/zipball/gh-pages">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/berkeley-scf/tutorial-dynamic-docs/tarball/gh-pages">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/berkeley-scf/tutorial-dynamic-docs">View On <strong>GitHub</strong></a></li>
+        </ul>
+        
+        
+        
+        <p>This project is maintained by <a href="https://github.com/berkeley-scf">berkeley-scf</a>, the <a href="https://statistics.berkeley.edu/computing">UC Berkeley Statistical Computing Facility</a></p>
+        
+
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+        
+      </header>
+      <section>
+        <div class="menu">
+        <nav>
+          <a href="http://berkeley-scf.github.io/tutorial-dynamic-docs/">Main content</a> |
+          <a href="demo">demo (HTML) output (from Rmd source)</a> |
+          <a href="python-in-RStudio">Python chunks in RStudio</a> 
+        </nav>
+        </div>
+        <div class="main">
+          <h1 id="1-how-to-generate-a-document-from-this-file">1) How to generate a document from this file</h1>
+
+<p>From within R, you can run the document through the either the
+<em>rmarkdown</em> or <em>knitr</em> package for R to generate an html file, or
+through the <em>rmarkdown</em> package to generate PDF or Word (the latter
+being useful at times but hopefully avoidable).</p>
+
+<p>Alternatively, start R and run the desired line from amongst following
+in R:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">library</span><span class="p">(</span><span class="n">rmarkdown</span><span class="p">);</span><span class="w"> </span><span class="n">render</span><span class="p">(</span><span class="s1">'demo.Rmd'</span><span class="p">,</span><span class="w"> </span><span class="s1">'pdf_document'</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rmarkdown</span><span class="p">);</span><span class="w"> </span><span class="n">render</span><span class="p">(</span><span class="s1">'demo.Rmd'</span><span class="p">,</span><span class="w"> </span><span class="s1">'html_document'</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">rmarkdown</span><span class="p">);</span><span class="w"> </span><span class="n">render</span><span class="p">(</span><span class="s1">'demo.Rmd'</span><span class="p">,</span><span class="w"> </span><span class="s1">'word_document'</span><span class="p">)</span><span class="w">
+</span><span class="n">library</span><span class="p">(</span><span class="n">knitr</span><span class="p">);</span><span class="w"> </span><span class="n">knit2html</span><span class="p">(</span><span class="s1">'demo.Rmd'</span><span class="p">)</span><span class="w">  
+</span></code></pre></div></div>
+
+<p>Or in RStudio, click on the ‘Knit’ pull-down menu and choose to knit to
+HTML, PDF, or Word (for R Markdown).</p>
+
+<p>Alternatively, from the UNIX command line, run one of these:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Rscript <span class="nt">-e</span> <span class="s2">"library(rmarkdown); render('demo.Rmd', 'pdf_document')"</span>  <span class="c"># PDF</span>
+Rscript <span class="nt">-e</span> <span class="s2">"library(rmarkdown); render('demo.Rmd', 'html_document')"</span>  <span class="c"># HTML</span>
+Rscript <span class="nt">-e</span> <span class="s2">"library(rmarkdown); render('demo.Rmd', 'word_document')"</span>  <span class="c"># Word</span>
+Rscript <span class="nt">-e</span> <span class="s2">"library(knitr); knit2html('demo.Rmd')"</span>  <span class="c"># HTML alternative</span>
+</code></pre></div></div>
+
+<h1 id="2-some-basic-markdown-formatting">2) Some basic Markdown formatting</h1>
+
+<p>Here’s an <em>introduction</em> to our <strong>critical</strong> discovery. Here we have
+some code to display inline but not evaluate: <code class="language-plaintext highlighter-rouge">exp(7)</code> and we can embed
+the code in a static code block as follows:</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>a = 7 %% 5
+b = exp(a)
+</code></pre></div></div>
+
+<p>This document will focus on embedding math and code and not on standard
+Markdown formatting. There are lots of sources of information on
+Markdown. <a href="https://rmarkdown.rstudio.com">RStudio has good information on R
+Markdown</a> (including Markdown
+formatting).</p>
+
+<p>For documents whose output format is HTML, you can use HTML formatting
+within your Markdown-based text.</p>
+
+<h1 id="3-embedding-equations-using-latex">3) Embedding equations using LaTeX</h1>
+
+<p>This can be done with the following syntax. Note that you can’t have a
+space after the initial $ for the inline equations.</p>
+
+<p>Here is an inline equation <em>f</em>(<em>x</em>) = ∫<em>f</em>(<em>y</em>,<em>x</em>)<em>d**y</em>.</p>
+
+<p>Here’s a displayed equation</p>
+
+<p><em>f</em><sub><em>θ</em></sub>(<em>x</em>) = ∫<em>f</em><sub><em>θ</em></sub>(<em>y</em>,<em>x</em>)<em>d**y</em>.</p>
+
+<h1 id="4-embedding-r-code">4) Embedding R code</h1>
+
+<p>Here’s an R code chunk</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">c</span><span class="p">(</span><span class="m">7</span><span class="p">,</span><span class="w"> </span><span class="m">3</span><span class="p">)</span><span class="w">
+</span><span class="n">mean</span><span class="p">(</span><span class="n">a</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## [1] 5
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="m">3</span><span class="w">
+</span><span class="n">mean</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## [1] 8
+</code></pre></div></div>
+
+<p>Here’s another chunk:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">mean</span><span class="p">(</span><span class="n">b</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## [1] 8
+</code></pre></div></div>
+
+<p>When running R code, output is printed interspersed with the code, as
+one would generally want. Also, later chunks have access to result from
+earlier chunks (i.e., state is preserved between chunks).</p>
+
+<p>Let’s make a plot:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">hist</span><span class="p">(</span><span class="n">rnorm</span><span class="p">(</span><span class="m">20</span><span class="p">))</span><span class="w">
+</span></code></pre></div></div>
+
+<p><img src="demo_files/figure-gfm/r-plot-1.png" alt="" /><!-- --></p>
+
+<p>And here’s some inline R code: What is 3 plus 5? 8.</p>
+
+<p>You have control over whether code in chunks is echoed into the document
+and evaluated using the <code class="language-plaintext highlighter-rouge">include</code>, <code class="language-plaintext highlighter-rouge">echo</code>, and <code class="language-plaintext highlighter-rouge">eval</code> tags.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## This code is not printed in the document, but results of evaluating the code are printed.
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span><span class="p">(</span><span class="s2">"This code is not evaluated, but the code itself is printed in the document."</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>Results of intensive calculations can be saved using the <code class="language-plaintext highlighter-rouge">cache=TRUE</code>
+tag so they don’t need to be rerun every time you compile the document.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">mean</span><span class="p">(</span><span class="n">rnorm</span><span class="p">(</span><span class="m">5e7</span><span class="p">))</span><span class="w">
+</span><span class="n">a</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## [1] 8.562798e-05
+</code></pre></div></div>
+
+<p>You can use R variables to control the chunk options. Note that the
+variable <code class="language-plaintext highlighter-rouge">myControlVar</code> is defined in the first chunk of this document.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">print</span><span class="p">(</span><span class="s2">"hi"</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<p>An alternative, nice way to specify chunk options is within the chunk,
+like this:</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">cat</span><span class="p">(</span><span class="s2">"This code is printed in the document, but the code is not evaluated."</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<h1 id="5-embedding-bash-and-python-code">5) Embedding bash and Python code</h1>
+
+<h2 id="51-bash">5.1) bash</h2>
+
+<p>A bash chunk:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">ls</span> <span class="nt">-l</span>
+<span class="nb">df</span> <span class="nt">-h</span>
+<span class="nb">cd</span> /tmp
+<span class="nb">pwd</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## total 3040
+## drwxr-sr-x 6 paciorek scfstaff      6 Nov 17  2021 assets
+## drwxr-sr-x 2 paciorek scfstaff     10 Feb  1  2022 cache
+## -rw-r--r-- 1 paciorek scfstaff    394 Feb  3  2022 _config.yml
+## -rw-r--r-- 1 paciorek scfstaff 282459 Feb  2  2022 demo-bash.html
+## -rw-r--r-- 1 paciorek scfstaff   8083 Feb  2  2022 demo-bash.ipynb
+## -rw-r--r-- 1 paciorek scfstaff  48673 Feb  2  2022 demo-bash.pdf
+## drwxr-sr-x 7 paciorek scfstaff      7 Aug 31 17:19 demo_cache
+## -rw-r--r-- 1 paciorek scfstaff  22979 Feb  3  2022 demo.docx
+## drwxr-sr-x 7 paciorek scfstaff      7 Aug 31 17:19 demo_files
+## -rw-r--r-- 1 paciorek scfstaff 660439 Feb  3  2022 demo.html
+## -rw-r--r-- 1 paciorek scfstaff  24939 Feb  1  2022 demo.lyx
+## -rw-r--r-- 1 paciorek scfstaff 259113 Aug 18 14:29 demo.pdf
+## -rw-r--r-- 1 paciorek scfstaff 284419 Feb  2  2022 demo-python.html
+## -rw-r--r-- 1 paciorek scfstaff   6936 Feb  2  2022 demo-python.ipynb
+## -rw-r--r-- 1 paciorek scfstaff  49626 Feb  2  2022 demo-python.pdf
+## -rw-r--r-- 1 paciorek scfstaff   3662 Jan 27  2022 demo-python.qmd
+## -rw-r--r-- 1 paciorek scfstaff  13224 Aug 18 14:30 demo.qmd
+## -rw-r--r-- 1 paciorek scfstaff  13004 Aug 18 12:56 demo.qmd~
+## -rw-r--r-- 1 paciorek scfstaff    252 Jan 31  2022 demo.R
+## -rw-r--r-- 1 paciorek scfstaff 321394 Feb  2  2022 demo-R.html
+## -rw-r--r-- 1 paciorek scfstaff 124604 Feb  2  2022 demo-R.ipynb
+## -rw-r--r-- 1 paciorek scfstaff  13004 Feb  2  2022 demo.Rmd
+## -rw-r--r-- 1 paciorek scfstaff  10853 Nov  6  2019 demo.Rmd.save
+## -rw-r--r-- 1 paciorek scfstaff  12462 Feb  1  2022 demo.Rnw
+## -rw-r--r-- 1 paciorek scfstaff  59736 Feb  2  2022 demo-R.pdf
+## -rw-r--r-- 1 paciorek scfstaff  12890 Feb  1  2022 demo.Rtex
+## drwxr-sr-x 2 paciorek scfstaff      5 Jul 30  2015 figure
+## drwxr-sr-x 2 paciorek scfstaff      3 Jul  5 16:07 _includes
+## -rw-r--r-- 1 paciorek scfstaff   7696 Aug 18 14:31 index.md
+## drwxr-sr-x 2 paciorek scfstaff      4 Jul  5 16:07 _layouts
+## -rw-r--r-- 1 paciorek scfstaff    463 Jul  5 16:52 Makefile
+## -rw-r--r-- 1 paciorek scfstaff   2129 Jul  5 16:34 python-in-RStudio.md
+## -rw-r--r-- 1 paciorek scfstaff 171796 Feb  2  2022 python-in-RStudio.pdf
+## -rw-r--r-- 1 paciorek scfstaff   2055 Jul  5 16:09 python-in-RStudio.Rmd
+## -rw-r--r-- 1 paciorek scfstaff    773 Feb  3  2022 README.md
+## -rw-r--r-- 1 paciorek scfstaff  14902 Jul 30  2015 refs.bib
+## drwxr-sr-x 2 paciorek scfstaff      7 Aug 31 15:58 _sass
+## -rw-r--r-- 1 paciorek scfstaff   7167 Jul 17  2015 test-line-formatting.Rnw
+## -rw-r--r-- 1 paciorek scfstaff    390 Aug 18 14:28 tmp.txt
+## Filesystem                       Size  Used Avail Use% Mounted on
+## /dev/sda2                        2.7T  177G  2.4T   7% /
+## udev                              16G     0   16G   0% /dev
+## tmpfs                             16G  327M   16G   3% /dev/shm
+## tmpfs                            3.2G  7.5M  3.2G   1% /run
+## tmpfs                            5.0M  4.0K  5.0M   1% /run/lock
+## tmpfs                             16G     0   16G   0% /sys/fs/cgroup
+## /dev/sda1                        511M  5.3M  506M   2% /boot/efi
+## /dev/sdb1                        111G  622M  105G   1% /tmp
+## oz.berkeley.edu:/pool0/system    6.0T  4.1T  2.0T  68% /system
+## oz.berkeley.edu:/pool0/accounts   72T  7.3T   64T  11% /accounts
+## tmpfs                            3.2G  124K  3.2G   1% /run/user/3189
+## oz.berkeley.edu:/pool0/scratch    30T   23T  7.7T  75% /scratch
+## /tmp
+</code></pre></div></div>
+
+<p>Unfortunately, output from bash chunks occurs after all the code is
+printed. Also, state is not preserved between chunks.</p>
+
+<p>We can see that state is not preserved here, where the current working
+directory is NOT the directory that we changed to in the chunk above.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">pwd</span>  <span class="c"># result would be /tmp if state were preserved </span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## /accounts/vis/paciorek/staff/tutorials/tutorial-dynamic-docs
+</code></pre></div></div>
+
+<p>Inline bash code won’t work: <code class="language-plaintext highlighter-rouge">bash wc demo.Rmd</code>, unlike with R code.</p>
+
+<h2 id="52-embedding-python-code">5.2) Embedding Python code</h2>
+
+<p>You can embed Python code. As with R, state is preserved so later chunks
+can use objects from earlier chunks.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="n">np</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="p">.</span><span class="n">array</span><span class="p">((</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">.</span><span class="nb">sum</span><span class="p">())</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## 15
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">x</span><span class="p">.</span><span class="nb">min</span><span class="p">()</span>    <span class="c1"># this will print with more recent versions of rmarkdown 
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## 3
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">try</span><span class="p">:</span>
+        <span class="k">print</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+<span class="k">except</span> <span class="nb">NameError</span><span class="p">:</span>
+       <span class="k">print</span><span class="p">(</span><span class="s">'state is not preserved: x does not exist'</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## 3
+</code></pre></div></div>
+
+<p>There is no facility for inline Python code: <code class="language-plaintext highlighter-rouge">python print(3+5)</code></p>
+
+<h1 id="6-reading-code-from-an-external-file">6) Reading code from an external file</h1>
+
+<p>It’s sometimes nice to draw code in from a separate file. Before
+invoking a chunk, we need to read the chunks from the source file, which
+contains the chunks tagged with some special formatting. Note that a
+good place for reading the source file via <code class="language-plaintext highlighter-rouge">read_chunk()</code> is in an
+initial setup chunk at the beginning of the document.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">7</span><span class="w">
+</span><span class="n">cat</span><span class="p">(</span><span class="s2">"a is "</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="s2">".\n"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## a is 7.
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="m">9</span><span class="w">
+</span><span class="n">cat</span><span class="p">(</span><span class="s2">"Now, a is "</span><span class="p">,</span><span class="w"> </span><span class="n">a</span><span class="p">,</span><span class="w"> </span><span class="s2">".\n"</span><span class="p">,</span><span class="w"> </span><span class="n">sep</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="s2">""</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Now, a is 9.
+</code></pre></div></div>
+
+<h1 id="7-formatting-of-long-lines-of-code-and-of-output">7) Formatting of long lines of code and of output</h1>
+
+<h2 id="71-r-code">7.1) R code</h2>
+
+<p>Having long lines be nicely formatted and other aspects of formatting
+can be a challenge. Also, results can differ depending on your output
+format (e.g., PDF vs. HTML). In general the code in this section will
+often overflow the page width in PDF but not in HTML, but even in the
+HTML the line breaks may be awkwardly positioned.</p>
+
+<p>Here are some examples that overflow in PDF output.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"</span><span class="w">
+</span><span class="c1">## Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively</span><span class="w">
+
+</span><span class="c1">## This should work to give decent formatting in HTML but doesn't in PDF.</span><span class="w">
+</span><span class="n">cat</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">)</span><span class="w">
+</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">vecWithALongName</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
+</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="p">))</span><span class="w"> </span><span class="c1"># this is a comment that goes over the line by a good long ways</span><span class="w">
+</span><span class="n">a</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">vecWithALongName</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w"> </span><span class="c1"># this is a comment that goes over the line by a good long long long long long long long long ways</span><span class="w">
+</span></code></pre></div></div>
+
+<p>In contrast, long output is usually fine, even in PDF.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">rnorm</span><span class="p">(</span><span class="m">30</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>##  [1]  0.47485053 -0.53300834 -0.69385985 -1.30288852 -1.14076964 -1.04437702
+##  [7]  0.51995461  0.15155954  0.55836893 -1.87940055 -0.99908618 -0.47083913
+## [13]  0.88461719 -2.47235000  1.55333948  1.41114869  1.91056609 -0.62932679
+## [19]  1.22380063  1.12960580 -0.84659648 -0.65229492  1.83760743 -1.32678114
+## [25]  0.50964439 -0.80747544 -0.03085863 -0.91200119  0.82473210  0.70518136
+</code></pre></div></div>
+
+<p>Adding the <code class="language-plaintext highlighter-rouge">tidy=TRUE</code> chunk option and setting the width (as shown in
+the Rmd version of this document) can help with long comment lines or
+lines of code, but doesn’t help for some of the cases above.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## Long strings and long comments:</span><span class="w">
+
+</span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"</span><span class="w">
+</span><span class="c1">## Statistics at UC Berkeley: We are a community engaged in research and</span><span class="w">
+</span><span class="c1">## education in probability and statistics. In addition to developing</span><span class="w">
+</span><span class="c1">## fundamental theory and methodology, we are actively</span><span class="w">
+
+</span><span class="c1">## This should work to give decent formatting in HTML but doesn't in PDF:</span><span class="w">
+
+</span><span class="n">cat</span><span class="p">(</span><span class="n">b</span><span class="p">,</span><span class="w"> </span><span class="n">fill</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">)</span><span class="w">
+</span></code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
+</code></pre></div></div>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## Now consider long lines of code:</span><span class="w">
+
+</span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">)</span><span class="w">
+</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">vecWithALongName</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
+</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="p">))</span><span class="w">  </span><span class="c1"># this is a comment that goes over the line by a good long ways</span><span class="w">
+</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">vecWithALongName</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w">
+    </span><span class="n">vecWithALongName</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">  </span><span class="c1"># this is a comment that goes over the line by a good long long long long long long long long ways</span><span class="w">
+</span></code></pre></div></div>
+
+<p>To address the problems seen above, sometimes you can format things
+manually for better results. You may need to tag the chunk with
+<code class="language-plaintext highlighter-rouge">tidy=FALSE</code>, but I have not done that here.</p>
+
+<div class="language-r highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1">## Breaking up a string:</span><span class="w">
+
+</span><span class="n">b</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="s2">"Statistics at UC Berkeley: We are a community engaged in research
+ and education in probability and statistics. In addition to developing 
+fundamental theory and methodology, we are actively"</span><span class="w">
+
+</span><span class="c1">## Breaking up a comment:</span><span class="w">
+
+</span><span class="c1">## Statistics at UC Berkeley: We are a community engaged in research and </span><span class="w">
+</span><span class="c1">## education in probability and statistics. In addition to developing </span><span class="w">
+</span><span class="c1">## fundamental theory and methodology, we are actively</span><span class="w">
+
+</span><span class="c1">## Breaking up code lines:</span><span class="w">
+
+</span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">rnorm</span><span class="p">(</span><span class="m">100</span><span class="p">)</span><span class="w">
+</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">vecWithALongName</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+    </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w">
+</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="p">))</span><span class="w"> </span><span class="c1"># this is a comment that </span><span class="w">
+    </span><span class="c1">## goes over the line by a good long ways</span><span class="w">
+</span><span class="n">a</span><span class="w"> </span><span class="o">&lt;-</span><span class="w"> </span><span class="nf">length</span><span class="p">(</span><span class="n">mean</span><span class="p">(</span><span class="m">5</span><span class="w"> </span><span class="o">*</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="n">vecWithALongName</span><span class="w"> </span><span class="o">-</span><span class="w"> </span><span class="nf">exp</span><span class="p">(</span><span class="n">vecWithALongName</span><span class="p">)</span><span class="w"> </span><span class="o">+</span><span class="w"> 
+    </span><span class="n">vecWithALongName</span><span class="p">,</span><span class="w"> </span><span class="n">na.rm</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="kc">TRUE</span><span class="p">))</span><span class="w"> </span><span class="c1"># this is a comment that goes over the line </span><span class="w">
+    </span><span class="c1">## by a good long long long long long long long long ways</span><span class="w">
+</span></code></pre></div></div>
+
+<h2 id="72-bash-code">7.2) bash code</h2>
+
+<p>In bash, we have similar problems with lines overflowing in PDF output,
+but bash allows us to use a backslash to break lines of code. However
+that strategy doesn’t help with long lines of output.</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nb">echo</span> <span class="s2">"Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"</span> <span class="o">&gt;</span> tmp.txt
+  
+<span class="nb">echo</span> <span class="s2">"Second try: Statistics at UC Berkeley: We are a community engaged </span><span class="se">\</span><span class="s2">
+in research and education in probability and statistics. In addition to </span><span class="se">\</span><span class="s2">
+developing fundamental theory and methodology, we are actively"</span> <span class="se">\</span>
+<span class="o">&gt;&gt;</span> tmp.txt
+
+<span class="nb">cat </span>tmp.txt
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
+## Second try: Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
+</code></pre></div></div>
+
+<p>We also have problems with long comments, so we would need to manually
+format them.</p>
+
+<p>Here is a long comment line that overflows in PDF:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl</span>
+</code></pre></div></div>
+
+<p>Instead manually break the comment into multiple lines:</p>
+
+<div class="language-bash highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c"># asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla </span>
+<span class="c"># lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa </span>
+<span class="c"># adlfjaf jkladf afdl</span>
+</code></pre></div></div>
+
+<h2 id="73-python-code">7.3) Python code</h2>
+
+<p>In Python, there is similar trouble with lines overflowing in PDF output
+too.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># This overflows the page:
+</span>
+<span class="n">b</span> <span class="o">=</span> <span class="s">"asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl"</span>
+<span class="k">print</span><span class="p">(</span><span class="n">b</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
+</code></pre></div></div>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># This code overflows the page:
+</span>
+<span class="n">zoo</span> <span class="o">=</span> <span class="p">{</span><span class="s">"lion"</span><span class="p">:</span> <span class="s">"Simba"</span><span class="p">,</span> <span class="s">"panda"</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s">"whale"</span><span class="p">:</span> <span class="s">"Moby"</span><span class="p">,</span> <span class="s">"numAnimals"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">"bear"</span><span class="p">:</span> <span class="s">"Yogi"</span><span class="p">,</span> <span class="s">"killer whale"</span><span class="p">:</span> <span class="s">"shamu"</span><span class="p">,</span> <span class="s">"bunny:"</span><span class="p">:</span> <span class="s">"bugs"</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">zoo</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## {'lion': 'Simba', 'panda': None, 'whale': 'Moby', 'numAnimals': 3, 'bear': 'Yogi', 'killer whale': 'shamu', 'bunny:': 'bugs'}
+</code></pre></div></div>
+
+<p>To fix the issue, we can manually break the code into multiple lines,
+but long output still overflows.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">zoo</span> <span class="o">=</span> <span class="p">{</span><span class="s">"lion"</span><span class="p">:</span> <span class="s">"Simba"</span><span class="p">,</span> <span class="s">"panda"</span><span class="p">:</span> <span class="bp">None</span><span class="p">,</span> <span class="s">"whale"</span><span class="p">:</span> <span class="s">"Moby"</span><span class="p">,</span> 
+       <span class="s">"numAnimals"</span><span class="p">:</span> <span class="mi">3</span><span class="p">,</span> <span class="s">"bear"</span><span class="p">:</span> <span class="s">"Yogi"</span><span class="p">,</span> <span class="s">"killer whale"</span><span class="p">:</span> <span class="s">"shamu"</span><span class="p">,</span> 
+       <span class="s">"bunny:"</span><span class="p">:</span> <span class="s">"bugs"</span><span class="p">}</span>
+<span class="k">print</span><span class="p">(</span><span class="n">zoo</span><span class="p">)</span>
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>## {'lion': 'Simba', 'panda': None, 'whale': 'Moby', 'numAnimals': 3, 'bear': 'Yogi', 'killer whale': 'shamu', 'bunny:': 'bugs'}
+</code></pre></div></div>
+
+<p>Long comments overflow as well, but you can always manually break into
+multiple lines.</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c1"># asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
+</span>
+<span class="c1"># asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad
+# kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
+</span></code></pre></div></div>
+
+<h1 id="8-references">8) References</h1>
+
+<p>We’ll just see how you use BibTeX style references. Banerjee et al.
+(2008) proposed a useful method. This was confirmed (Cressie and
+Johannesson 2008).</p>
+
+<p>Note the indication of the <code class="language-plaintext highlighter-rouge">refs.bib</code> file in the initial lines of this
+document so that the bibliographic information for these citations can
+be found.</p>
+
+<p>The list of references is placed at the end of the document. You’d
+presumably want a section header like this:</p>
+
+<h1 id="literature-cited">Literature cited</h1>
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-Bane:etal:2008" class="csl-entry">
+
+Banerjee, S., A. E. Gelfand, A. O. Finley, and H. Sang. 2008. “Gaussian
+Predictive Process Models for Large Spatial Data Sets.” *Journal of the
+Royal Statistical Society B* 70 (4): 825–48.
+
+</div>
+
+<div id="ref-Cres:Joha:2008" class="csl-entry">
+
+Cressie, N., and G. Johannesson. 2008. “Fixed Rank Kriging for Very
+Large Spatial Data Sets.” *Journal of the Royal Statistical Society B*
+70 (1): 209–26.
+
+</div>
+
+</div>
+
+        </div>
+
+      </section>
+      <footer>
+      </footer>
+    </div>
+    <script src="/tutorial-dynamic-docs/assets/js/scale.fix.js"></script>
+  </body>
+</html>
