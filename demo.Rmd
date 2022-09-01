@@ -97,7 +97,7 @@ mean(b)
 When running R code, output is printed interspersed with the code, as one would generally want. Also, later chunks have access to result from earlier chunks (i.e., state is preserved between chunks). 
 
 Let's make a plot:
-```{r, r-plot, fig.height = 3}
+```{r, r-plot, fig.height = 3, fig.alt="example plot"}
 hist(rnorm(20))
 ```
 
