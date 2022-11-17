@@ -1,15 +1,15 @@
 
 ---
 title: "An example Quarto Markdown file"
-subtitle: "Illustrating use of R, bash, and Python code chunks"
+subtitle: "Illustrating use of R, bash, Python, and Julia code chunks"
 author: "Christopher Paciorek"
-date: "August 2022"
+date: "November 2022"
 bibliography: refs.bib
 editor: source
 format: html
 ---
 
-```{r chunksetup}
+```{r, chunksetup}
 #| include: false
 # include any code here you don't want to show up in the document,
 # e.g., package and dataset loading
@@ -37,9 +37,7 @@ quarto render demo.qmd --to pdf
 quarto render demo.qmd  # output depends on 'format' declaration at the top of the document (defaults to html)
 ```
 
-From within R,  you can run the document through the either the *rmarkdown* or *knitr* package for R to generate an html file, or through the *rmarkdown* package to generate PDF or Word (the latter being useful at times but hopefully avoidable).
-
-Alternatively, start R and run the desired line from amongst following in R:
+Alternatively, start R and run the desired line from amongst the following possibilities in R:
 
 ```{r}
 #| label: compile-R
@@ -91,18 +89,6 @@ b <- a + 3
 mean(b)
 ```
 
-While you can specify the chunk label and chunk options using R Markdown syntax inside the braces in the first chunk line above,
-with Quarto, an alternative, nice way to specify chunk labels and other options is within the chunk, like this:
-
-```{r}
-#| label: put-options-in-chunk
-#| eval: false
-#| echo: true
-cat("This code is printed in the document, but the code is not evaluated.")
-mean(b)
-```
-
-
 
 When running R code, output is printed interspersed with the code, as one would generally want. Also, later chunks have access to result from earlier chunks (i.e., state is preserved between chunks). 
 
@@ -115,7 +101,41 @@ hist(rnorm(20))
 
 And here's some inline R code: What is 3 plus 5? `r 3+5`.
 
+# 5) Controlling code chunk behavior
+
+While you can specify the chunk label and chunk options using R Markdown syntax inside the braces in the first chunk line above,
+with Quarto, an alternative, nice way to specify chunk labels and other options is within the chunk, like this:
+
+```{r}
+#| echo: fenced
+#| label: put-options-in-chunk
+b <- rnorm(5)
+mean(b)
+```
+
 You have control over whether code in chunks is echoed into the document and evaluated using the `include`, `echo`, and `eval` tags.
+
+Here we print out the code, but we don't evaluate it:
+
+```{r}
+#| echo: fenced
+#| label: evalChunk
+#| eval: false
+cat("This code is printed in the document, but the code is not evaluated.")
+mean(b)
+```
+
+
+Here's the result of a chunk with `echo` set to `false` so the code itself does not show up in the rendered document.
+
+```{r}
+#| label: echoChunk
+#| echo: false
+cat("This code is not printed in the document, but results of evaluating the code are printed.")
+```
+
+Here's a chunk with `include` set to `false`, hence neither the code nor output from running
+the code show up in the rendered output.
 
 ```{r}
 #| label: includeChunk
@@ -127,38 +147,32 @@ myVar <- 7
 ## myVar should now be available
 ```
 
-```{r}
-#| label: echoChunk
-#| echo: false
-cat("This code is not printed in the document, but results of evaluating the code are printed.")
-```
-```{r}
-#| label: evalChunk
-#| eval: false
-cat("This code is not evaluated, but the code itself is printed in the document.")
-```
-
 Results of intensive calculations can be saved using the `cache: true` tag so they don't need to be rerun every time you compile the document. 
 ```{r}
+#| echo: fenced
 #| label: slow-step
 #| cache: true
 a <- mean(rnorm(5e7))
 a
 ```
 
-You can use R variables to control the chunk options. Note that the variable `myControlVar` is defined in the first chunk of this document.
+You can use variables (an R variable here) to control the chunk options. Note that the variable `myControlVar` is defined in the first chunk of this document. Here it is used to turn off evaluation of the chunk code.
 
 ```{r}
 #| label: use-var-in-chunk-option
-#| echo: !expr myControlVar
+#| echo: fenced
 #| eval: !expr '!myControlVar'
 print("hi")
+mean(b)
 ```
 
 
-# 5) Embedding bash and Python code
+# 6) Embedding bash, Python, and Julia code
 
-## 5.1) bash
+Using code chunks from various languages, including bash, Python, and Julia is very similar to using R chunks.
+In addition, controlling and annotating chunks works the same.
+
+## 6.1) bash
 
 A bash chunk:
 ```{bash}
@@ -180,7 +194,7 @@ pwd  # result would be /tmp if state were preserved
 
 Inline bash code won't work: `bash wc demo.Rmd`, unlike with R code.
 
-## 5.2) Embedding Python code
+## 6.2) Embedding Python code
 
 You can embed Python code. As with R, state is preserved so later chunks can use objects from earlier chunks. 
 
@@ -195,15 +209,37 @@ x.min()    # this will print with more recent versions of rmarkdown
 ```{python}
 #| label: py-chunk2
 try:
-        print(x[0])
+    print("state is preserved if we see the value of `x[2]` next")
+    print(x[2])
 except NameError:
-       print('state is not preserved: x does not exist')
+    print('state is not preserved: x does not exist')
 ```
 
 There is no facility for inline Python code: `python print(3+5)`
 
+## 6.3) Embedding Julia code
 
-# 6) Reading code from an external file
+You can embed Julia code. As with R and Python, state is preserved so later chunks can use objects from earlier chunks. 
+
+```{julia}
+#| label: jl-chunk1
+x = [3, 5, 7];
+x[2]
+```
+
+```{julia}
+#| label: jl-chunk2
+try
+    println("state is preserved if we see the value of `x[2]` next")
+    print(x[2])
+catch
+    print("state is not preserved: x does not exist")
+end
+```
+
+There is no facility for inline Julia code: `julia print(3+5)`
+
+# 7) Reading code from an external file
 
 It's sometimes nice to draw code in from a separate file. Before invoking a chunk, we need to read the chunks from the source file, which contains the chunks tagged with some special formatting. Note that a good place for reading the source file via `read_chunk()` is in an initial setup chunk at the beginning of the document.
 
@@ -222,9 +258,9 @@ read_chunk('demo.R')  ## contains external_chunk_1 and external_chunk_1
 #| label: external_chunk_2
 ```
 
-# 7) Formatting of long lines of code and of output
+# 8) Formatting of long lines of code and of output
 
-## 7.1) R code
+## 8.1) R code
 
 Having long lines be nicely formatted and other aspects of formatting can be a challenge. Also, results can differ depending on your output format (e.g., PDF vs. HTML). In general the code in this section will often overflow the page width in PDF but not in HTML, but even in the HTML the line breaks may be awkwardly positioned.
 
@@ -306,7 +342,7 @@ a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName)
 
 
 
-## 7.2) bash code
+## 8.2) bash code
 
 
 In bash, we have similar problems with lines overflowing in PDF output, but bash allows us to use a backslash to break lines of code. However that strategy doesn't help with long lines of output. 
@@ -341,7 +377,7 @@ Instead manually break the comment into multiple lines:
 # adlfjaf jkladf afdl
 ```
 
-## 7.3) Python code
+## 8.3) Python code
 
 In Python, there is similar trouble with lines overflowing in PDF output too.
 
@@ -383,7 +419,7 @@ Long comments overflow as well, but you can always manually break into multiple 
 # kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
 ```
 
-# 8) References
+# 9) References
 
 We'll just see how you use BibTeX style references.  @Bane:etal:2008 proposed a useful method. This was confirmed [@Cres:Joha:2008].
 

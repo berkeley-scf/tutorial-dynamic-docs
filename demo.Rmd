@@ -1,7 +1,7 @@
 
 ---
 title: "An example R Markdown file"
-subtitle: "Illustrating use of R, bash, and Python code chunks"
+subtitle: "Illustrating use of R, bash, Python, and Julia code chunks"
 author: "Christopher Paciorek"
 date: "February 2022"
 bibliography: refs.bib
@@ -27,8 +27,6 @@ myControlVar <- TRUE   # R variable used later to control chunk behavior
 
 From within R,  you can run the document through the either the *rmarkdown* or *knitr* package for R to generate an html file, or through the *rmarkdown* package to generate PDF or Word (the latter being useful at times but hopefully avoidable).
 
-Alternatively, start R and run the desired line from amongst following in R:
-
 ```{r, compile-R, eval=FALSE}
 library(rmarkdown); render('demo.Rmd', 'pdf_document')
 library(rmarkdown); render('demo.Rmd', 'html_document')
@@ -36,7 +34,7 @@ library(rmarkdown); render('demo.Rmd', 'word_document')
 library(knitr); knit2html('demo.Rmd')  
 ```
 
-Or in RStudio, click on the 'Knit' pull-down menu and choose to knit to HTML, PDF, or Word (for R Markdown).
+Or in RStudio, click on the 'Knit' pull-down menu and choose to knit to HTML, PDF, or Word (for R Markdown) or use the 'Render' button in more recent versions of RStudio.
 
 Alternatively, from the UNIX command line, run one of these:
 
@@ -45,7 +43,6 @@ Rscript -e "library(rmarkdown); render('demo.Rmd', 'pdf_document')"  # PDF
 Rscript -e "library(rmarkdown); render('demo.Rmd', 'html_document')"  # HTML
 Rscript -e "library(rmarkdown); render('demo.Rmd', 'word_document')"  # Word
 Rscript -e "library(knitr); knit2html('demo.Rmd')"  # HTML alternative
-
 ```
 
 
@@ -103,7 +100,24 @@ hist(rnorm(20))
 
 And here's some inline R code: What is 3 plus 5? `r 3+5`.
 
+
+# 5) Controlling code chunk behavior
+
 You have control over whether code in chunks is echoed into the document and evaluated using the `include`, `echo`, and `eval` tags.
+
+Here we print the code but don't evaluate it by setting `eval` to `false`.
+
+```{r, evalChunk, eval=FALSE}
+cat("This code is not evaluated, but the code itself is printed in the document.")
+```
+
+Here is the result of running the code in a chunk but not printing the code by setting `eval` to `false`.
+
+```{r, echoChunk, echo=FALSE}
+cat("This code is not printed in the document, but results of evaluating the code are printed.")
+```
+
+And here is a chunk that is evaluated, but neither the code nor the result of evaluating the code is printed in the rendered document. This is achieved by setting `include` to `false`.
 
 ```{r, includeChunk, include=FALSE}
 cat("This code is evaluated but nothing is printed in the document.")
@@ -113,12 +127,6 @@ myVar <- 7
 ## myVar should now be available
 ```
 
-```{r, echoChunk, echo=FALSE}
-cat("This code is not printed in the document, but results of evaluating the code are printed.")
-```
-```{r, evalChunk, eval=FALSE}
-cat("This code is not evaluated, but the code itself is printed in the document.")
-```
 
 Results of intensive calculations can be saved using the `cache=TRUE` tag so they don't need to be rerun every time you compile the document. 
 ```{r, slow-step, cache=TRUE}
@@ -126,7 +134,7 @@ a <- mean(rnorm(5e7))
 a
 ```
 
-You can use R variables to control the chunk options. Note that the variable `myControlVar` is defined in the first chunk of this document.
+You can use R variables to control the chunk options. Note that the variable `myControlVar` is defined in the first chunk of this document. Here it is used to turn off evaluation of the chunk code.
 
 ```{r, use-var-in-chunk-option, echo=myControlVar, eval=!myControlVar}
 print("hi")
@@ -141,9 +149,9 @@ An alternative, nice way to specify chunk options is within the chunk, like this
 cat("This code is printed in the document, but the code is not evaluated.")
 ```
 
-# 5) Embedding bash and Python code
+# 6) Embedding bash and Python code
 
-## 5.1) bash
+## 6.1) bash
 
 A bash chunk:
 ```{bash, bash-chunk1}
@@ -163,7 +171,7 @@ pwd  # result would be /tmp if state were preserved
 
 Inline bash code won't work: `bash wc demo.Rmd`, unlike with R code.
 
-## 5.2) Embedding Python code
+## 6.2) Embedding Python code
 
 You can embed Python code. As with R, state is preserved so later chunks can use objects from earlier chunks. 
 
@@ -183,8 +191,29 @@ except NameError:
 
 There is no facility for inline Python code: `python print(3+5)`
 
+# 6.3) Embedding Julia code
 
-# 6) Reading code from an external file
+You can embed Julia code. As with R and Python, state is preserved so later chunks can use objects from earlier chunks. 
+
+```{julia}
+#| label: jl-chunk1
+x = [3, 5, 7];
+x[2]
+```
+
+```{julia}
+#| label: jl-chunk2
+try
+    println("state is preserved if we see the value of `x[2]` next")
+    print(x[2])
+catch
+    print("state is not preserved: x does not exist")
+end
+```
+
+There is no facility for inline Julia code: `julia print(3+5)`
+
+# 7) Reading code from an external file
 
 It's sometimes nice to draw code in from a separate file. Before invoking a chunk, we need to read the chunks from the source file, which contains the chunks tagged with some special formatting. Note that a good place for reading the source file via `read_chunk()` is in an initial setup chunk at the beginning of the document.
 
@@ -199,9 +228,9 @@ read_chunk('demo.R')  ## contains external_chunk_1 and external_chunk_1
 ```{r, external_chunk_2}
 ```
 
-# 7) Formatting of long lines of code and of output
+# 8) Formatting of long lines of code and of output
 
-## 7.1) R code
+## 8.1) R code
 
 Having long lines be nicely formatted and other aspects of formatting can be a challenge. Also, results can differ depending on your output format (e.g., PDF vs. HTML). In general the code in this section will often overflow the page width in PDF but not in HTML, but even in the HTML the line breaks may be awkwardly positioned.
 
@@ -276,7 +305,7 @@ a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName)
 
 
 
-## 7.2) bash code
+## 8.2) bash code
 
 
 In bash, we have similar problems with lines overflowing in PDF output, but bash allows us to use a backslash to break lines of code. However that strategy doesn't help with long lines of output. 
@@ -308,7 +337,7 @@ Instead manually break the comment into multiple lines:
 # adlfjaf jkladf afdl
 ```
 
-## 7.3) Python code
+## 8.3) Python code
 
 In Python, there is similar trouble with lines overflowing in PDF output too.
 
@@ -346,7 +375,7 @@ Long comments overflow as well, but you can always manually break into multiple 
 # kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
 ```
 
-# 8) References
+# 9) References
 
 We'll just see how you use BibTeX style references.  @Bane:etal:2008 proposed a useful method. This was confirmed [@Cres:Joha:2008].
 

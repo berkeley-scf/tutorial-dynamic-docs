@@ -9,7 +9,7 @@ author: Christopher Paciorek
 
 ## 1 This tutorial
 
-This tutorial covers the basics of creating documents that combine code chunks, mathematical notation, and text. We'll cover R, Python and bash shell chunks in the context of documents written with LaTeX, Markdown, and Jupyter notebooks.
+This tutorial covers the basics of creating documents that combine code chunks, mathematical notation, and text. We'll cover R, Python, Julia and bash shell chunks in the context of documents written with LaTeX, Quarto, Markdown, and Jupyter notebooks.
 
 For this tutorial you'll need to install the following software:
 
