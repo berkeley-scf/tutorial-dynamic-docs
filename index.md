@@ -16,6 +16,7 @@ For this tutorial you'll need to install the following software:
 * R (and optionally RStudio).
    * You'll also need Pandoc. Pandoc comes with RStudio, so if you have RStudio, you don't need to install it yourself.
 * The `rmarkdown` and `knitr` packages for R.
+* Quarto 
 * A LaTeX distribution:
    * This is probably most easily obtained by running `install_tinytex()`, available from the R `tinytex` package
    * Alternatively, an installation such as `MacTex` (Mac) or `MiKTeX` (Windows).
@@ -46,11 +47,32 @@ R Markdown is a variant on the Markdown markup language that allows you to embed
 
 In [demo.Rmd](demo.Rmd), you'll see examples of embedding R, Python, and bash code chunks, as well as the syntax involved in creating PDF, HTML, and Word output files. [demo.html](demo.html) and [demo.pdf](demo.pdf) show how it looks as a final output file, after "rendering" the input Rmd document. 
 
-### Quarto and qmd files
+## 4 Quarto and qmd files
 
-Quarto is a relatively new project meant to extend R Markdown and also work with Jupyter notebooks. You can create `qmd` files that use the same syntax as R Markdown (`Rmd`) files or that use slightly modified syntax, as demonstrated in `demo.qmd`. Quarto also allows you to easily render output files from qmd, R Markdown, and Jupyter notebook files. And you can use Quarto to convert Jupyter notebooks to the qmd format. This is nice in part because qmd (like Rmd) is more easily handled by version control and with shell commands than the JSON format of .ipynb files.
+Quarto is a somewhat new project meant to extend R Markdown to a more general purpose system that doesn't focus on R and that  also work with Jupyter notebooks. You can create `qmd` files that use the same syntax as R Markdown (`Rmd`) files or that use slightly modified syntax, as demonstrated in `demo.qmd`. Quarto also allows you to easily render output files from qmd, R Markdown, and Jupyter notebook files. And you can use Quarto to convert Jupyter notebooks to the qmd format. This is nice in part because qmd (like Rmd) is more easily handled by version control and with shell commands than the JSON format of .ipynb files.
 
-## 4 LaTeX plus knitr
+### Rendering engines
+
+If only Python chunks or only bash chunks are used, Quarto will use the `jupyter` engine to render the chunks. For bash chunks to be processed you'll need the Jupyter bash kernel installed. If you don't want to install the bash kernel, you can request the `knitr` engine as discussed below.
+
+Otherwise (if using R chunks or if there are chunks from multiple languages), quarto will use the `knitr` engine to run the chunks, which requires you to have R and the `knitr` R package installed. For Python chunks, this will use the `reticulate` R package behind the scenes to run Python code.
+
+You can specify the engine by adding information to the YAML configuration information at the top of the file, e.g., as follows to use the `knitr` engine:
+
+```
+engine: knitr
+```
+
+### Tools for developing qmd documents
+
+Here are a few approaches you can use to interactively develop your documents.
+
+  1. **Text editor + quarto preview**: The most basic approach is to use your favorite text editor and run `quarto preview file.qmd` from the command line (including Windows cmd.exe or PowerShell). Assuming that you've done an initial rendering of the document, this will display the output in a browser window and update the output any time you save the qmd file.
+  2. **VS Code**: You can use VS Code with the Quarto extension. (If using Python chunks, you will probably also need the Python and Jupyter extensions). The extension will provide a "Run chunk" option above each chunk, and you can run individual lines using Shift+Enter (this may vary by operating system). You can also render from within VS Code and you'll see the results displayed in a pane within VS Code. Note that ith Python chunks, you may need to choose the Python interpreter that you want used - you can do this from the command pallette with "Python: select interpreter" or by clicking on the icon that shows the current Python interpreter.
+  3. **RStudio**: You can use RStudio to interact with qmd files in the same fashion as with Rmd files. You can run chunks or individual lines of code easily and render easily using the Render button.
+
+
+## 5 LaTeX plus knitr
 
 *knitr* is an R package that allows you to process LaTeX files that contain code chunks. The code chunks can be in one of two formats, either a format introduced by knitr (with extension .Rtex) or traditional Sweave format (with extension .Rnw). Files in either format are simple text files. I recommend the Rtex format.
 
@@ -63,11 +85,11 @@ Quarto is a relatively new project meant to extend R Markdown and also work with
 > **Warning**:
 > Strangely, regardless of which format you use, you need to have your document name end in the .Rtex extension for the code chunks to be interpreted as code.
 
-## 5 LyX plus knitr
+## 6 LyX plus knitr
 
 You can embed code chunks in the Sweave (Rnw) format in LyX files and then process the file using `knitr` to create PDF output. [demo.lyx](demo.lyx) provides an example, including the syntax for creating PDF output files. To use LyX, you'll need to start the LyX application and open an existing or create a new LyX file.
 
-## 6 Jupyter notebooks
+## 7 Jupyter notebooks
 
 Project Jupyter grew out of the IPython Notebook project and provides a general way of embedding code chunks, using a variety of languages (not just Python), within a document (called a notebook) where the text components of the document is written in Markdown. Basically a document is a sequence of chunks, where each chunk is either a code chunk or a Markdown (text) chunk. The Markdown text can of course include mathematical notation using LaTeX syntax. 
 
@@ -81,10 +103,11 @@ You can insert code chunks in a different language using the `%%` magic syntax, 
 
 ### Quarto and qmd files
 
-You can use Quarto to convert Jupyter notebooks to the qmd format. 
+You can use Quarto to convert between the Jupyter notebook format (.ipynb) and the qmd format. 
 
 ```
 quarto convert demo-python.ipynb 
+quarto convert demo-python.qmd
 ```
 
 This is nice in part because qmd (like Rmd) is more easily handled by version control and with shell commands than the JSON format of .ipynb files.

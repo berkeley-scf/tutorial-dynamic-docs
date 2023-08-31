@@ -1,4 +1,3 @@
-
 ---
 title: "An example Quarto Markdown file"
 subtitle: "Illustrating use of R, bash, Python, and Julia code chunks"
@@ -48,6 +47,8 @@ quarto_render("demo.qmd", output_format = "pdf")
 ```
 
 Or in RStudio (version at least 2022.07), click on the 'Render' button and choose to knit to HTML, PDF, or Word (for R Markdown).
+
+
 
 
 
@@ -213,6 +214,16 @@ try:
     print(x[2])
 except NameError:
     print('state is not preserved: x does not exist')
+```
+
+When using the `jupyter` rendering engine, all output is printed after all the code from the chunk.
+When using `knitr` engine, output appears directly after the code producing the output. However, output appears after any comments that follow the code, which might not be what you want.
+
+```{python}
+print(1)
+# Whether "1" and "2" are printed after all the code or interspersed
+# depends on the engine used.
+print(2)
 ```
 
 There is no facility for inline Python code: `python print(3+5)`

@@ -1,9 +1,10 @@
 # tutorial-dynamic-docs
-Tutorial on creating dynamic documents, focused on R.
+Tutorial on creating dynamic documents, focused on R, but with information on Quarto as well.
 
 This tutorial covers:
 
-* Embedding R and bash and Python code in Markdown using R Markdown and Quarto Markdown (qmd).
+* Embedding R and bash and Python code in Markdown using R Markdown.
+* Embedding code chunks (Python, R, bash) in Quarto Markdown (qmd).
 * Embedding R and bash and Python code in LaTeX using knitr (and Sweave).
 * Embedding R and bash and Python code in the LyX GUI for LaTeX using knitr and Sweave.
 * A bit on Jupyter Notebooks.
