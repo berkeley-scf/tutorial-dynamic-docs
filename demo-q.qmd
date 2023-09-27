@@ -49,9 +49,6 @@ quarto_render("demo.qmd", output_format = "pdf")
 Or in RStudio (version at least 2022.07), click on the 'Render' button and choose to knit to HTML, PDF, or Word (for R Markdown).
 
 
-
-
-
 # 2) Some basic Markdown formatting
 
 
@@ -77,7 +74,21 @@ Here's a displayed equation
 
 $$
 f_\theta(x) = \int f_\theta(y, x) dy.
-$$ 
+$$
+
+You can define LaTeX macros in a qmd file and then use them, like this:
+
+$$
+\newcommand{\trans}[1]{{#1}^\mathsf{T}} 
+$$
+
+```
+\newcommand{\trans}[1]{{#1}^\mathsf{T}}
+```
+
+$$
+A = \trans{X}Y
+$$
 
 # 4) Embedding R code
 
@@ -167,6 +178,17 @@ print("hi")
 mean(b)
 ```
 
+You can control which executable is used to execute a given chunk of code by  (particularly useful for Python and bash and for debugging), using the `engine.path` chunk option.
+
+```{python}
+#| echo: fenced
+#| eval: false
+#| engine.path: /usr/bin/python2
+a = 3
+print a
+```
+
+It's not uncommon to have various Python executables installed (different versions, in Conda/Mamba environments, etc.) on your system or to be unclear about which shell is being used to execute a shell chunk. Manually setting `engine.path` can help figure things out or work around problems.
 
 # 6) Embedding bash, Python, and Julia code
 
@@ -194,6 +216,16 @@ pwd  # result would be /tmp if state were preserved
 ```
 
 Inline bash code won't work: `bash wc demo.Rmd`, unlike with R code.
+
+If you are using the `jupyter` engine and want to have both bash and Python chunks in a document, or you don't want to have to install a bash Jupyter kernel, you can use ipython magic to run bash code within a Python chunk:
+
+```{python}
+#| eval: false
+!echo "hello from python"
+!pwd
+```
+
+One can also use `zsh` or other shell chunks, replacing the "bash" label with "zsh" or the other shell. 
 
 ## 6.2) Embedding Python code
 
@@ -228,6 +260,19 @@ print(2)
 
 There is no facility for inline Python code: `python print(3+5)`
 
+To display code from a file of Python code, you can use functionality in the `inspect` module.
+This code would display the definition of `doubled()` from the `my_code` module.
+
+```{python}
+#| eval: false
+import my_code
+import inspect
+print(inspect.getsource(my_code.doubled))
+```
+
+
+This will work for functions and for class definitions.
+
 ## 6.3) Embedding Julia code
 
 You can embed Julia code. As with R and Python, state is preserved so later chunks can use objects from earlier chunks. 
@@ -252,14 +297,22 @@ There is no facility for inline Julia code: `julia print(3+5)`
 
 # 7) Reading code from an external file
 
-It's sometimes nice to draw code in from a separate file. Before invoking a chunk, we need to read the chunks from the source file, which contains the chunks tagged with some special formatting. Note that a good place for reading the source file via `read_chunk()` is in an initial setup chunk at the beginning of the document.
+It's sometimes nice to draw code in from a separate file. Before invoking a chunk, we need to read the chunks from the source file, which contains the chunks tagged with some special formatting.
+
+This only works with the `knitr` engine.
+
 
 ```{r}
 #| label: read-chunk
-#| echo: false
+#| echo: fenced
 library(knitr)
-read_chunk('demo.R')  ## contains external_chunk_1 and external_chunk_1
+read_chunk('demo.R')  ## contains external_chunk_1 and external_chunk_2 of R code
+read_chunk('demo.py')  ## contains external_chunk_3 of Python code
 ```
+
+Note that a good place for reading the source file via `read_chunk()` is in an initial setup chunk at the beginning of the document.
+
+Here are two R chunks whose code is in `demo.R`.
 
 ```{r}
 #| label: external_chunk_1
@@ -268,6 +321,25 @@ read_chunk('demo.R')  ## contains external_chunk_1 and external_chunk_1
 ```{r}
 #| label: external_chunk_2
 ```
+
+And here is a Python chunk whose code is in `demo.py`.
+
+```{python}
+#| label: external_chunk_3
+```
+
+
+
+To display function or class definitions from a file of Python code, you can use functionality in the `inspect` module.
+This code would display the definition of `doubled()` from the `my_code` module.
+
+```{python}
+#| eval: false
+import my_code
+import inspect
+print(inspect.getsource(my_code.doubled))
+```
+
 
 # 8) Formatting of long lines of code and of output
 
