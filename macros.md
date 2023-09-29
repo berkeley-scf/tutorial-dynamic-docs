@@ -1,4 +1,4 @@
 $$
-\newcommand{\trans}[1]{{#1}^\mathsf{T}} 
+\newcommand{\trans}{^\mathsf{T}} 
 \newcommand{\eps}{\epsilon}
 $$

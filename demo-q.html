@@ -89,7 +89,7 @@ div.csl-indent {
 <link href="demo-q_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="demo-q_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
 </head><body>$$
-\newcommand{\trans}[1]{{#1}^\mathsf{T}} 
+\newcommand{\trans}{^\mathsf{T}} 
 \newcommand{\eps}{\epsilon}
 $$
 
@@ -168,7 +168,7 @@ b = exp(a)</code></pre>
 f_\theta(x) = \int f_\theta(y, x) dy.
 \]</span></p>
 <section id="latex-macros" class="level2">
-<h2 class="anchored" data-anchor-id="latex-macros">4.1) LaTeX macros</h2>
+<h2 class="anchored" data-anchor-id="latex-macros">3.1) LaTeX macros</h2>
 <p>You can define LaTeX macros in separate files and then use them as follows.</p>
 <p>The macros for PDF rendering should be placed in a .tex file as shown in <a href="macros.tex">macros.tex</a>. The macros for HTML rendering should be placed in a .md file, formatted as shown in <a href="macros.md">macros.md</a>.</p>
 <p>(Unfortunately, it does seem to me that you need to have two separate files with the same macro definitions if rendering to both pdf and html.)</p>
@@ -180,9 +180,9 @@ f_\theta(x) = \int f_\theta(y, x) dy.
   html:
     include-in-header:
      - file: macros.md</code></pre>
-<p>We use a macro in this equation:</p>
+<p>We can then use a macro in this equation:</p>
 <p><span class="math display">\[
-A = \trans{X}Y
+A = X \trans Y
 \]</span></p>
 </section>
 </section>
@@ -309,7 +309,7 @@ drwxr-sr-x 2 paciorek scfstaff 3 Sep 27 15:57 figure-html
 drwxr-sr-x 5 paciorek scfstaff 5 Sep 27 16:07 libs
 Filesystem                       Size  Used Avail Use% Mounted on
 /dev/sda2                         59G   31G   26G  55% /
-tmpfs                             16G  1.3G   15G   8% /dev/shm
+tmpfs                             16G  1.4G   15G   9% /dev/shm
 tmpfs                            3.2G   25M  3.2G   1% /run
 tmpfs                            5.0M  4.0K  5.0M   1% /run/lock
 /dev/sdb1                        111G  3.3G  102G   4% /tmp

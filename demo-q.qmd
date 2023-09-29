@@ -82,7 +82,7 @@ $$
 f_\theta(x) = \int f_\theta(y, x) dy.
 $$
 
-## 4.1) LaTeX macros
+## 3.1) LaTeX macros
 
 You can define LaTeX macros in separate files and then use them as follows.
 
@@ -104,10 +104,10 @@ format:
      - file: macros.md
 ```
 
-We use a macro in this equation:
+We can then use a macro in this equation:
 
 $$
-A = \trans{X}Y
+A = X \trans Y
 $$
 
 # 4) Embedding R code
