@@ -2,12 +2,12 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
 
 <meta charset="utf-8">
-<meta name="generator" content="quarto-1.2.269">
+<meta name="generator" content="quarto-1.3.450">
 
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Christopher Paciorek">
-<meta name="dcterms.date" content="2022-11-01">
+<meta name="dcterms.date" content="2023-09-01">
 
 <title>An example Quarto Markdown file</title>
 <style>
@@ -19,9 +19,10 @@ div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
 ul.task-list{list-style: none;}
 ul.task-list li input[type="checkbox"] {
   width: 0.8em;
-  margin: 0 0.8em 0.2em -1.6em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
   vertical-align: middle;
 }
+/* CSS for syntax highlighting */
 pre > code.sourceCode { white-space: pre; position: relative; }
 pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
 pre > code.sourceCode > span:empty { height: 1.2em; }
@@ -48,48 +49,19 @@ pre.numberSource code > span > a:first-child::before
     -khtml-user-select: none; -moz-user-select: none;
     -ms-user-select: none; user-select: none;
     padding: 0 4px; width: 4em;
-    color: #aaaaaa;
   }
-pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
 div.sourceCode
   {   }
 @media screen {
 pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
 }
-code span.al { color: #ff0000; font-weight: bold; } /* Alert */
-code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
-code span.at { color: #7d9029; } /* Attribute */
-code span.bn { color: #40a070; } /* BaseN */
-code span.bu { color: #008000; } /* BuiltIn */
-code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
-code span.ch { color: #4070a0; } /* Char */
-code span.cn { color: #880000; } /* Constant */
-code span.co { color: #60a0b0; font-style: italic; } /* Comment */
-code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
-code span.do { color: #ba2121; font-style: italic; } /* Documentation */
-code span.dt { color: #902000; } /* DataType */
-code span.dv { color: #40a070; } /* DecVal */
-code span.er { color: #ff0000; font-weight: bold; } /* Error */
-code span.ex { } /* Extension */
-code span.fl { color: #40a070; } /* Float */
-code span.fu { color: #06287e; } /* Function */
-code span.im { color: #008000; font-weight: bold; } /* Import */
-code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
-code span.kw { color: #007020; font-weight: bold; } /* Keyword */
-code span.op { color: #666666; } /* Operator */
-code span.ot { color: #007020; } /* Other */
-code span.pp { color: #bc7a00; } /* Preprocessor */
-code span.sc { color: #4070a0; } /* SpecialChar */
-code span.ss { color: #bb6688; } /* SpecialString */
-code span.st { color: #4070a0; } /* String */
-code span.va { color: #19177c; } /* Variable */
-code span.vs { color: #4070a0; } /* VerbatimString */
-code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+/* CSS for citations */
 div.csl-bib-body { }
 div.csl-entry {
   clear: both;
 }
-.hanging div.csl-entry {
+.hanging-indent div.csl-entry {
   margin-left:2em;
   text-indent:-2em;
 }
@@ -103,8 +75,7 @@ div.csl-right-inline {
 }
 div.csl-indent {
   margin-left: 2em;
-}
-</style>
+}</style>
 
 
 <script src="demo-q_files/libs/clipboard/clipboard.min.js"></script>
@@ -117,15 +88,21 @@ div.csl-indent {
 <script src="demo-q_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="demo-q_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="demo-q_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
+</head><body>$$
+\newcommand{\trans}[1]{{#1}^\mathsf{T}} 
+\newcommand{\eps}{\epsilon}
+$$
 
+  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
-</head>
 
-<body class="fullcontent">
+
+
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
-
+<div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="demo-q.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <main class="content" id="quarto-document-content">
 
 <header id="title-block-header" class="quarto-title-block default">
@@ -148,7 +125,7 @@ div.csl-indent {
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">November 1, 2022</p>
+      <p class="date">September 1, 2023</p>
     </div>
   </div>
   
@@ -190,14 +167,24 @@ b = exp(a)</code></pre>
 <p><span class="math display">\[
 f_\theta(x) = \int f_\theta(y, x) dy.
 \]</span></p>
-<p>You can define LaTeX macros in a qmd file and then use them, like this:</p>
-<p><span class="math display">\[
-\newcommand{\trans}[1]{{#1}^\mathsf{T}}
-\]</span></p>
-<pre><code>\newcommand{\trans}[1]{{#1}^\mathsf{T}}</code></pre>
+<section id="latex-macros" class="level2">
+<h2 class="anchored" data-anchor-id="latex-macros">4.1) LaTeX macros</h2>
+<p>You can define LaTeX macros in separate files and then use them as follows.</p>
+<p>The macros for PDF rendering should be placed in a .tex file as shown in <a href="macros.tex">macros.tex</a>. The macros for HTML rendering should be placed in a .md file, formatted as shown in <a href="macros.md">macros.md</a>.</p>
+<p>(Unfortunately, it does seem to me that you need to have two separate files with the same macro definitions if rendering to both pdf and html.)</p>
+<p>Then make sure to include those files as seen in the header of the qmd document like this:</p>
+<pre><code>format:
+  pdf:
+    include-in-header:
+     - file: macros.tex
+  html:
+    include-in-header:
+     - file: macros.md</code></pre>
+<p>We use a macro in this equation:</p>
 <p><span class="math display">\[
 A = \trans{X}Y
 \]</span></p>
+</section>
 </section>
 <section id="embedding-r-code" class="level1">
 <h1>4) Embedding R code</h1>
@@ -293,86 +280,46 @@ A = \trans{X}Y
 <h2 class="anchored" data-anchor-id="bash">6.1) bash</h2>
 <p>A bash chunk:</p>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span> test<span class="pp">*</span></span>
 <span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span></span>
 <span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp</span>
 <span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>total 3471
-drwxr-sr-x 6 paciorek scfstaff      6 Nov 17  2021 assets
-drwxr-sr-x 2 paciorek scfstaff     10 Feb  1  2022 cache
--rw-r--r-- 1 paciorek scfstaff    394 Feb  3  2022 _config.yml
--rw-r--r-- 1 paciorek scfstaff    150 Sep 27 16:15 demo2.R
--rw-r--r-- 1 paciorek scfstaff    252 Sep 27 16:13 demo2.R~
--rw-r--r-- 1 paciorek scfstaff 282459 Feb  2  2022 demo-bash.html
--rw-r--r-- 1 paciorek scfstaff   8083 Feb  2  2022 demo-bash.ipynb
--rw-r--r-- 1 paciorek scfstaff  48673 Feb  2  2022 demo-bash.pdf
-drwxr-sr-x 7 paciorek scfstaff      7 Aug 31  2022 demo_cache
--rw-r--r-- 1 paciorek scfstaff  22979 Feb  3  2022 demo.docx
-drwxr-sr-x 8 paciorek scfstaff      8 Nov 16  2022 demo_files
--rw-r--r-- 1 paciorek scfstaff 662128 Nov 16  2022 demo.html
--rw-r--r-- 1 paciorek scfstaff  24939 Feb  1  2022 demo.lyx
--rw-r--r-- 1 paciorek scfstaff 294238 Nov 16  2022 demo.pdf
--rw-r--r-- 1 paciorek scfstaff    218 Sep 27 16:31 demo.py
--rw-r--r-- 1 paciorek scfstaff    150 Sep 27 16:15 demo.py~
--rw-r--r-- 1 paciorek scfstaff 284419 Feb  2  2022 demo-python.html
--rw-r--r-- 1 paciorek scfstaff   6936 Feb  2  2022 demo-python.ipynb
--rw-r--r-- 1 paciorek scfstaff  49626 Feb  2  2022 demo-python.pdf
--rw-r--r-- 1 paciorek scfstaff   3662 Jan 27  2022 demo-python.qmd
-drwxr-sr-x 3 paciorek scfstaff      3 Sep 27 16:29 demo-q_cache
-drwxr-sr-x 4 paciorek scfstaff      4 Sep 27 16:35 demo-q_files
--rw-r--r-- 1 paciorek scfstaff  67507 Sep 27 16:35 demo-q.html
--rw-r--r-- 1 paciorek scfstaff  13004 Aug 18  2022 demo.qmd~
--rw-r--r-- 1 paciorek scfstaff  16577 Sep 27 16:36 demo-q.qmd
--rw-r--r-- 1 paciorek scfstaff  15850 Sep 27 16:01 demoq.qmd
--rw-r--r-- 1 paciorek scfstaff  16643 Sep 27 16:36 demo-q.rmarkdown
--rw-r--r-- 1 paciorek scfstaff    252 Jan 31  2022 demo.R
--rw-r--r-- 1 paciorek scfstaff 321394 Feb  2  2022 demo-R.html
--rw-r--r-- 1 paciorek scfstaff 124604 Feb  2  2022 demo-R.ipynb
--rw-r--r-- 1 paciorek scfstaff  13945 Nov 16  2022 demo.Rmd
--rw-r--r-- 1 paciorek scfstaff  10853 Nov  6  2019 demo.Rmd.save
--rw-r--r-- 1 paciorek scfstaff  12462 Feb  1  2022 demo.Rnw
--rw-r--r-- 1 paciorek scfstaff  59736 Feb  2  2022 demo-R.pdf
--rw-r--r-- 1 paciorek scfstaff  12890 Feb  1  2022 demo.Rtex
-drwxr-sr-x 3 paciorek scfstaff      3 Jan  6  2023 demo-with-interactive_files
--rw-r--r-- 1 paciorek scfstaff  17113 Jan  6  2023 demo-with-interactive.html
--rw-r--r-- 1 paciorek scfstaff    343 Jan  6  2023 demo-with-interactive.qmd
--rw-r--r-- 1 paciorek scfstaff    269 Jan  6  2023 demo-with-interactive.qmd~
-drwxr-sr-x 2 paciorek scfstaff      5 Jul 30  2015 figure
-drwxr-sr-x 2 paciorek scfstaff      3 Jul  5  2022 _includes
--rw-r--r-- 1 paciorek scfstaff  10251 Sep 27 16:28 index.md
-drwxr-sr-x 2 paciorek scfstaff      4 Sep 27 16:29 _layouts
--rw-r--r-- 1 paciorek scfstaff    463 Jul  5  2022 Makefile
--rw-r--r-- 1 paciorek scfstaff   2129 Jul  5  2022 python-in-RStudio.md
--rw-r--r-- 1 paciorek scfstaff 171796 Feb  2  2022 python-in-RStudio.pdf
--rw-r--r-- 1 paciorek scfstaff   2055 Jul  5  2022 python-in-RStudio.Rmd
--rw-r--r-- 1 paciorek scfstaff    855 Aug 31 15:35 README.md
--rw-r--r-- 1 paciorek scfstaff  14902 Jul 30  2015 refs.bib
-drwxr-sr-x 2 paciorek scfstaff      7 Aug 31  2022 _sass
-drwxr-sr-x 3 paciorek scfstaff      3 Sep 27 16:16 test_files
--rw-r--r-- 1 paciorek scfstaff   7019 Sep 27 16:16 test.html
--rw-r--r-- 1 paciorek scfstaff   7167 Jul 17  2015 test-line-formatting.Rnw
--rw-r--r-- 1 paciorek scfstaff  13996 Jan  6  2023 test.pdf
-drwxr-sr-x 3 paciorek scfstaff      3 Sep 27 15:57 testq_cache
-drwxr-sr-x 4 paciorek scfstaff      4 Sep 27 16:07 testq_files
--rw-r--r-- 1 paciorek scfstaff  64072 Sep 27 16:07 testq.html
--rw-r--r-- 1 paciorek scfstaff    516 Sep 27 16:16 test.qmd
--rw-r--r-- 1 paciorek scfstaff    360 Sep 27 16:04 test.qmd~
--rw-r--r-- 1 paciorek scfstaff  15865 Sep 27 16:05 testq.qmd
--rw-r--r-- 1 paciorek scfstaff    390 Sep 27 16:35 tmp.txt
+<pre><code>-rw-r--r-- 1 paciorek scfstaff  7088 Sep 28 15:20 test.html
+-rw-r--r-- 1 paciorek scfstaff  1166 Sep 27 17:21 test.ipynb
+-rw-r--r-- 1 paciorek scfstaff  7167 Jul 17  2015 test-line-formatting.Rnw
+-rw-r--r-- 1 paciorek scfstaff 14477 Sep 28 15:19 test.pdf
+-rw-r--r-- 1 paciorek scfstaff 64072 Sep 27 16:07 testq.html
+-rw-r--r-- 1 paciorek scfstaff   419 Sep 28 15:19 test.qmd
+-rw-r--r-- 1 paciorek scfstaff   387 Sep 27 17:22 test.qmd~
+-rw-r--r-- 1 paciorek scfstaff 15865 Sep 27 16:05 testq.qmd
+-rw------- 1 paciorek scfstaff  5285 Sep 28 15:16 test.tex~
+
+test_files:
+total 9
+drwxr-sr-x 15 paciorek scfstaff 15 Sep 27 15:21 libs
+
+testq_cache:
+total 9
+drwxr-sr-x 2 paciorek scfstaff 6 Sep 27 15:57 html
+
+testq_files:
+total 1
+drwxr-sr-x 2 paciorek scfstaff 3 Sep 27 15:57 figure-html
+drwxr-sr-x 5 paciorek scfstaff 5 Sep 27 16:07 libs
 Filesystem                       Size  Used Avail Use% Mounted on
-/dev/sda2                         59G   31G   26G  54% /
-tmpfs                             16G  1.3G   15G   9% /dev/shm
+/dev/sda2                         59G   31G   26G  55% /
+tmpfs                             16G  1.3G   15G   8% /dev/shm
 tmpfs                            3.2G   25M  3.2G   1% /run
 tmpfs                            5.0M  4.0K  5.0M   1% /run/lock
-/dev/sdb1                        111G  3.1G  102G   3% /tmp
+/dev/sdb1                        111G  3.3G  102G   4% /tmp
 /dev/sda3                         59G   11G   46G  19% /var
 /dev/sda5                        2.6T  178G  2.3T   8% /var/tmp
 /dev/sda1                        499M  6.1M  493M   2% /boot/efi
-oz.berkeley.edu:/pool0/system    6.0T  3.9T  2.2T  64% /system
+oz.berkeley.edu:/pool0/system    6.0T  3.9T  2.2T  65% /system
 oz.berkeley.edu:/pool0/scratch    35T   32T  3.1T  92% /scratch
 oz.berkeley.edu:/pool0/accounts   71T  8.0T   63T  12% /accounts
-tmpfs                            3.2G  316K  3.2G   1% /run/user/3189
+tmpfs                            3.2G  308K  3.2G   1% /run/user/3189
 /tmp</code></pre>
 </div>
 </div>
@@ -669,11 +616,11 @@ Second try: Statistics at UC Berkeley: We are a community engaged in research an
 
 </section>
 
-<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Literature cited</h2><div id="refs" class="references csl-bib-body hanging-indent" role="doc-bibliography">
-<div id="ref-Bane:etal:2008" class="csl-entry" role="doc-biblioentry">
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography"><h2 class="anchored quarto-appendix-heading">Literature cited</h2><div id="refs" class="references csl-bib-body hanging-indent" role="list">
+<div id="ref-Bane:etal:2008" class="csl-entry" role="listitem">
 Banerjee, S., A. E. Gelfand, A. O. Finley, and H. Sang. 2008. <span>“Gaussian Predictive Process Models for Large Spatial Data Sets.”</span> <em>Journal of the Royal Statistical Society B</em> 70 (4): 825–48.
 </div>
-<div id="ref-Cres:Joha:2008" class="csl-entry" role="doc-biblioentry">
+<div id="ref-Cres:Joha:2008" class="csl-entry" role="listitem">
 Cressie, N., and G. Johannesson. 2008. <span>“Fixed Rank Kriging for Very Large Spatial Data Sets.”</span> <em>Journal of the Royal Statistical Society B</em> 70 (1): 209–26.
 </div>
 </div></section></div></main>
@@ -705,9 +652,23 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
     icon: icon
   };
   anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
   const clipboard = new window.ClipboardJS('.code-copy-button', {
-    target: function(trigger) {
-      return trigger.previousElementSibling;
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
     }
   });
   clipboard.on('success', function(e) {
@@ -772,6 +733,92 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
       return note.innerHTML;
     });
   }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
   const findCites = (el) => {
     const parentEl = el.parentElement;
     if (parentEl) {

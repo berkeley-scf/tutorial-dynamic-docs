@@ -2,10 +2,16 @@
 title: "An example Quarto Markdown file"
 subtitle: "Illustrating use of R, bash, Python, and Julia code chunks"
 author: "Christopher Paciorek"
-date: "November 2022"
+date: "September 2023"
 bibliography: refs.bib
 editor: source
-format: html
+format:
+  pdf:
+    include-in-header:
+     - file: macros.tex
+  html:
+    include-in-header:
+     - file: macros.md
 ---
 
 ```{r, chunksetup}
@@ -76,15 +82,29 @@ $$
 f_\theta(x) = \int f_\theta(y, x) dy.
 $$
 
-You can define LaTeX macros in a qmd file and then use them, like this:
+## 4.1) LaTeX macros
 
-$$
-\newcommand{\trans}[1]{{#1}^\mathsf{T}} 
-$$
+You can define LaTeX macros in separate files and then use them as follows.
+
+
+The macros for PDF rendering should be placed in a .tex file as shown in [macros.tex](macros.tex).
+The macros for HTML rendering should be placed in a .md file, formatted as shown in [macros.md](macros.md).
+
+(Unfortunately, it does seem to me that you need to have two separate files with the same macro definitions if rendering to both pdf and html.)
+
+Then make sure to include those files as seen in the header of the qmd document like this:
 
 ```
-\newcommand{\trans}[1]{{#1}^\mathsf{T}}
+format:
+  pdf:
+    include-in-header:
+     - file: macros.tex
+  html:
+    include-in-header:
+     - file: macros.md
 ```
+
+We use a macro in this equation:
 
 $$
 A = \trans{X}Y
@@ -200,7 +220,7 @@ In addition, controlling and annotating chunks works the same.
 A bash chunk:
 ```{bash}
 #| label: bash-chunk1
-ls -l
+ls -l test*
 df -h
 cd /tmp
 pwd
