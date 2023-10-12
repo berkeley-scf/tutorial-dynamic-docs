@@ -88,22 +88,22 @@ div.csl-indent {
 <script src="demo-q_files/libs/bootstrap/bootstrap.min.js"></script>
 <link href="demo-q_files/libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
 <link href="demo-q_files/libs/bootstrap/bootstrap.min.css" rel="stylesheet" id="quarto-bootstrap" data-mode="light">
-</head><body>$$
-\newcommand{\trans}{^\mathsf{T}} 
-\newcommand{\eps}{\epsilon}
-$$
 
   <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
   <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
 
+</head>
 
-
-
+<body>
 
 <div id="quarto-content" class="page-columns page-rows-contents page-layout-article">
 <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
 <div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="demo-q.pdf"><i class="bi bi-file-pdf"></i>PDF</a></li></ul></div></div>
 <main class="content" id="quarto-document-content">
+$$
+\newcommand{\trans}{^\mathsf{T}} 
+\newcommand{\eps}{\epsilon}
+$$
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
@@ -175,10 +175,10 @@ f_\theta(x) = \int f_\theta(y, x) dy.
 <p>Then make sure to include those files as seen in the header of the qmd document like this:</p>
 <pre><code>format:
   pdf:
-    include-in-header:
+    include-before-body:
      - file: macros.tex
   html:
-    include-in-header:
+    include-before-body:
      - file: macros.md</code></pre>
 <p>We can then use a macro in this equation:</p>
 <p><span class="math display">\[
@@ -309,17 +309,17 @@ drwxr-sr-x 2 paciorek scfstaff 3 Sep 27 15:57 figure-html
 drwxr-sr-x 5 paciorek scfstaff 5 Sep 27 16:07 libs
 Filesystem                       Size  Used Avail Use% Mounted on
 /dev/sda2                         59G   31G   26G  55% /
-tmpfs                             16G  1.4G   15G   9% /dev/shm
-tmpfs                            3.2G   25M  3.2G   1% /run
+tmpfs                             16G  406M   16G   3% /dev/shm
+tmpfs                            3.2G   26M  3.2G   1% /run
 tmpfs                            5.0M  4.0K  5.0M   1% /run/lock
-/dev/sdb1                        111G  3.3G  102G   4% /tmp
-/dev/sda3                         59G   11G   46G  19% /var
-/dev/sda5                        2.6T  178G  2.3T   8% /var/tmp
+/dev/sdb1                        111G  4.6G  101G   5% /tmp
+/dev/sda3                         59G   12G   45G  21% /var
+/dev/sda5                        2.6T  180G  2.3T   8% /var/tmp
 /dev/sda1                        499M  6.1M  493M   2% /boot/efi
 oz.berkeley.edu:/pool0/system    6.0T  3.9T  2.2T  65% /system
-oz.berkeley.edu:/pool0/scratch    35T   32T  3.1T  92% /scratch
-oz.berkeley.edu:/pool0/accounts   71T  8.0T   63T  12% /accounts
-tmpfs                            3.2G  308K  3.2G   1% /run/user/3189
+oz.berkeley.edu:/pool0/scratch    35T   33T  2.6T  93% /scratch
+oz.berkeley.edu:/pool0/accounts   71T  8.1T   63T  12% /accounts
+tmpfs                            3.2G  300K  3.2G   1% /run/user/3189
 /tmp</code></pre>
 </div>
 </div>

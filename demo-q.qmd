@@ -7,10 +7,10 @@ bibliography: refs.bib
 editor: source
 format:
   pdf:
-    include-in-header:
+    include-before-body:
      - file: macros.tex
   html:
-    include-in-header:
+    include-before-body:
      - file: macros.md
 ---
 
@@ -97,10 +97,10 @@ Then make sure to include those files as seen in the header of the qmd document 
 ```
 format:
   pdf:
-    include-in-header:
+    include-before-body:
      - file: macros.tex
   html:
-    include-in-header:
+    include-before-body:
      - file: macros.md
 ```
 

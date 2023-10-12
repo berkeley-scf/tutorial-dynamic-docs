@@ -51,7 +51,7 @@ In [demo.Rmd](demo.Rmd), you'll see examples of embedding R, Python, and bash co
 
 Quarto is a somewhat new project meant to extend R Markdown to a more general purpose system that doesn't focus on R and that  also work with Jupyter notebooks. You can create `qmd` files that use the same syntax as R Markdown (`Rmd`) files or that use slightly modified syntax defined specifically for Quarto. 
 
-You can see Quarto's syntax in [demo-q.qmd](demo-q.qmd). [demo-q.html](demo-q.html) and [demo-q.pdf](demo-q.pdf) show how it looks as a final output file, after rendering the input Rmd document.
+You can see Quarto's syntax in [demo-q.qmd](demo-q.qmd). [demo-q.html](demo-q.html) and [demo-q.pdf](demo-q.pdf) show how it looks as a final output file, after rendering the input qmd document.
 
 Quarto also allows you to easily render output files from qmd, R Markdown, and Jupyter notebook files. And you can use Quarto to convert Jupyter notebooks to the qmd format. This is nice in part because qmd (like Rmd) is more easily handled by version control and with shell commands than the JSON format of .ipynb files.
 
