@@ -1,8 +1,6 @@
 ---
 title: "An example Quarto Markdown file"
 subtitle: "Illustrating use of R, bash, Python, and Julia code chunks"
-author: "Christopher Paciorek"
-date: "September 2023"
 bibliography: refs.bib
 editor: source
 format:
@@ -12,6 +10,7 @@ format:
   html:
     include-before-body:
      - file: macros.md
+ipynb-shell-interactivity: all
 ---
 
 ```{r, chunksetup}
@@ -39,7 +38,7 @@ From the command line, you can render the file as follows:
 #| eval: false
 quarto render demo.qmd --to html
 quarto render demo.qmd --to pdf
-quarto render demo.qmd  # output depends on 'format' declaration at the top of the document (defaults to html)
+quarto render demo.qmd  # Output depends on 'format' declaration at the top of the document (defaults to html).
 ```
 
 Alternatively, start R and run the desired line from amongst the following possibilities in R:
@@ -54,9 +53,9 @@ quarto_render("demo.qmd", output_format = "pdf")
 
 Or in RStudio (version at least 2022.07), click on the 'Render' button and choose to knit to HTML, PDF, or Word (for R Markdown).
 
+Here is [the rendered PDF version](demo.pdf) of this document.
 
 # 2) Some basic Markdown formatting
-
 
 Here's an *introduction* to our **critical** discovery. Here we have some code to display inline but not evaluate: `exp(7)` and we can embed the code in a static code block as follows:
 
@@ -67,12 +66,12 @@ b = exp(a)
 
 This document will focus on embedding math and code and not on standard Markdown formatting. There are lots of sources of information on Markdown. [RStudio has good information on R Markdown](https://rmarkdown.rstudio.com) (including Markdown formatting).
 
-For documents whose output format is HTML, you can use HTML formatting within your Markdown-based text.
+You can directly use [HTML formatting (for HTML output files) and PDF formatting (for PDF output files)](https://quarto.org/docs/authoring/markdown-basics.html#raw-content).
 
 
 # 3) Embedding equations using LaTeX
 
-This can be done with the following syntax. Note that you can't have a space after the initial $ for the inline equations.
+This can be done with the following syntax. Note that you can't have a space after the initial `$` for the inline equations.
 
 Here is an inline equation $f(x) = \int f(y, x) dy$.
 
@@ -110,7 +109,9 @@ $$
 A = X \trans Y
 $$
 
-# 4) Embedding R code
+# 4) Embedding code chunks
+
+## 4.1) R code
 
 Here's an R code chunk
 
@@ -133,10 +134,114 @@ hist(rnorm(20))
 
 And here's some inline R code: What is 3 plus 5? `r 3+5`.
 
+## 4.2) Python code
+
+You can embed Python code. As with R, state is preserved so later chunks can use objects from earlier chunks. 
+
+```{python}
+#| label: py-chunk1
+import numpy as np
+x = np.array((3, 5, 7))
+print(x.sum())
+x.min()  
+```
+
+```{python}
+#| label: py-chunk2
+try:
+    print("state is preserved if we see the value of `x[2]` next")
+    print(x[2])
+except NameError:
+    print('state is not preserved: x does not exist')
+```
+
+When using the `jupyter` rendering engine, all output is printed after all the code from the chunk.
+When using `knitr` engine, output appears directly after the code producing the output. 
+
+```{python}
+print(1)
+# Whether "1" and "2" are printed after all the code or interspersed
+# depends on the engine used.
+print(2)
+```
+
+By default, only the output of the last line of Python code and explicit `print` calls are printed.
+But you can add `ipynb-shell-interactivity: all` to the yml header of the file to have all output printed.
+
+There is no facility for inline Python code: `python print(3+5)`
+
+To display code from a file of Python code, you can use functionality in the `inspect` module.
+This code would display the definition of `doubled()` from the `my_code` module.
+
+```{python}
+#| eval: false
+import my_code
+import inspect
+print(inspect.getsource(my_code.doubled))
+```
+
+
+This will work for functions and for class definitions.
+
+## 4.3) bash code
+
+A bash chunk:
+```{bash}
+#| label: bash-chunk1
+ls -l test*
+df -h
+cd /tmp
+pwd
+```
+
+Unfortunately, output from bash chunks occurs after all the code is printed. Also, state is not preserved between chunks.
+
+We can see that state is not preserved here, where the current working directory is NOT the directory that we changed to in the chunk above.
+
+```{bash}
+#| label: bash-chunk2
+pwd  # result would be /tmp if state were preserved 
+```
+
+Inline bash code won't work: `bash wc demo.Rmd`, unlike with R code.
+
+If you are using the `jupyter` engine and want to have both bash and Python chunks in a document, or you don't want to have to install a bash Jupyter kernel, you can use ipython magic to run bash code within a Python chunk:
+
+```{python}
+#| eval: false
+!echo "hello from python"
+!pwd
+```
+
+One can also use `zsh` or other shell chunks, replacing the "bash" label with "zsh" or the other shell. 
+
+
+## 4.4) Embedding Julia code
+
+You can embed Julia code. As with R and Python, state is preserved so later chunks can use objects from earlier chunks. 
+
+```{julia}
+#| label: jl-chunk1
+x = [3, 5, 7];
+x[2]
+```
+
+```{julia}
+#| label: jl-chunk2
+try
+    println("state is preserved if we see the value of `x[2]` next")
+    print(x[2])
+catch
+    print("state is not preserved: x does not exist")
+end
+```
+
+There is no facility for inline Julia code: `julia print(3+5)`
+
+
 # 5) Controlling code chunk behavior
 
-While you can specify the chunk label and chunk options using R Markdown syntax inside the braces in the first chunk line above,
-with Quarto, an alternative, nice way to specify chunk labels and other options is within the chunk, like this:
+The Quarto syntax for specifying a chunk label (useful for debugging) and chunk options is as shown here:
 
 ```{r}
 #| echo: fenced
@@ -145,7 +250,7 @@ b <- rnorm(5)
 mean(b)
 ```
 
-You have control over whether code in chunks is echoed into the document and evaluated using the `include`, `echo`, and `eval` tags.
+You have control over whether code in chunks is echoed (printed) into the document and evaluated using the `include`, `echo`, and `eval` tags.
 
 Here we print out the code, but we don't evaluate it:
 
@@ -179,7 +284,8 @@ myVar <- 7
 ## myVar should now be available
 ```
 
-Results of intensive calculations can be saved using the `cache: true` tag so they don't need to be rerun every time you compile the document. 
+Results of intensive calculations can be saved using the `cache: true` tag so they don't need to be rerun every time you compile the document.
+
 ```{r}
 #| echo: fenced
 #| label: slow-step
@@ -210,110 +316,6 @@ print a
 
 It's not uncommon to have various Python executables installed (different versions, in Conda/Mamba environments, etc.) on your system or to be unclear about which shell is being used to execute a shell chunk. Manually setting `engine.path` can help figure things out or work around problems.
 
-# 6) Embedding bash, Python, and Julia code
-
-Using code chunks from various languages, including bash, Python, and Julia is very similar to using R chunks.
-In addition, controlling and annotating chunks works the same.
-
-## 6.1) bash
-
-A bash chunk:
-```{bash}
-#| label: bash-chunk1
-ls -l test*
-df -h
-cd /tmp
-pwd
-```
-
-Unfortunately, output from bash chunks occurs after all the code is printed. Also, state is not preserved between chunks.
-
-We can see that state is not preserved here, where the current working directory is NOT the directory that we changed to in the chunk above.
-
-```{bash}
-#| label: bash-chunk2
-pwd  # result would be /tmp if state were preserved 
-```
-
-Inline bash code won't work: `bash wc demo.Rmd`, unlike with R code.
-
-If you are using the `jupyter` engine and want to have both bash and Python chunks in a document, or you don't want to have to install a bash Jupyter kernel, you can use ipython magic to run bash code within a Python chunk:
-
-```{python}
-#| eval: false
-!echo "hello from python"
-!pwd
-```
-
-One can also use `zsh` or other shell chunks, replacing the "bash" label with "zsh" or the other shell. 
-
-## 6.2) Embedding Python code
-
-You can embed Python code. As with R, state is preserved so later chunks can use objects from earlier chunks. 
-
-```{python}
-#| label: py-chunk1
-import numpy as np
-x = np.array((3, 5, 7))
-print(x.sum())
-x.min()    # this will print with more recent versions of rmarkdown 
-```
-
-```{python}
-#| label: py-chunk2
-try:
-    print("state is preserved if we see the value of `x[2]` next")
-    print(x[2])
-except NameError:
-    print('state is not preserved: x does not exist')
-```
-
-When using the `jupyter` rendering engine, all output is printed after all the code from the chunk.
-When using `knitr` engine, output appears directly after the code producing the output. However, output appears after any comments that follow the code, which might not be what you want.
-
-```{python}
-print(1)
-# Whether "1" and "2" are printed after all the code or interspersed
-# depends on the engine used.
-print(2)
-```
-
-There is no facility for inline Python code: `python print(3+5)`
-
-To display code from a file of Python code, you can use functionality in the `inspect` module.
-This code would display the definition of `doubled()` from the `my_code` module.
-
-```{python}
-#| eval: false
-import my_code
-import inspect
-print(inspect.getsource(my_code.doubled))
-```
-
-
-This will work for functions and for class definitions.
-
-## 6.3) Embedding Julia code
-
-You can embed Julia code. As with R and Python, state is preserved so later chunks can use objects from earlier chunks. 
-
-```{julia}
-#| label: jl-chunk1
-x = [3, 5, 7];
-x[2]
-```
-
-```{julia}
-#| label: jl-chunk2
-try
-    println("state is preserved if we see the value of `x[2]` next")
-    print(x[2])
-catch
-    print("state is not preserved: x does not exist")
-end
-```
-
-There is no facility for inline Julia code: `julia print(3+5)`
 
 # 7) Reading code from an external file
 
@@ -362,6 +364,20 @@ print(inspect.getsource(my_code.doubled))
 
 
 # 8) Formatting of long lines of code and of output
+
+In general, it's best to keep lines of code to at most 80 characters. This will help with code readability in the file with the code and with the output that is rendered not going into the margin.
+
+For HTML output, you can set `code-overflow: wrap` in the yml frontmatter to enforce line-wrapping for code.
+
+For PDF output, you can insert the following LaTeX in the yml frontmatter:
+
+```
+include-in-header: 
+  text: |
+    \usepackage{fvextra}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{breaklines,commandchars=\\\{\}}
+```
+
 
 ## 8.1) R code
 
@@ -444,8 +460,49 @@ a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName)
 ```
 
 
+## 8.2) Python code
 
-## 8.2) bash code
+In Python, there is similar trouble with lines overflowing in PDF output too.
+
+```{python}
+#| label: test-python1
+# This overflows the page:
+
+b = "asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl"
+print(b)
+```
+
+```{python}
+#| label: test-python2
+# This code overflows the page:
+
+zoo = {"lion": "Simba", "panda": None, "whale": "Moby", "numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", "bunny:": "bugs"}
+print(zoo)
+```
+
+
+To fix the issue, we can use the frontmatter settings noted at the start of this section, or we can manually break the code into multiple lines. However long output still overflows. One work-around is only to print out portions of an object such that what is printed doesn't overflow
+
+
+```{python}
+#| label: test-python3
+zoo = {"lion": "Simba", "panda": None, "whale": "Moby", 
+       "numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", 
+       "bunny:": "bugs"}
+print(zoo)
+```
+
+Long comments overflow as well, but you can always manually break into multiple lines.
+
+```{python}
+#| label: test-python4
+# asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
+
+# asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad
+# kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
+```
+
+## 8.3) bash code
 
 
 In bash, we have similar problems with lines overflowing in PDF output, but bash allows us to use a backslash to break lines of code. However that strategy doesn't help with long lines of output. 
@@ -480,47 +537,6 @@ Instead manually break the comment into multiple lines:
 # adlfjaf jkladf afdl
 ```
 
-## 8.3) Python code
-
-In Python, there is similar trouble with lines overflowing in PDF output too.
-
-```{python}
-#| label: test-python1
-# This overflows the page:
-
-b = "asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl"
-print(b)
-```
-
-```{python}
-#| label: test-python2
-# This code overflows the page:
-
-zoo = {"lion": "Simba", "panda": None, "whale": "Moby", "numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", "bunny:": "bugs"}
-print(zoo)
-```
-
-To fix the issue, we can manually break the code into multiple lines, but long
-output still overflows.
-
-
-```{python}
-#| label: test-python3
-zoo = {"lion": "Simba", "panda": None, "whale": "Moby", 
-       "numAnimals": 3, "bear": "Yogi", "killer whale": "shamu", 
-       "bunny:": "bugs"}
-print(zoo)
-```
-
-Long comments overflow as well, but you can always manually break into multiple lines.
-
-```{python}
-#| label: test-python4
-# asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
-
-# asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad
-# kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
-```
 
 # 9) References
 
