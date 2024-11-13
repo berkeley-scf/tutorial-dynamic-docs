@@ -1,6 +1,6 @@
 ---
 title: "An example Quarto Markdown file"
-subtitle: "Illustrating use of R, bash, Python, and Julia code chunks"
+subtitle: "Illustrating use of R, Python, bash and Julia code chunks"
 bibliography: refs.bib
 editor: source
 format:
@@ -406,7 +406,7 @@ In contrast, long output is usually fine, even in PDF.
 rnorm(30)
 ```
 
-Adding the `tidy: true` chunk option and setting the width (as shown in the Rmd version of this document) can help with long comment lines or lines of code, but doesn't help for some of the cases above.
+Adding the `tidy: true` chunk option and setting the width as shown below can help with long comment lines or lines of code, but doesn't help for some of the cases above.
 
 ```{r} 
 #| label: r-long-tidy
@@ -430,7 +430,7 @@ a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName)
 ```
 
 
-To address the problems seen above, sometimes you can format things manually for better results. You may need to tag the chunk with `tidy: false`, but I have not done that here.
+To address the problems seen above, sometimes you can format things manually for better results. In that case, you may need to tag the chunk with `tidy: false`, but I have not done that here.
 
 ```{r}
 #| label: r-long-manual
