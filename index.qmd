@@ -50,7 +50,7 @@ As a specific example, [demo.html](demo.html) and [demo.pdf](demo.pdf) show the 
 
 ## 3 Quarto and qmd files
 
-Quarto is a relatively recent project meant to extend R Markdown to a more general purpose system that doesn't focus on R and that  also work with Jupyter notebooks. You can create `qmd` files that use the same syntax as R Markdown (`Rmd`) files or that use slightly modified syntax defined specifically for Quarto. 
+Quarto is a relatively recent project meant to extend R Markdown to a more general purpose system that doesn't focus on R and that  also works with Jupyter notebooks. You can create `qmd` files that use the same syntax as R Markdown (`Rmd`) files or that use slightly modified syntax defined specifically for Quarto. 
 
 You can see Quarto's syntax in [demo.qmd](demo.qmd). [demo.html](demo.html) and [demo.pdf](demo.pdf) show how it looks as a final output file, after rendering the input qmd document.
 
@@ -106,7 +106,7 @@ You can embed code chunks in the Sweave (Rnw) format in LyX files and then proce
 
 Project Jupyter grew out of the IPython Notebook project and provides a general way of embedding code chunks, using a variety of languages (not just Python), within a document (called a notebook) where the text components of the document is written in Markdown. Basically a document is a sequence of chunks, where each chunk is either a code chunk or a Markdown (text) chunk. The Markdown text can of course include mathematical notation using LaTeX syntax. 
 
-To work with a Jupyter notebook, you start Jupyter by running `jupyter notebook` from the UNIX command line. This will open up a Jupyter interface in a browser window. From there, you can navigate to and open your notebook file (which will end in extension .ipynb). You can choose the kernel (i.e., the language for the code chunks -- Python, R, etc.) by selecting `Kernel -> Change Kernel` or by selecting the kernel you want when opening a new notebook.
+To work with a Jupyter notebook, you start Jupyter by running `jupyter notebook` from the UNIX command line. This will open up a Jupyter interface in a browser window. From there, you can navigate to and open your notebook file (which will end in extension .ipynb). You can choose the kernel (i.e., the language for the code chunks -- Python, R, etc.) by selecting `Kernel -> Change Kernel` or by selecting the kernel you want when opening a new notebook. Note that unlike with Quarto, a single file can only use a single kernel, so you can't mix cells that use different languages.
 
 You may have web-based access to Jupyter notebooks via services such as JupyterHub and Open OnDemand (e.g., on the [UC Berkeley Savio campus cluster](https://ood.brc.berkeley.edu) or through the [UC Berkeley Statistical Computing Facility](https://jupyter.stat.berkeley.edu) or the UC Berkeley [DataHub](https://datahub.berkeley.edu)). In that case you logon via a web browser and then start and interact with your notebook in the browser.
 
