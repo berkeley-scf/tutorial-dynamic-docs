@@ -28,10 +28,12 @@ myControlVar <- TRUE   # R variable used later to control chunk behavior
 From within R,  you can run the document through the either the *rmarkdown* or *knitr* package for R to generate an html file, or through the *rmarkdown* package to generate PDF or Word (the latter being useful at times but hopefully avoidable).
 
 ```{r, compile-R, eval=FALSE}
-library(rmarkdown); render('demo.Rmd', 'pdf_document')
-library(rmarkdown); render('demo.Rmd', 'html_document')
-library(rmarkdown); render('demo.Rmd', 'word_document')
-library(knitr); knit2html('demo.Rmd')  
+library(quarto); quarto_render('demo-Rmd.Rmd', 'html')
+library(quarto); quarto_render('demo-Rmd.Rmd', 'pdf')
+library(rmarkdown); render('demo-Rmd.Rmd', 'pdf_document')
+library(rmarkdown); render('demo-Rmd.Rmd', 'html_document')
+library(rmarkdown); render('demo-Rmd.Rmd', 'word_document')
+library(knitr); knit2html('demo-Rmd.Rmd')  
 ```
 
 Or in RStudio, click on the 'Knit' pull-down menu and choose to knit to HTML, PDF, or Word (for R Markdown) or use the 'Render' button in more recent versions of RStudio.
@@ -39,10 +41,12 @@ Or in RStudio, click on the 'Knit' pull-down menu and choose to knit to HTML, PD
 Alternatively, from the UNIX command line, run one of these:
 
 ```{bash, compile-bash, eval=FALSE}
-Rscript -e "library(rmarkdown); render('demo.Rmd', 'pdf_document')"  # PDF
-Rscript -e "library(rmarkdown); render('demo.Rmd', 'html_document')"  # HTML
-Rscript -e "library(rmarkdown); render('demo.Rmd', 'word_document')"  # Word
-Rscript -e "library(knitr); knit2html('demo.Rmd')"  # HTML alternative
+quarto render demo-Rmd.Rmd --to html  # HTML
+quarto render demo-Rmd.Rmd --to pdf  # pdf
+Rscript -e "library(rmarkdown); render('demo-Rmd.Rmd', 'pdf_document')"  # PDF
+Rscript -e "library(rmarkdown); render('demo-Rmd.Rmd', 'html_document')"  # HTML
+Rscript -e "library(rmarkdown); render('demo-Rmd.Rmd', 'word_document')"  # Word
+Rscript -e "library(knitr); knit2html('demo-Rmd.Rmd')"  # HTML alternative
 ```
 
 
@@ -169,7 +173,7 @@ We can see that state is not preserved here, where the current working directory
 pwd  # result would be /tmp if state were preserved 
 ```
 
-Inline bash code won't work: `bash wc demo.Rmd`, unlike with R code.
+Inline bash code won't work: `bash wc demo-Rmd.Rmd`, unlike with R code.
 
 ## 6.2) Embedding Python code
 
