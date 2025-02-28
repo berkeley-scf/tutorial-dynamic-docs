@@ -159,7 +159,7 @@ except NameError:
 
 ::: {.callout-warning title="Format of output from Python chunks"}
 When using the `jupyter` rendering engine, all output is printed after all the code from the chunk.
-When using `knitr` engine, output appears directly after the code producing the output. 
+When using `knitr` engine, output appears directly after the code producing the output, as shown here. 
 
 ```{python}
 print(1)
@@ -180,7 +180,6 @@ To display code from a file of Python code, you can use functionality in the `in
 This code would display the definition of `doubled()` from the `my_code` module.
 
 ```{python}
-#| eval: false
 import my_code
 import inspect
 print(inspect.getsource(my_code.doubled))
@@ -200,7 +199,7 @@ cd /tmp
 pwd
 ```
 
-Unfortunately, output from bash chunks occurs after all the code is printed. Also, state is not preserved between chunks.
+Unfortunately, output from bash chunks occurs after all the code is printed and without any line spacing. Also, state is not preserved between chunks.
 
 We can see that state is not preserved here, where the current working directory is NOT the directory that we changed to in the chunk above.
 
@@ -211,7 +210,7 @@ pwd  # result would be /tmp if state were preserved
 
 Inline bash code won't work so this: `bash wc demo.Rmd` has no effect, unlike with R code.
 
-If you are using the `jupyter` engine and want to have both bash and Python chunks in a document, or you don't want to have to install a bash Jupyter kernel, you can use ipython magic to run bash code within a Python chunk:
+If you are using the `jupyter` engine and want to have both bash and Python chunks in a document, or you don't want to have to install a bash Jupyter kernel, you can use ipython magic to run bash code within a Python chunk (results not shown here):
 
 ```{python}
 #| eval: false

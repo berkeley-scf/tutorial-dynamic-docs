@@ -11,13 +11,13 @@ format:
 ---
 
 ```{r chunksetup, include=FALSE} 
-# include any code here you don't want to show up in the document,
-# e.g., package and dataset loading
+# Include any code here you don't want to show up in the document,
+# e.g., package and dataset loading.
 
 require(ggplot2)
 set.seed(1)
 
-# also a good place to set global chunk options
+# This is also a good place to set global chunk options.
 
 library(knitr) # need this for opts_chunk command
 opts_chunk$set(fig.width = 5, fig.height = 5)
@@ -26,7 +26,7 @@ opts_chunk$set(fig.width = 5, fig.height = 5)
 myControlVar <- TRUE   # R variable used later to control chunk behavior
 ```
 
-# 1) How to generate a document from this file
+# 1 How to generate a document from this file
 
 From within R,  you can run the document through the either the *rmarkdown* or *knitr* package for R to generate an html file, or through the *rmarkdown* package to generate PDF or Word (the latter being useful at times but hopefully avoidable).
 
@@ -54,7 +54,7 @@ Rscript -e "library(knitr); knit2html('demo-Rmd.Rmd')"  # HTML alternative
 
 
 
-# 2) Some basic Markdown formatting
+# 2 Some basic Markdown formatting
 
 
 Here's an *introduction* to our **critical** discovery. Here we have some code to display inline but not evaluate: `exp(7)` and we can embed the code in a static code block as follows:
@@ -69,7 +69,7 @@ This document will focus on embedding math and code and not on standard Markdown
 For documents whose output format is HTML, you can use HTML formatting within your Markdown-based text.
 
 
-# 3) Embedding equations using LaTeX
+# 3 Embedding equations using LaTeX
 
 This can be done with the following syntax. Note that you can't have a space after the initial $ for the inline equations.
 
@@ -81,7 +81,7 @@ $$
 f_\theta(x) = \int f_\theta(y, x) dy.
 $$ 
 
-# 4) Embedding R code
+# 4 Embedding R code
 
 Here's an R code chunk
 
@@ -108,7 +108,7 @@ hist(rnorm(20))
 And here's some inline R code: What is 3 plus 5? `r 3+5`.
 
 
-# 5) Controlling code chunk behavior
+# 5 Controlling code chunk behavior
 
 You have control over whether code in chunks is echoed into the document and evaluated using the `include`, `echo`, and `eval` tags.
 
@@ -156,19 +156,20 @@ An alternative, nice way to specify chunk options is within the chunk, like this
 cat("This code is printed in the document, but the code is not evaluated.")
 ```
 
-# 6) Embedding bash and Python code
+# 6 Embedding bash and Python code
 
-## 6.1) bash
+## 6.1 bash
 
 A bash chunk:
 ```{bash, bash-chunk1}
-ls -l
+ls -l assets
 df -h
 cd /tmp
 pwd
 ```
 
-Unfortunately, output from bash chunks occurs after all the code is printed. Also, state is not preserved between chunks.
+Unfortunately, output from bash chunks occurs after all the code is printed and without any line spacing. Also, state is not preserved between chunks.
+
 
 We can see that state is not preserved here, where the current working directory is NOT the directory that we changed to in the chunk above.
 
@@ -178,7 +179,7 @@ pwd  # result would be /tmp if state were preserved
 
 Inline bash code won't work: `bash wc demo-Rmd.Rmd`, unlike with R code.
 
-## 6.2) Embedding Python code
+## 6.2 Embedding Python code
 
 You can embed Python code. As with R, state is preserved so later chunks can use objects from earlier chunks. 
 
@@ -198,18 +199,16 @@ except NameError:
 
 There is no facility for inline Python code: `python print(3+5)`
 
-# 6.3) Embedding Julia code
+# 6.3 Embedding Julia code
 
 You can embed Julia code. As with R and Python, state is preserved so later chunks can use objects from earlier chunks. 
 
-```{julia}
-#| label: jl-chunk1
+```{julia, jl-chunk1}
 x = [3, 5, 7];
 x[2]
 ```
 
-```{julia}
-#| label: jl-chunk2
+```{julia, jl-chunk2}
 try
     println("state is preserved if we see the value of `x[2]` next")
     print(x[2])
@@ -220,7 +219,7 @@ end
 
 There is no facility for inline Julia code: `julia print(3+5)`
 
-# 7) Reading code from an external file
+# 7 Reading code from an external file
 
 It's sometimes nice to draw code in from a separate file. Before invoking a chunk, we need to read the chunks from the source file, which contains the chunks tagged with some special formatting. Note that a good place for reading the source file via `read_chunk()` is in an initial setup chunk at the beginning of the document.
 
@@ -235,9 +234,9 @@ read_chunk('demo.R')  ## contains external_chunk_1 and external_chunk_1
 ```{r, external_chunk_2}
 ```
 
-# 8) Formatting of long lines of code and of output
+# 8 Formatting of long lines of code and of output
 
-## 8.1) R code
+## 8.1 R code
 
 Having long lines be nicely formatted and other aspects of formatting can be a challenge. Also, results can differ depending on your output format (e.g., PDF vs. HTML). In general the code in this section will often overflow the page width in PDF but not in HTML, but even in the HTML the line breaks may be awkwardly positioned.
 
@@ -247,7 +246,7 @@ Here are some examples that overflow in PDF output.
 b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"
 ## Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
 
-## This should work to give decent formatting in HTML but doesn't in PDF.
+## This might work to give decent formatting in HTML but doesn't in PDF.
 cat(b, fill = TRUE)
 
 vecWithALongName = rnorm(100)
@@ -270,7 +269,7 @@ Adding the `tidy=TRUE` chunk option and setting the width (as shown in the Rmd v
 b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"
 ## Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
 
-## This should work to give decent formatting in HTML but doesn't in PDF:
+## This might work to give decent formatting in HTML but doesn't in PDF:
 
 cat(b, fill = TRUE)
 
@@ -312,7 +311,7 @@ a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName)
 
 
 
-## 8.2) bash code
+## 8.2 bash code
 
 
 In bash, we have similar problems with lines overflowing in PDF output, but bash allows us to use a backslash to break lines of code. However that strategy doesn't help with long lines of output. 
@@ -344,7 +343,7 @@ Instead manually break the comment into multiple lines:
 # adlfjaf jkladf afdl
 ```
 
-## 8.3) Python code
+## 8.3 Python code
 
 In Python, there is similar trouble with lines overflowing in PDF output too.
 
@@ -382,7 +381,7 @@ Long comments overflow as well, but you can always manually break into multiple 
 # kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
 ```
 
-# 9) References
+# 9 References
 
 We'll just see how you use BibTeX style references.  @Bane:etal:2008 proposed a useful method. This was confirmed [@Cres:Joha:2008].
 
