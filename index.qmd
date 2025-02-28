@@ -110,7 +110,7 @@ You may have web-based access to Jupyter notebooks via services such as JupyterH
 
 The Jupyter files have some similarities to `demo.qmd` and `demo-Rmd.Rmd` as both Quarto/R Markdown and Jupyter rely on Markdown as the format for text input. However, they handle code chunks somewhat differently.
 
-You can insert code chunks in a different language using the `%%` magic syntax, as shown in [_demo-python.ipynb](_demo-python.ipynb). We also have specific demo files for bash and R: [_demo-bash.ipynb](_demo-bash.ipynb) and [_demo-R.ipynb](_demo-R.ipynb).  All include instructions for generating HTML output. 
+You can insert code chunks in a different language using the `%%` magic syntax, as shown in [demo-python.ipynb](demo-python.ipynb). We also have specific demo files for bash and R: [demo-bash.ipynb](demo-bash.ipynb) and [demo-R.ipynb](demo-R.ipynb).  All include instructions for generating HTML output. 
 
 You can convert Jupyter notebooks to Quarto qmd format:
 

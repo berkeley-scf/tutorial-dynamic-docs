@@ -6,10 +6,10 @@ editor: source
 format:
   pdf:
     include-before-body:
-     - file: _macros.tex
+     - file: macros.tex
   html:
     include-before-body:
-     - file: _macros.md
+     - file: macros.md
 ipynb-shell-interactivity: all
 ---
 
@@ -87,7 +87,7 @@ You can define LaTeX macros in separate files and then use them as follows.
 
 
 The macros for PDF rendering should be placed in a .tex file as shown in [macros.tex](macros.tex).
-The macros for HTML rendering should be placed in a .md file, formatted as shown in [_macros.md](_macros.md).
+The macros for HTML rendering should be placed in a .md file, formatted as shown in [macros.md](macros.md).
 
 (Unfortunately, it does seem to me that you need to have two separate files with the same macro definitions if rendering to both pdf and html.)
 
@@ -97,10 +97,10 @@ Then make sure to include those files as seen in the header of the qmd document 
 format:
   pdf:
     include-before-body:
-     - file: _macros.tex
+     - file: macros.tex
   html:
     include-before-body:
-     - file: _macros.md
+     - file: macros.md
 ```
 
 We can then use a macro in this equation:
