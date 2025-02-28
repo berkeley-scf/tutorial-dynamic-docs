@@ -136,6 +136,12 @@ ul.task-list li input[type="checkbox"] {
  <span class="menu-text">Python chunks in RStudio</span></a>
   </div>
 </li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./license.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">License</span></a>
+  </div>
+</li>
     </ul>
     </div>
 </nav>
@@ -203,11 +209,11 @@ ul.task-list li input[type="checkbox"] {
 <p>You might also consider using <a href="mystmd.org">MyST</a>.</p>
 <p>For this tutorial you’ll need to install the following software, though individual parts of the tutorial only need some of the software.</p>
 <ul>
+<li>Quarto</li>
 <li>R (and optionally RStudio).
 <ul>
 <li>The <code>rmarkdown</code> and <code>knitr</code> packages for R.</li>
 </ul></li>
-<li>Quarto</li>
 <li>A LaTeX distribution:
 <ul>
 <li>This is probably most easily obtained by running <code>install_tinytex()</code>, available from the R <code>tinytex</code> package</li>
@@ -219,19 +225,6 @@ ul.task-list li input[type="checkbox"] {
 <p>This tutorial assumes basic familiarity with LaTeX syntax (most simply just with some basic math syntax).</p>
 <p>You should be able to follow the tutorial on any of MacOS, Windows or Linux.</p>
 <p>Materials for this tutorial, in particular the demonstration input files in various formats, are available from the underlying GitHub repository via the icon in the upper left.</p>
-<div class="callout callout-style-default callout-note callout-titled" title="License">
-<div class="callout-header d-flex align-content-center">
-<div class="callout-icon-container">
-<i class="callout-icon"></i>
-</div>
-<div class="callout-title-container flex-fill">
-License
-</div>
-</div>
-<div class="callout-body-container callout-body">
-<p>This tutorial by Christopher Paciorek is licensed under a Creative Commons Attribution 3.0 Unported License.</p>
-</div>
-</div>
 <div class="callout callout-style-default callout-tip callout-titled">
 <div class="callout-header d-flex align-content-center">
 <div class="callout-icon-container">
@@ -242,7 +235,8 @@ Tip
 </div>
 </div>
 <div class="callout-body-container callout-body">
-<p>As of November 2024, the website for this tutorial was developed using Quarto.</p>
+<p>As of February 2025, the website for this tutorial was developed using Quarto.</p>
+<p>The reason that some of the files in the tutorial/repository start with “_” is to prevent Quarto from trying to render those files to HTML when building the website, so that the website can link to them as actual source files for you to examine.</p>
 </div>
 </div>
 </section>
@@ -255,7 +249,7 @@ Tip
 <section id="quarto-and-qmd-files" class="level2">
 <h2 class="anchored" data-anchor-id="quarto-and-qmd-files">3 Quarto and qmd files</h2>
 <p>Quarto is a relatively recent project meant to extend R Markdown to a more general purpose system that doesn’t focus on R and that also works with Jupyter notebooks. You can create <code>qmd</code> files that use the same syntax as R Markdown (<code>Rmd</code>) files or that use slightly modified syntax defined specifically for Quarto.</p>
-<p>You can see Quarto’s syntax in <a href="./demo.html">demo.qmd</a>. <a href="demo.html">demo.html</a> and <a href="demo.pdf">demo.pdf</a> show how it looks as a final output file, after rendering the input qmd document.</p>
+<p>You can see Quarto’s syntax in <a href="https://github.com/berkeley-scf/tutorial-dynamic-docs/blob/main/demo.qmd">demo.qmd</a>. <a href="demo.html">demo.html</a> and <a href="demo.pdf">demo.pdf</a> show how it looks as a final output file, after rendering the input qmd document.</p>
 <p>Quarto allows you to easily render output files from qmd, R Markdown, Markdown, and Jupyter notebook files.</p>
 <p>You can also convert qmd files to Jupyter notebooks, using <code>quarto convert file.qmd</code>. This is nice if you like to do your work in notebooks (though RStudio also has a visual mode that behaves somewhat similarly).</p>
 <section id="rendering-engines" class="level3">
@@ -279,7 +273,7 @@ Tip
 <section id="r-markdown" class="level2">
 <h2 class="anchored" data-anchor-id="r-markdown">4 R Markdown</h2>
 <p>R Markdown is a variant on the Markdown markup language that allows you to embed code chunks that are evaluated before creating the final output, unlike standard static code chunks in Markdown that are not evaluated. R Markdown files are simple text files.</p>
-<p>In <a href="./demo-Rmd.html">demo-Rmd.Rmd</a>, you’ll see examples of embedding R, Python, and bash code chunks, as well as the syntax involved in creating PDF, HTML, and Word output files. <a href="demo-Rmd.html">demo-Rmd.html</a> and <a href="demo-Rmd.pdf">demo-Rmd.pdf</a> show how it looks as a final output file, after “rendering” the input Rmd document.</p>
+<p>In <a href="https://github.com/berkeley-scf/tutorial-dynamic-docs/blob/main/demo-Rmd.Rmd">demo-Rmd.Rmd</a>, you’ll see examples of embedding R, Python, and bash code chunks, as well as the syntax involved in creating PDF, HTML, and Word output files. <a href="demo-Rmd.html">demo-Rmd.html</a> and <a href="demo-Rmd.pdf">demo-Rmd.pdf</a> show how it looks as a final output file, after “rendering” the input Rmd document.</p>
 </section>
 <section id="latex-plus-knitr" class="level2">
 <h2 class="anchored" data-anchor-id="latex-plus-knitr">5 LaTeX plus knitr</h2>
@@ -301,7 +295,7 @@ Tip
 <p>To work with a Jupyter notebook, you start Jupyter by running <code>jupyter notebook</code> from the UNIX command line. This will open up a Jupyter interface in a browser window. From there, you can navigate to and open your notebook file (which will end in extension .ipynb). You can choose the kernel (i.e., the language for the code chunks – Python, R, etc.) by selecting <code>Kernel -&gt; Change Kernel</code> or by selecting the kernel you want when opening a new notebook. Note that unlike with Quarto, a single file can only use a single kernel, so you can’t mix cells that use different languages.</p>
 <p>You may have web-based access to Jupyter notebooks via services such as JupyterHub and Open OnDemand (e.g., on the <a href="https://ood.brc.berkeley.edu">UC Berkeley Savio campus cluster</a> or through the <a href="https://jupyter.stat.berkeley.edu">UC Berkeley Statistical Computing Facility</a> or the UC Berkeley <a href="https://datahub.berkeley.edu">DataHub</a>). In that case you logon via a web browser and then start and interact with your notebook in the browser.</p>
 <p>The Jupyter files have some similarities to <code>demo.qmd</code> and <code>demo-Rmd.Rmd</code> as both Quarto/R Markdown and Jupyter rely on Markdown as the format for text input. However, they handle code chunks somewhat differently.</p>
-<p>You can insert code chunks in a different language using the <code>%%</code> magic syntax, as shown in <a href="./demo-python.html">demo-python.ipynb</a>. We also have specific demo files for bash and R: <a href="./demo-bash.html">demo-bash.ipynb</a> and <a href="./demo-R.html">demo-R.ipynb</a>. All include instructions for generating HTML output.</p>
+<p>You can insert code chunks in a different language using the <code>%%</code> magic syntax, as shown in <a href="_demo-python.ipynb">_demo-python.ipynb</a>. We also have specific demo files for bash and R: <a href="_demo-bash.ipynb">_demo-bash.ipynb</a> and <a href="_demo-R.ipynb">_demo-R.ipynb</a>. All include instructions for generating HTML output.</p>
 <p>You can convert Jupyter notebooks to Quarto qmd format:</p>
 <pre><code>quarto convert demo-python.ipynb</code></pre>
 <p>This is nice in part because qmd (like Rmd) is more easily handled by version control and with shell commands than the JSON format of .ipynb files.</p>
