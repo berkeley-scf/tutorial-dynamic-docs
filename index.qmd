@@ -1,7 +1,7 @@
 ---
 title: Creating Dynamic Documents
 subtitle: Embedding Code Chunks in Scientific Documents
-date: 2024-10-31
+date: 2025-02-28
 format:
   html:
     theme: cosmo

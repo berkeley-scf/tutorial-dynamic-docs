@@ -1,7 +1,5 @@
 ---
 title: "Notes on using Python within RStudio"
-author: "Christopher Paciorek"
-date: "February 2022"
 ---
 
 # Notes on using Python within RStudio
