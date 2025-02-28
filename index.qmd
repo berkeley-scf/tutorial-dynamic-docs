@@ -15,9 +15,9 @@ You might also consider using [MyST](mystmd.org).
 
 For this tutorial you'll need to install the following software, though individual parts of the tutorial only need some of the software.
 
-- R (and optionally RStudio).
+* Quarto
+* R (and optionally RStudio).
    - The `rmarkdown` and `knitr` packages for R.
-* Quarto 
 * A LaTeX distribution:
    * This is probably most easily obtained by running `install_tinytex()`, available from the R `tinytex` package
    * Alternatively, an installation such as `MacTex` (Mac) or `MiKTeX` (Windows).
@@ -31,12 +31,10 @@ You should be able to follow the tutorial on any of MacOS, Windows or Linux.
 
 Materials for this tutorial, in particular the demonstration input files in various formats, are available from the underlying GitHub repository via the icon in the upper left.
 
-:::{.callout-note title="License"}
-This tutorial by Christopher Paciorek is licensed under a Creative Commons Attribution 3.0 Unported License.
-:::
-
 :::{.callout-tip}
-As of November 2024, the website for this tutorial was developed using Quarto.
+As of February 2025, the website for this tutorial was developed using Quarto.
+
+The reason that some of the files in the tutorial/repository start with "_" is to prevent Quarto from trying to render those files to HTML when building the website, so that the website can link to them as actual source files for you to examine.
 :::
 
 
@@ -52,7 +50,7 @@ As a specific example, [demo.html](demo.html) and [demo.pdf](demo.pdf) show the 
 
 Quarto is a relatively recent project meant to extend R Markdown to a more general purpose system that doesn't focus on R and that  also works with Jupyter notebooks. You can create `qmd` files that use the same syntax as R Markdown (`Rmd`) files or that use slightly modified syntax defined specifically for Quarto. 
 
-You can see Quarto's syntax in [demo.qmd](demo.qmd). [demo.html](demo.html) and [demo.pdf](demo.pdf) show how it looks as a final output file, after rendering the input qmd document.
+You can see Quarto's syntax in [demo.qmd](https://github.com/berkeley-scf/tutorial-dynamic-docs/blob/main/demo.qmd). [demo.html](demo.html) and [demo.pdf](demo.pdf) show how it looks as a final output file, after rendering the input qmd document.
 
 Quarto allows you to easily render output files from qmd, R Markdown, Markdown, and Jupyter notebook files.
 
@@ -84,7 +82,7 @@ Here are a few approaches you can use to interactively develop your documents.
 
 R Markdown is a variant on the Markdown markup language that allows you to embed code chunks that are evaluated before creating the final output, unlike standard static code chunks in Markdown that are not evaluated. R Markdown files are simple text files.
 
-In [demo-Rmd.Rmd](demo-Rmd.Rmd), you'll see examples of embedding R, Python, and bash code chunks, as well as the syntax involved in creating PDF, HTML, and Word output files. [demo-Rmd.html](demo-Rmd.html) and [demo-Rmd.pdf](demo-Rmd.pdf) show how it looks as a final output file, after "rendering" the input Rmd document. 
+In [demo-Rmd.Rmd](https://github.com/berkeley-scf/tutorial-dynamic-docs/blob/main/demo-Rmd.Rmd), you'll see examples of embedding R, Python, and bash code chunks, as well as the syntax involved in creating PDF, HTML, and Word output files. [demo-Rmd.html](demo-Rmd.html) and [demo-Rmd.pdf](demo-Rmd.pdf) show how it looks as a final output file, after "rendering" the input Rmd document. 
 
 ## 5 LaTeX plus knitr
 
@@ -112,7 +110,7 @@ You may have web-based access to Jupyter notebooks via services such as JupyterH
 
 The Jupyter files have some similarities to `demo.qmd` and `demo-Rmd.Rmd` as both Quarto/R Markdown and Jupyter rely on Markdown as the format for text input. However, they handle code chunks somewhat differently.
 
-You can insert code chunks in a different language using the `%%` magic syntax, as shown in [demo-python.ipynb](demo-python.ipynb). We also have specific demo files for bash and R: [demo-bash.ipynb](demo-bash.ipynb) and [demo-R.ipynb](demo-R.ipynb).  All include instructions for generating HTML output. 
+You can insert code chunks in a different language using the `%%` magic syntax, as shown in [_demo-python.ipynb](_demo-python.ipynb). We also have specific demo files for bash and R: [_demo-bash.ipynb](_demo-bash.ipynb) and [_demo-R.ipynb](_demo-R.ipynb).  All include instructions for generating HTML output. 
 
 You can convert Jupyter notebooks to Quarto qmd format:
 

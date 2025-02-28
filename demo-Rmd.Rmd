@@ -5,6 +5,9 @@ subtitle: "Illustrating use of R, bash, Python, and Julia code chunks"
 author: "Christopher Paciorek"
 date: "February 2022"
 bibliography: refs.bib
+format:
+  pdf
+  html
 ---
 
 ```{r chunksetup, include=FALSE} 
