@@ -1,0 +1,38 @@
+project:
+  type: website
+  render:
+    - demo.qmd
+    - demo-Rmd.Rmd
+    - index.qmd
+    - python-in-RStudio.Rmd 
+    - license.qmd
+
+website:
+  site-url: https://computing.stat.berkeley.edu/tutorial-dynamic-docs
+  sidebar:
+    style: docked
+    title: "SCF Dynamic Documents Tutorial"
+    logo: assets/img/logo.svg
+    logo-href: https://statistics.berkeley.edu
+    logo-alt: "UC Berkeley Statistics logo"
+    tools:
+      - icon: github
+        href: https://github.com/berkeley-scf/tutorial-dynamic-docs
+        aria-label: GitHub
+    contents:
+      - href: index.qmd
+        text: Overview
+      - href: demo.qmd
+        text: Quarto output example
+      - href: demo-Rmd.Rmd
+        text: R Markdown output example
+      - href: python-in-RStudio.Rmd
+        text: Python chunks in RStudio
+      - href: license.qmd
+        text: License
+
+format:
+  html:
+    theme: cosmo
+    css: assets/styles.css
+    toc: true
