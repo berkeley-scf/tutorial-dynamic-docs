@@ -32,9 +32,7 @@ You should be able to follow the tutorial on any of MacOS, Windows or Linux.
 Materials for this tutorial, in particular the demonstration input files in various formats, are available from the underlying GitHub repository via the icon in the upper left.
 
 :::{.callout-tip}
-As of February 2025, the website for this tutorial was developed using Quarto.
-
-The reason that some of the files in the tutorial/repository start with "_" is to prevent Quarto from trying to render those files to HTML when building the website, so that the website can link to them as actual source files for you to examine.
+As of February 2025, the website for this tutorial was developed using Quarto, with the input files being (primarily) .qmd files.
 :::
 
 

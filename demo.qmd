@@ -30,7 +30,7 @@ opts_chunk$set(fig.width = 5, fig.height = 5)
 myControlVar <- TRUE   # R variable used later to control chunk behavior
 ```
 
-# 1) How to generate a document from this file
+# 1 How to generate a document from this file
 
 From the command line, you can render the file as follows:
 
@@ -38,7 +38,9 @@ From the command line, you can render the file as follows:
 #| eval: false
 quarto render demo.qmd --to html
 quarto render demo.qmd --to pdf
-quarto render demo.qmd  # Output depends on 'format' declaration at the top of the document (defaults to html).
+
+# Output depends on 'format' declaration at the top of the document (defaults to html):
+quarto render demo.qmd  
 ```
 
 Alternatively, start R and run the desired line from amongst the following possibilities in R:
@@ -55,7 +57,7 @@ Or in RStudio (version at least 2022.07), click on the 'Render' button and choos
 
 Here is [the rendered PDF version](demo.pdf) of this document.
 
-# 2) Some basic Markdown formatting
+# 2 Some basic Markdown formatting
 
 Here's an *introduction* to our **critical** discovery. Here we have some code to display inline but not evaluate: `exp(7)` and we can embed the code in a static code block as follows:
 
@@ -66,10 +68,10 @@ b = exp(a)
 
 This document will focus on embedding math and code and not on standard Markdown formatting. There are lots of sources of information on Markdown. [RStudio has good information on R Markdown](https://rmarkdown.rstudio.com) (including Markdown formatting).
 
-You can directly use [HTML formatting (for HTML output files) and PDF formatting (for PDF output files)](https://quarto.org/docs/authoring/markdown-basics.html#raw-content).
+You can directly use [HTML formatting (for HTML output files) and LaTeX formatting (for PDF output files)](https://quarto.org/docs/authoring/markdown-basics.html#raw-content).
 
 
-# 3) Embedding equations using LaTeX
+# 3 Embedding equations using LaTeX
 
 This can be done with the following syntax. Note that you can't have a space after the initial `$` for the inline equations.
 
@@ -81,7 +83,7 @@ $$
 f_\theta(x) = \int f_\theta(y, x) dy.
 $$
 
-## 3.1) LaTeX macros
+## 3.1 LaTeX macros
 
 You can define LaTeX macros in separate files and then use them as follows.
 
@@ -109,9 +111,9 @@ $$
 A = X \trans Y
 $$
 
-# 4) Embedding code chunks
+# 4 Embedding code chunks
 
-## 4.1) R code
+## 4.1 R code
 
 Here's an R code chunk
 
@@ -134,7 +136,7 @@ hist(rnorm(20))
 
 And here's some inline R code: What is 3 plus 5? `r 3+5`.
 
-## 4.2) Python code
+## 4.2 Python code
 
 You can embed Python code. As with R, state is preserved so later chunks can use objects from earlier chunks. 
 
@@ -155,6 +157,7 @@ except NameError:
     print('state is not preserved: x does not exist')
 ```
 
+::: {.callout-warning title="Format of output from Python chunks"}
 When using the `jupyter` rendering engine, all output is printed after all the code from the chunk.
 When using `knitr` engine, output appears directly after the code producing the output. 
 
@@ -164,11 +167,14 @@ print(1)
 # depends on the engine used.
 print(2)
 ```
+:::
 
+::: {.callout-warning title="What output is printed from Python chunks"}
 By default, only the output of the last line of Python code and explicit `print` calls are printed.
-But you can add `ipynb-shell-interactivity: all` to the yml header of the file to have all output printed.
+But you can add `ipynb-shell-interactivity: all` to the yml header of the Quarto file to have all output printed.
+:::
 
-There is no facility for inline Python code: `python print(3+5)`
+There is no facility for inline Python code, so this: `python print(3+5)` does not print out "8".
 
 To display code from a file of Python code, you can use functionality in the `inspect` module.
 This code would display the definition of `doubled()` from the `my_code` module.
@@ -183,12 +189,12 @@ print(inspect.getsource(my_code.doubled))
 
 This will work for functions and for class definitions.
 
-## 4.3) bash code
+## 4.3 bash code
 
 A bash chunk:
 ```{bash}
 #| label: bash-chunk1
-ls -l test*
+ls -l assets
 df -h
 cd /tmp
 pwd
@@ -203,7 +209,7 @@ We can see that state is not preserved here, where the current working directory
 pwd  # result would be /tmp if state were preserved 
 ```
 
-Inline bash code won't work: `bash wc demo.Rmd`, unlike with R code.
+Inline bash code won't work so this: `bash wc demo.Rmd` has no effect, unlike with R code.
 
 If you are using the `jupyter` engine and want to have both bash and Python chunks in a document, or you don't want to have to install a bash Jupyter kernel, you can use ipython magic to run bash code within a Python chunk:
 
@@ -216,7 +222,7 @@ If you are using the `jupyter` engine and want to have both bash and Python chun
 One can also use `zsh` or other shell chunks, replacing the "bash" label with "zsh" or the other shell. 
 
 
-## 4.4) Embedding Julia code
+## 4.4 Embedding Julia code
 
 You can embed Julia code. As with R and Python, state is preserved so later chunks can use objects from earlier chunks. 
 
@@ -236,12 +242,12 @@ catch
 end
 ```
 
-There is no facility for inline Julia code: `julia print(3+5)`
+There is no facility for inline Julia code, so this code: `julia print(3+5)` has no effect.
 
 
-# 5) Controlling code chunk behavior
+# 5 Controlling code chunk behavior
 
-The Quarto syntax for specifying a chunk label (useful for debugging) and chunk options is as shown here:
+The Quarto syntax for specifying a chunk label (useful for debugging) and chunk options is as shown here, with the label defined using `#|`:
 
 ```{r}
 #| echo: fenced
@@ -317,7 +323,7 @@ print a
 It's not uncommon to have various Python executables installed (different versions, in Conda/Mamba environments, etc.) on your system or to be unclear about which shell is being used to execute a shell chunk. Manually setting `engine.path` can help figure things out or work around problems.
 
 
-# 7) Reading code from an external file
+# 6 Reading code from an external file
 
 It's sometimes nice to draw code in from a separate file. Before invoking a chunk, we need to read the chunks from the source file, which contains the chunks tagged with some special formatting.
 
@@ -352,7 +358,7 @@ And here is a Python chunk whose code is in `demo.py`.
 
 
 
-To display function or class definitions from a file of Python code, you can use functionality in the `inspect` module.
+As mentioned earlier, to display function or class definitions from a file of Python code, you can use functionality in the `inspect` module.
 This code would display the definition of `doubled()` from the `my_code` module.
 
 ```{python}
@@ -363,7 +369,7 @@ print(inspect.getsource(my_code.doubled))
 ```
 
 
-# 8) Formatting of long lines of code and of output
+# 7 Formatting of long lines of code and of output
 
 In general, it's best to keep lines of code to at most 80 characters. This will help with code readability in the file with the code and with the output that is rendered not going into the margin.
 
@@ -379,7 +385,7 @@ include-in-header:
 ```
 
 
-## 8.1) R code
+## 7.1 R code
 
 Having long lines be nicely formatted and other aspects of formatting can be a challenge. Also, results can differ depending on your output format (e.g., PDF vs. HTML). In general the code in this section will often overflow the page width in PDF but not in HTML, but even in the HTML the line breaks may be awkwardly positioned.
 
@@ -390,7 +396,7 @@ Here are some examples that overflow in PDF output.
 b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"
 ## Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
 
-## This should work to give decent formatting in HTML but doesn't in PDF.
+## This might work to give decent formatting in HTML but doesn't in PDF.
 cat(b, fill = TRUE)
 
 vecWithALongName = rnorm(100)
@@ -417,7 +423,7 @@ Adding the `tidy: true` chunk option and setting the width as shown below can he
 b <- "Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"
 ## Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
 
-## This should work to give decent formatting in HTML but doesn't in PDF:
+## This might work to give decent formatting in HTML but doesn't in PDF:
 
 cat(b, fill = TRUE)
 
@@ -460,7 +466,7 @@ a <- length(mean(5 * vecWithALongName + vecWithALongName - exp(vecWithALongName)
 ```
 
 
-## 8.2) Python code
+## 7.2 Python code
 
 In Python, there is similar trouble with lines overflowing in PDF output too.
 
@@ -502,7 +508,7 @@ Long comments overflow as well, but you can always manually break into multiple 
 # kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl
 ```
 
-## 8.3) bash code
+## 7.3 bash code
 
 
 In bash, we have similar problems with lines overflowing in PDF output, but bash allows us to use a backslash to break lines of code. However that strategy doesn't help with long lines of output. 
@@ -538,7 +544,7 @@ Instead manually break the comment into multiple lines:
 ```
 
 
-# 9) References
+# 8 References
 
 We'll just see how you use BibTeX style references.  @Bane:etal:2008 proposed a useful method. This was confirmed [@Cres:Joha:2008].
 
