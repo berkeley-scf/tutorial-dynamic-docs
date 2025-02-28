@@ -323,16 +323,16 @@ f_\theta(x) = \int f_\theta(y, x) dy.
 <section id="latex-macros" class="level2">
 <h2 class="anchored" data-anchor-id="latex-macros">3.1) LaTeX macros</h2>
 <p>You can define LaTeX macros in separate files and then use them as follows.</p>
-<p>The macros for PDF rendering should be placed in a .tex file as shown in <a href="macros.tex">macros.tex</a>. The macros for HTML rendering should be placed in a .md file, formatted as shown in <a href="_macros.md">_macros.md</a>.</p>
+<p>The macros for PDF rendering should be placed in a .tex file as shown in <a href="macros.tex">macros.tex</a>. The macros for HTML rendering should be placed in a .md file, formatted as shown in <a href="macros.md">macros.md</a>.</p>
 <p>(Unfortunately, it does seem to me that you need to have two separate files with the same macro definitions if rendering to both pdf and html.)</p>
 <p>Then make sure to include those files as seen in the header of the qmd document like this:</p>
 <pre><code>format:
   pdf:
     include-before-body:
-     - file: _macros.tex
+     - file: macros.tex
   html:
     include-before-body:
-     - file: _macros.md</code></pre>
+     - file: macros.md</code></pre>
 <p>We can then use a macro in this equation:</p>
 <p><span class="math display">\[
 A = X \trans Y
@@ -448,10 +448,10 @@ drwxr-sr-x 2 paciorek scfstaff 3 Sep 27  2023 figure-html
 drwxr-sr-x 5 paciorek scfstaff 5 Sep 27  2023 libs
 Filesystem                       Size  Used Avail Use% Mounted on
 /dev/sda2                         59G   32G   25G  57% /
-tmpfs                             16G  134M   16G   1% /dev/shm
+tmpfs                             16G  126M   16G   1% /dev/shm
 tmpfs                            3.2G  3.4M  3.2G   1% /run
 tmpfs                            5.0M  4.0K  5.0M   1% /run/lock
-/dev/sdb1                        111G  491M  105G   1% /tmp
+/dev/sdb1                        111G  488M  105G   1% /tmp
 /dev/sda1                        499M  6.1M  493M   2% /boot/efi
 /dev/sda3                         59G   47G  9.3G  84% /var
 /dev/sda5                        2.6T  1.3T  1.2T  53% /var/tmp

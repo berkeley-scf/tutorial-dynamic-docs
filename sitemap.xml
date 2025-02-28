@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://computing.stat.berkeley.edu/tutorial-dynamic-docs/license.html</loc>
+    <lastmod>2025-02-28T00:25:48.535Z</lastmod>
+  </url>
+  <url>
+    <loc>https://computing.stat.berkeley.edu/tutorial-dynamic-docs/index.html</loc>
+    <lastmod>2025-02-28T00:48:47.192Z</lastmod>
+  </url>
+  <url>
     <loc>https://computing.stat.berkeley.edu/tutorial-dynamic-docs/demo.html</loc>
-    <lastmod>2025-02-28T00:23:27.003Z</lastmod>
+    <lastmod>2025-02-28T00:48:37.476Z</lastmod>
   </url>
   <url>
     <loc>https://computing.stat.berkeley.edu/tutorial-dynamic-docs/demo-Rmd.html</loc>
     <lastmod>2025-02-28T00:38:06.105Z</lastmod>
   </url>
   <url>
-    <loc>https://computing.stat.berkeley.edu/tutorial-dynamic-docs/license.html</loc>
-    <lastmod>2025-02-28T00:25:48.535Z</lastmod>
-  </url>
-  <url>
     <loc>https://computing.stat.berkeley.edu/tutorial-dynamic-docs/python-in-RStudio.html</loc>
     <lastmod>2025-02-25T22:37:39.054Z</lastmod>
-  </url>
-  <url>
-    <loc>https://computing.stat.berkeley.edu/tutorial-dynamic-docs/index.html</loc>
-    <lastmod>2025-02-28T00:34:49.077Z</lastmod>
   </url>
 </urlset>
