@@ -6,8 +6,8 @@ author: "Christopher Paciorek"
 date: "February 2022"
 bibliography: refs.bib
 format:
-  pdf
-  html
+  pdf: default
+  html: default
 ---
 
 ```{r chunksetup, include=FALSE} 
