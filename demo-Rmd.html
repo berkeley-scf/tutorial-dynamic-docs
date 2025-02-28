@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.6.40">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Christopher Paciorek">
+<meta name="dcterms.date" content="2022-02-01">
+
+<title>An example R Markdown file</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+/* CSS for citations */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+  margin-bottom: 0em;
+}
+.hanging-indent div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-549806ee2085284f45b00abea8c6df48.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-cd173fadfbc59501cc53580d670575f8.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN") {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="assets/styles.css">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="./demo-Rmd.html">R Markdown output example</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-left sidebar-header sidebar-header-stacked">
+      <a href="https://statistics.berkeley.edu" class="sidebar-logo-link">
+      <img src="./assets/img/logo.svg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+    <div class="sidebar-title mb-0 py-0">
+      <a href="./">SCF Dynamic Documents Tutorial</a> 
+        <div class="sidebar-tools-main">
+    <a href="https://github.com/berkeley-scf/tutorial-dynamic-docs" title="" class="quarto-navigation-tool px-1" aria-label="GitHub"><i class="bi bi-github"></i></a>
+</div>
+    </div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./demo.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Quarto output example</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./demo-Rmd.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">R Markdown output example</span></a>
+  </div>
+</li>
+        <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./python-in-RStudio.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Python chunks in RStudio</span></a>
+  </div>
+</li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#how-to-generate-a-document-from-this-file" id="toc-how-to-generate-a-document-from-this-file" class="nav-link active" data-scroll-target="#how-to-generate-a-document-from-this-file">1) How to generate a document from this file</a></li>
+  <li><a href="#some-basic-markdown-formatting" id="toc-some-basic-markdown-formatting" class="nav-link" data-scroll-target="#some-basic-markdown-formatting">2) Some basic Markdown formatting</a></li>
+  <li><a href="#embedding-equations-using-latex" id="toc-embedding-equations-using-latex" class="nav-link" data-scroll-target="#embedding-equations-using-latex">3) Embedding equations using LaTeX</a></li>
+  <li><a href="#embedding-r-code" id="toc-embedding-r-code" class="nav-link" data-scroll-target="#embedding-r-code">4) Embedding R code</a></li>
+  <li><a href="#controlling-code-chunk-behavior" id="toc-controlling-code-chunk-behavior" class="nav-link" data-scroll-target="#controlling-code-chunk-behavior">5) Controlling code chunk behavior</a></li>
+  <li><a href="#embedding-bash-and-python-code" id="toc-embedding-bash-and-python-code" class="nav-link" data-scroll-target="#embedding-bash-and-python-code">6) Embedding bash and Python code</a>
+  <ul class="collapse">
+  <li><a href="#bash" id="toc-bash" class="nav-link" data-scroll-target="#bash">6.1) bash</a></li>
+  <li><a href="#embedding-python-code" id="toc-embedding-python-code" class="nav-link" data-scroll-target="#embedding-python-code">6.2) Embedding Python code</a></li>
+  </ul></li>
+  <li><a href="#embedding-julia-code" id="toc-embedding-julia-code" class="nav-link" data-scroll-target="#embedding-julia-code">6.3) Embedding Julia code</a></li>
+  <li><a href="#reading-code-from-an-external-file" id="toc-reading-code-from-an-external-file" class="nav-link" data-scroll-target="#reading-code-from-an-external-file">7) Reading code from an external file</a></li>
+  <li><a href="#formatting-of-long-lines-of-code-and-of-output" id="toc-formatting-of-long-lines-of-code-and-of-output" class="nav-link" data-scroll-target="#formatting-of-long-lines-of-code-and-of-output">8) Formatting of long lines of code and of output</a>
+  <ul class="collapse">
+  <li><a href="#r-code" id="toc-r-code" class="nav-link" data-scroll-target="#r-code">8.1) R code</a></li>
+  <li><a href="#bash-code" id="toc-bash-code" class="nav-link" data-scroll-target="#bash-code">8.2) bash code</a></li>
+  <li><a href="#python-code" id="toc-python-code" class="nav-link" data-scroll-target="#python-code">8.3) Python code</a></li>
+  </ul></li>
+  <li><a href="#references" id="toc-references" class="nav-link" data-scroll-target="#references">9) References</a></li>
+  <li><a href="#literature-cited" id="toc-literature-cited" class="nav-link" data-scroll-target="#literature-cited">Literature cited</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">An example R Markdown file</h1>
+<p class="subtitle lead">Illustrating use of R, bash, Python, and Julia code chunks</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    <div>
+    <div class="quarto-title-meta-heading">Author</div>
+    <div class="quarto-title-meta-contents">
+             <p>Christopher Paciorek </p>
+          </div>
+  </div>
+    
+    <div>
+    <div class="quarto-title-meta-heading">Published</div>
+    <div class="quarto-title-meta-contents">
+      <p class="date">February 1, 2022</p>
+    </div>
+  </div>
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="how-to-generate-a-document-from-this-file" class="level1">
+<h1>1) How to generate a document from this file</h1>
+<p>From within R, you can run the document through the either the <em>rmarkdown</em> or <em>knitr</em> package for R to generate an html file, or through the <em>rmarkdown</em> package to generate PDF or Word (the latter being useful at times but hopefully avoidable).</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quarto); <span class="fu">quarto_render</span>(<span class="st">'demo-Rmd.Rmd'</span>, <span class="st">'html'</span>)</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(quarto); <span class="fu">quarto_render</span>(<span class="st">'demo-Rmd.Rmd'</span>, <span class="st">'pdf'</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rmarkdown); <span class="fu">render</span>(<span class="st">'demo-Rmd.Rmd'</span>, <span class="st">'pdf_document'</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rmarkdown); <span class="fu">render</span>(<span class="st">'demo-Rmd.Rmd'</span>, <span class="st">'html_document'</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(rmarkdown); <span class="fu">render</span>(<span class="st">'demo-Rmd.Rmd'</span>, <span class="st">'word_document'</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(knitr); <span class="fu">knit2html</span>(<span class="st">'demo-Rmd.Rmd'</span>)  </span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Or in RStudio, click on the ‘Knit’ pull-down menu and choose to knit to HTML, PDF, or Word (for R Markdown) or use the ‘Render’ button in more recent versions of RStudio.</p>
+<p>Alternatively, from the UNIX command line, run one of these:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render demo-Rmd.Rmd <span class="at">--to</span> html  <span class="co"># HTML</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="ex">quarto</span> render demo-Rmd.Rmd <span class="at">--to</span> pdf  <span class="co"># pdf</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">"library(rmarkdown); render('demo-Rmd.Rmd', 'pdf_document')"</span>  <span class="co"># PDF</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">"library(rmarkdown); render('demo-Rmd.Rmd', 'html_document')"</span>  <span class="co"># HTML</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">"library(rmarkdown); render('demo-Rmd.Rmd', 'word_document')"</span>  <span class="co"># Word</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="ex">Rscript</span> <span class="at">-e</span> <span class="st">"library(knitr); knit2html('demo-Rmd.Rmd')"</span>  <span class="co"># HTML alternative</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="some-basic-markdown-formatting" class="level1">
+<h1>2) Some basic Markdown formatting</h1>
+<p>Here’s an <em>introduction</em> to our <strong>critical</strong> discovery. Here we have some code to display inline but not evaluate: <code>exp(7)</code> and we can embed the code in a static code block as follows:</p>
+<pre><code>a = 7 %% 5
+b = exp(a)</code></pre>
+<p>This document will focus on embedding math and code and not on standard Markdown formatting. There are lots of sources of information on Markdown. <a href="https://rmarkdown.rstudio.com">RStudio has good information on R Markdown</a> (including Markdown formatting).</p>
+<p>For documents whose output format is HTML, you can use HTML formatting within your Markdown-based text.</p>
+</section>
+<section id="embedding-equations-using-latex" class="level1">
+<h1>3) Embedding equations using LaTeX</h1>
+<p>This can be done with the following syntax. Note that you can’t have a space after the initial $ for the inline equations.</p>
+<p>Here is an inline equation <span class="math inline">\(f(x) = \int f(y, x) dy\)</span>.</p>
+<p>Here’s a displayed equation</p>
+<p><span class="math display">\[
+f_\theta(x) = \int f_\theta(y, x) dy.
+\]</span></p>
+</section>
+<section id="embedding-r-code" class="level1">
+<h1>4) Embedding R code</h1>
+<p>Here’s an R code chunk</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">c</span>(<span class="dv">7</span>, <span class="dv">3</span>)</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(a)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 5</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> a <span class="sc">+</span> <span class="dv">3</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
+<p>Here’s another chunk:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">mean</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8</code></pre>
+</div>
+</div>
+<p>When running R code, output is printed interspersed with the code, as one would generally want. Also, later chunks have access to result from earlier chunks (i.e., state is preserved between chunks).</p>
+<p>Let’s make a plot:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">hist</span>(<span class="fu">rnorm</span>(<span class="dv">20</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="demo-Rmd_files/figure-html/r-plot-1.png" class="img-fluid figure-img" alt="example plot" width="480"></p>
+</figure>
+</div>
+</div>
+</div>
+<p>And here’s some inline R code: What is 3 plus 5? 8.</p>
+</section>
+<section id="controlling-code-chunk-behavior" class="level1">
+<h1>5) Controlling code chunk behavior</h1>
+<p>You have control over whether code in chunks is echoed into the document and evaluated using the <code>include</code>, <code>echo</code>, and <code>eval</code> tags.</p>
+<p>Here we print the code but don’t evaluate it by setting <code>eval</code> to <code>false</code>.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"This code is not evaluated, but the code itself is printed in the document."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Here is the result of running the code in a chunk but not printing the code by setting <code>eval</code> to <code>false</code>.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>This code is not printed in the document, but results of evaluating the code are printed.</code></pre>
+</div>
+</div>
+<p>And here is a chunk that is evaluated, but neither the code nor the result of evaluating the code is printed in the rendered document. This is achieved by setting <code>include</code> to <code>false</code>.</p>
+<p>Results of intensive calculations can be saved using the <code>cache=TRUE</code> tag so they don’t need to be rerun every time you compile the document.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">mean</span>(<span class="fu">rnorm</span>(<span class="fl">5e7</span>))</span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>a</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 8.562798e-05</code></pre>
+</div>
+</div>
+<p>You can use R variables to control the chunk options. Note that the variable <code>myControlVar</code> is defined in the first chunk of this document. Here it is used to turn off evaluation of the chunk code.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb15"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(<span class="st">"hi"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>An alternative, nice way to specify chunk options is within the chunk, like this:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"This code is printed in the document, but the code is not evaluated."</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="embedding-bash-and-python-code" class="level1">
+<h1>6) Embedding bash and Python code</h1>
+<section id="bash" class="level2">
+<h2 class="anchored" data-anchor-id="bash">6.1) bash</h2>
+<p>A bash chunk:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="fu">ls</span> <span class="at">-l</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a><span class="fu">df</span> <span class="at">-h</span></span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">cd</span> /tmp</span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>total 1367
+drwxr-sr-x 6 paciorek scfstaff      8 Feb 25 14:37 assets
+drwxr-sr-x 2 paciorek scfstaff     10 Feb  1  2022 cache
+-rw-r--r-- 1 paciorek scfstaff    394 Feb 25 14:37 _config.yml
+-rw-r--r-- 1 paciorek scfstaff    150 Sep 27  2023 demo2.R
+-rw-r--r-- 1 paciorek scfstaff    252 Sep 27  2023 demo2.R~
+-rw-r--r-- 1 paciorek scfstaff   8083 Feb 25 14:37 demo-bash.ipynb
+-rw-r--r-- 1 paciorek scfstaff  48673 Feb 25 14:37 demo-bash.pdf
+drwxr-sr-x 7 paciorek scfstaff      7 Aug 31  2022 demo_cache
+-rw-r--r-- 1 paciorek scfstaff  22979 Feb  3  2022 demo.docx
+drwxr-sr-x 8 paciorek scfstaff      8 Feb 25 14:48 demo_files
+-rw-r--r-- 1 paciorek scfstaff  24939 Feb 25 14:37 demo.lyx
+-rw-r--r-- 1 paciorek scfstaff    218 Feb 25 14:37 demo.py
+-rw-r--r-- 1 paciorek scfstaff    150 Sep 27  2023 demo.py~
+drwxr-sr-x 3 paciorek scfstaff      3 Feb 27 16:21 demo-python_files
+-rw-r--r-- 1 paciorek scfstaff  32863 Feb 27 16:21 demo-python.html
+-rw-r--r-- 1 paciorek scfstaff   6936 Feb 25 14:37 demo-python.ipynb
+-rw-r--r-- 1 paciorek scfstaff  49626 Feb 25 14:37 demo-python.pdf
+-rw-r--r-- 1 paciorek scfstaff   3662 Jan 27  2022 _demo-python.qmd
+drwxr-sr-x 4 paciorek scfstaff      4 Sep 27  2023 demo-q_cache
+drwxr-sr-x 5 paciorek scfstaff      5 Feb 25 14:37 demo-q_files
+-rw-r--r-- 1 paciorek scfstaff  68377 Feb 25 14:37 demo-q.html
+-rw-r--r-- 1 paciorek scfstaff  17776 Feb 25 14:49 demo.qmd
+-rw-r--r-- 1 paciorek scfstaff  13004 Aug 18  2022 demo.qmd~
+-rw-r--r-- 1 paciorek scfstaff  79811 Feb 25 14:37 demo-q.pdf
+-rw-r--r-- 1 paciorek scfstaff    252 Feb 25 14:37 demo.R
+drwxr-sr-x 3 paciorek scfstaff      3 Feb 27 16:21 demo-R_files
+-rw-r--r-- 1 paciorek scfstaff  37819 Feb 27 16:21 demo-R.html
+-rw-r--r-- 1 paciorek scfstaff 124604 Feb 25 14:37 demo-R.ipynb
+drwxr-sr-x 3 paciorek scfstaff      3 Feb 25 14:40 demo-Rmd_cache
+drwxr-sr-x 3 paciorek scfstaff      3 Feb 25 14:47 demo-Rmd_files
+-rw-r--r-- 1 paciorek scfstaff  14284 Feb 27 16:21 demo-Rmd.rmarkdown
+-rw-r--r-- 1 paciorek scfstaff  14178 Feb 25 14:37 demo-Rmd.Rmd
+-rw-r--r-- 1 paciorek scfstaff  10853 Nov  6  2019 demo.Rmd.save
+-rw-r--r-- 1 paciorek scfstaff  12462 Feb 25 14:37 demo.Rnw
+-rw-r--r-- 1 paciorek scfstaff  59736 Feb 25 14:37 demo-R.pdf
+-rw-r--r-- 1 paciorek scfstaff  12890 Feb 25 14:37 demo.Rtex
+drwxr-sr-x 3 paciorek scfstaff      3 Jan  6  2023 demo-with-interactive_files
+-rw-r--r-- 1 paciorek scfstaff  17113 Jan  6  2023 demo-with-interactive.html
+-rw-r--r-- 1 paciorek scfstaff    343 Feb 25 14:37 _demo-with-interactive.qmd
+-rw-r--r-- 1 paciorek scfstaff    269 Jan  6  2023 demo-with-interactive.qmd~
+drwxr-sr-x 2 paciorek scfstaff      5 Jul 30  2015 figure
+drwxr-sr-x 2 paciorek scfstaff      3 Feb 25 14:37 _includes
+-rw-r--r-- 1 paciorek scfstaff  37115 Feb 25 14:41 index.html
+-rw-r--r-- 1 paciorek scfstaff  10451 Feb 25 14:37 index.qmd
+-rw-r--r-- 1 paciorek scfstaff  10222 Nov  5 15:35 index.qmd~
+drwxr-sr-x 2 paciorek scfstaff      4 Feb 25 14:37 _layouts
+-rw-r--r-- 1 paciorek scfstaff     68 Feb 25 14:37 _macros.md
+-rw-r--r-- 1 paciorek scfstaff     40 Sep 28  2023 macros.md~
+-rw-r--r-- 1 paciorek scfstaff     61 Feb 25 14:37 _macros.tex
+-rw-r--r-- 1 paciorek scfstaff     40 Sep 28  2023 macros.tex~
+-rw-r--r-- 1 paciorek scfstaff    463 Feb 25 14:37 Makefile
+-rw-r--r-- 1 paciorek scfstaff  28862 Feb 27 16:21 python-in-RStudio.html
+-rw-r--r-- 1 paciorek scfstaff 171796 Feb 25 14:37 python-in-RStudio.pdf
+-rw-r--r-- 1 paciorek scfstaff   2055 Feb 25 14:37 python-in-RStudio.Rmd
+-rw-r--r-- 1 paciorek scfstaff    763 Nov  5 15:43 _quarto.yml
+-rw-r--r-- 1 paciorek scfstaff    531 Nov  5 15:32 _quarto.yml~
+-rw-r--r-- 1 paciorek scfstaff    831 Feb 25 14:37 README.md
+-rw-r--r-- 1 paciorek scfstaff  14902 Feb 25 14:37 refs.bib
+drwxr-sr-x 2 paciorek scfstaff      7 Feb 25 14:37 _sass
+drwxr-sr-x 6 paciorek scfstaff     20 Feb 25 14:48 _site
+drwxr-sr-x 7 paciorek scfstaff      7 Feb 27 16:21 site_libs
+drwxr-sr-x 3 paciorek scfstaff      3 Feb 25 14:40 test_files
+-rw-r--r-- 1 paciorek scfstaff   7167 Jul 17  2015 test-line-formatting.Rnw
+-rw-r--r-- 1 paciorek scfstaff  14477 Sep 28  2023 test.pdf
+drwxr-sr-x 3 paciorek scfstaff      3 Sep 27  2023 testq_cache
+drwxr-sr-x 4 paciorek scfstaff      4 Sep 27  2023 testq_files
+-rw-r--r-- 1 paciorek scfstaff  64072 Sep 27  2023 testq.html
+-rw-r--r-- 1 paciorek scfstaff    387 Sep 27  2023 test.qmd~
+-rw------- 1 paciorek scfstaff   5285 Sep 28  2023 test.tex~
+-rw-r--r-- 1 paciorek scfstaff    390 Feb 25 14:48 tmp.txt
+Filesystem                       Size  Used Avail Use% Mounted on
+/dev/sda2                         59G   32G   25G  57% /
+tmpfs                             16G  122M   16G   1% /dev/shm
+tmpfs                            3.2G  3.4M  3.2G   1% /run
+tmpfs                            5.0M  4.0K  5.0M   1% /run/lock
+/dev/sdb1                        111G  479M  105G   1% /tmp
+/dev/sda1                        499M  6.1M  493M   2% /boot/efi
+/dev/sda3                         59G   47G  9.3G  84% /var
+/dev/sda5                        2.6T  1.3T  1.2T  53% /var/tmp
+oz.berkeley.edu:/pool0/accounts   67T   23T   45T  34% /accounts
+tmpfs                            3.2G  132K  3.2G   1% /run/user/3189
+oz.berkeley.edu:/pool0/system    6.0T  4.9T  1.2T  81% /system
+oz.berkeley.edu:/pool0/scratch    37T   35T  2.5T  94% /scratch
+/tmp</code></pre>
+</div>
+</div>
+<p>Unfortunately, output from bash chunks occurs after all the code is printed. Also, state is not preserved between chunks.</p>
+<p>We can see that state is not preserved here, where the current working directory is NOT the directory that we changed to in the chunk above.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb19"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="bu">pwd</span>  <span class="co"># result would be /tmp if state were preserved </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>/accounts/vis/paciorek/staff/tutorials/tutorial-dynamic-docs</code></pre>
+</div>
+</div>
+<p>Inline bash code won’t work: <code>bash wc demo-Rmd.Rmd</code>, unlike with R code.</p>
+</section>
+<section id="embedding-python-code" class="level2">
+<h2 class="anchored" data-anchor-id="embedding-python-code">6.2) Embedding Python code</h2>
+<p>You can embed Python code. As with R, state is preserved so later chunks can use objects from earlier chunks.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> np.array((<span class="dv">3</span>, <span class="dv">5</span>, <span class="dv">7</span>))</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(x.<span class="bu">sum</span>())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>15</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>x.<span class="bu">min</span>()    <span class="co"># this will print with more recent versions of rmarkdown </span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb25"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="cf">try</span>:</span>
+<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(x[<span class="dv">0</span>])</span>
+<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a><span class="cf">except</span> <span class="pp">NameError</span>:</span>
+<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>       <span class="bu">print</span>(<span class="st">'state is not preserved: x does not exist'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>3</code></pre>
+</div>
+</div>
+<p>There is no facility for inline Python code: <code>python print(3+5)</code></p>
+</section>
+</section>
+<section id="embedding-julia-code" class="level1">
+<h1>6.3) Embedding Julia code</h1>
+<p>You can embed Julia code. As with R and Python, state is preserved so later chunks can use objects from earlier chunks.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb27"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a>x <span class="op">=</span> [<span class="fl">3</span>, <span class="fl">5</span>, <span class="fl">7</span>];</span>
+<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>x[<span class="fl">2</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>5</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb29"><pre class="sourceCode julia code-with-copy"><code class="sourceCode julia"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a>try</span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>    <span class="fu">println</span>(<span class="st">"state is preserved if we see the value of `x[2]` next"</span>)</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(x[<span class="fl">2</span>])</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>catch</span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    <span class="fu">print</span>(<span class="st">"state is not preserved: x does not exist"</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a><span class="kw">end</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>state is preserved if we see the value of `x[2]` next
+5</code></pre>
+</div>
+</div>
+<p>There is no facility for inline Julia code: <code>julia print(3+5)</code></p>
+</section>
+<section id="reading-code-from-an-external-file" class="level1">
+<h1>7) Reading code from an external file</h1>
+<p>It’s sometimes nice to draw code in from a separate file. Before invoking a chunk, we need to read the chunks from the source file, which contains the chunks tagged with some special formatting. Note that a good place for reading the source file via <code>read_chunk()</code> is in an initial setup chunk at the beginning of the document.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb31"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">7</span></span>
+<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"a is "</span>, a, <span class="st">".</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>a is 7.</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb33"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb33-1"><a href="#cb33-1" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="dv">9</span></span>
+<span id="cb33-2"><a href="#cb33-2" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(<span class="st">"Now, a is "</span>, a, <span class="st">".</span><span class="sc">\n</span><span class="st">"</span>, <span class="at">sep =</span> <span class="st">""</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Now, a is 9.</code></pre>
+</div>
+</div>
+</section>
+<section id="formatting-of-long-lines-of-code-and-of-output" class="level1">
+<h1>8) Formatting of long lines of code and of output</h1>
+<section id="r-code" class="level2">
+<h2 class="anchored" data-anchor-id="r-code">8.1) R code</h2>
+<p>Having long lines be nicely formatted and other aspects of formatting can be a challenge. Also, results can differ depending on your output format (e.g., PDF vs.&nbsp;HTML). In general the code in this section will often overflow the page width in PDF but not in HTML, but even in the HTML the line breaks may be awkwardly positioned.</p>
+<p>Here are some examples that overflow in PDF output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb35"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="st">"Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively</span></span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a><span class="do">## This should work to give decent formatting in HTML but doesn't in PDF.</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(b, <span class="at">fill =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb37"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a>vecWithALongName <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">mean</span>(<span class="dv">5</span> <span class="sc">*</span> vecWithALongName <span class="sc">+</span> vecWithALongName <span class="sc">-</span> <span class="fu">exp</span>(vecWithALongName) <span class="sc">+</span> vecWithALongName <span class="sc">*</span> vecWithALongName, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">mean</span>(<span class="dv">5</span> <span class="sc">*</span> vecWithALongName <span class="sc">+</span> vecWithALongName)) <span class="co"># this is a comment that goes over the line by a good long ways</span></span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>a <span class="ot">=</span> <span class="fu">length</span>(<span class="fu">mean</span>(<span class="dv">5</span> <span class="sc">*</span> vecWithALongName <span class="sc">+</span> vecWithALongName <span class="sc">-</span> <span class="fu">exp</span>(vecWithALongName) <span class="sc">+</span> vecWithALongName, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="co"># this is a comment that goes over the line by a good long long long long long long long long ways</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>In contrast, long output is usually fine, even in PDF.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a><span class="fu">rnorm</span>(<span class="dv">30</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code> [1]  0.47485053 -0.53300834 -0.69385985 -1.30288852 -1.14076964 -1.04437702
+ [7]  0.51995461  0.15155954  0.55836893 -1.87940055 -0.99908618 -0.47083913
+[13]  0.88461719 -2.47235000  1.55333948  1.41114869  1.91056609 -0.62932679
+[19]  1.22380063  1.12960580 -0.84659648 -0.65229492  1.83760743 -1.32678114
+[25]  0.50964439 -0.80747544 -0.03085863 -0.91200119  0.82473210  0.70518136</code></pre>
+</div>
+</div>
+<p>Adding the <code>tidy=TRUE</code> chunk option and setting the width (as shown in the Rmd version of this document) can help with long comment lines or lines of code, but doesn’t help for some of the cases above.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Long strings and long comments:</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="st">"Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"</span></span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a><span class="do">## Statistics at UC Berkeley: We are a community engaged in research and</span></span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a><span class="do">## education in probability and statistics. In addition to developing</span></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="do">## fundamental theory and methodology, we are actively</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a><span class="do">## This should work to give decent formatting in HTML but doesn't in PDF:</span></span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span>(b, <span class="at">fill =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Now consider long lines of code:</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a>vecWithALongName <span class="ot">&lt;-</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">mean</span>(<span class="dv">5</span> <span class="sc">*</span> vecWithALongName <span class="sc">+</span> vecWithALongName <span class="sc">-</span> <span class="fu">exp</span>(vecWithALongName) <span class="sc">+</span></span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>    vecWithALongName <span class="sc">*</span> vecWithALongName, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">mean</span>(<span class="dv">5</span> <span class="sc">*</span> vecWithALongName <span class="sc">+</span> vecWithALongName))  <span class="co"># this is a comment that goes over the line by a good long ways</span></span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">mean</span>(<span class="dv">5</span> <span class="sc">*</span> vecWithALongName <span class="sc">+</span> vecWithALongName <span class="sc">-</span> <span class="fu">exp</span>(vecWithALongName) <span class="sc">+</span></span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>    vecWithALongName, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))  <span class="co"># this is a comment that goes over the line by a good long long long long long long long long ways</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>To address the problems seen above, sometimes you can format things manually for better results. You may need to tag the chunk with <code>tidy=FALSE</code>, but I have not done that here.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb43"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb43-1"><a href="#cb43-1" aria-hidden="true" tabindex="-1"></a><span class="do">## Breaking up a string:</span></span>
+<span id="cb43-2"><a href="#cb43-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-3"><a href="#cb43-3" aria-hidden="true" tabindex="-1"></a>b <span class="ot">&lt;-</span> <span class="st">"Statistics at UC Berkeley: We are a community engaged in research</span></span>
+<span id="cb43-4"><a href="#cb43-4" aria-hidden="true" tabindex="-1"></a><span class="st"> and education in probability and statistics. In addition to developing </span></span>
+<span id="cb43-5"><a href="#cb43-5" aria-hidden="true" tabindex="-1"></a><span class="st">fundamental theory and methodology, we are actively"</span></span>
+<span id="cb43-6"><a href="#cb43-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-7"><a href="#cb43-7" aria-hidden="true" tabindex="-1"></a><span class="do">## Breaking up a comment:</span></span>
+<span id="cb43-8"><a href="#cb43-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-9"><a href="#cb43-9" aria-hidden="true" tabindex="-1"></a><span class="do">## Statistics at UC Berkeley: We are a community engaged in research and </span></span>
+<span id="cb43-10"><a href="#cb43-10" aria-hidden="true" tabindex="-1"></a><span class="do">## education in probability and statistics. In addition to developing </span></span>
+<span id="cb43-11"><a href="#cb43-11" aria-hidden="true" tabindex="-1"></a><span class="do">## fundamental theory and methodology, we are actively</span></span>
+<span id="cb43-12"><a href="#cb43-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-13"><a href="#cb43-13" aria-hidden="true" tabindex="-1"></a><span class="do">## Breaking up code lines:</span></span>
+<span id="cb43-14"><a href="#cb43-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb43-15"><a href="#cb43-15" aria-hidden="true" tabindex="-1"></a>vecWithALongName <span class="ot">=</span> <span class="fu">rnorm</span>(<span class="dv">100</span>)</span>
+<span id="cb43-16"><a href="#cb43-16" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">mean</span>(<span class="dv">5</span> <span class="sc">*</span> vecWithALongName <span class="sc">+</span> vecWithALongName <span class="sc">-</span> <span class="fu">exp</span>(vecWithALongName) <span class="sc">+</span> </span>
+<span id="cb43-17"><a href="#cb43-17" aria-hidden="true" tabindex="-1"></a>    vecWithALongName <span class="sc">*</span> vecWithALongName, <span class="at">na.rm =</span> <span class="cn">TRUE</span>))</span>
+<span id="cb43-18"><a href="#cb43-18" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">mean</span>(<span class="dv">5</span> <span class="sc">*</span> vecWithALongName <span class="sc">+</span> vecWithALongName)) <span class="co"># this is a comment that </span></span>
+<span id="cb43-19"><a href="#cb43-19" aria-hidden="true" tabindex="-1"></a>    <span class="do">## goes over the line by a good long ways</span></span>
+<span id="cb43-20"><a href="#cb43-20" aria-hidden="true" tabindex="-1"></a>a <span class="ot">&lt;-</span> <span class="fu">length</span>(<span class="fu">mean</span>(<span class="dv">5</span> <span class="sc">*</span> vecWithALongName <span class="sc">+</span> vecWithALongName <span class="sc">-</span> <span class="fu">exp</span>(vecWithALongName) <span class="sc">+</span> </span>
+<span id="cb43-21"><a href="#cb43-21" aria-hidden="true" tabindex="-1"></a>    vecWithALongName, <span class="at">na.rm =</span> <span class="cn">TRUE</span>)) <span class="co"># this is a comment that goes over the line </span></span>
+<span id="cb43-22"><a href="#cb43-22" aria-hidden="true" tabindex="-1"></a>    <span class="do">## by a good long long long long long long long long ways</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="bash-code" class="level2">
+<h2 class="anchored" data-anchor-id="bash-code">8.2) bash code</h2>
+<p>In bash, we have similar problems with lines overflowing in PDF output, but bash allows us to use a backslash to break lines of code. However that strategy doesn’t help with long lines of output.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively"</span> <span class="op">&gt;</span> tmp.txt</span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  </span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a><span class="bu">echo</span> <span class="st">"Second try: Statistics at UC Berkeley: We are a community engaged </span><span class="dt">\</span></span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a><span class="st">in research and education in probability and statistics. In addition to </span><span class="dt">\</span></span>
+<span id="cb44-5"><a href="#cb44-5" aria-hidden="true" tabindex="-1"></a><span class="st">developing fundamental theory and methodology, we are actively"</span> <span class="dt">\</span></span>
+<span id="cb44-6"><a href="#cb44-6" aria-hidden="true" tabindex="-1"></a><span class="op">&gt;&gt;</span> tmp.txt</span>
+<span id="cb44-7"><a href="#cb44-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb44-8"><a href="#cb44-8" aria-hidden="true" tabindex="-1"></a><span class="fu">cat</span> tmp.txt</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively
+Second try: Statistics at UC Berkeley: We are a community engaged in research and education in probability and statistics. In addition to developing fundamental theory and methodology, we are actively</code></pre>
+</div>
+</div>
+<p>We also have problems with long comments, so we would need to manually format them.</p>
+<p>Here is a long comment line that overflows in PDF:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Instead manually break the comment into multiple lines:</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode bash code-with-copy"><code class="sourceCode bash"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla </span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="co"># lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa </span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a><span class="co"># adlfjaf jkladf afdl</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="python-code" class="level2">
+<h2 class="anchored" data-anchor-id="python-code">8.3) Python code</h2>
+<p>In Python, there is similar trouble with lines overflowing in PDF output too.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb48"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb48-1"><a href="#cb48-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This overflows the page:</span></span>
+<span id="cb48-2"><a href="#cb48-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb48-3"><a href="#cb48-3" aria-hidden="true" tabindex="-1"></a>b <span class="op">=</span> <span class="st">"asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl"</span></span>
+<span id="cb48-4"><a href="#cb48-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(b)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl</code></pre>
+</div>
+</div>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb50"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb50-1"><a href="#cb50-1" aria-hidden="true" tabindex="-1"></a><span class="co"># This code overflows the page:</span></span>
+<span id="cb50-2"><a href="#cb50-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb50-3"><a href="#cb50-3" aria-hidden="true" tabindex="-1"></a>zoo <span class="op">=</span> {<span class="st">"lion"</span>: <span class="st">"Simba"</span>, <span class="st">"panda"</span>: <span class="va">None</span>, <span class="st">"whale"</span>: <span class="st">"Moby"</span>, <span class="st">"numAnimals"</span>: <span class="dv">3</span>, <span class="st">"bear"</span>: <span class="st">"Yogi"</span>, <span class="st">"killer whale"</span>: <span class="st">"shamu"</span>, <span class="st">"bunny:"</span>: <span class="st">"bugs"</span>}</span>
+<span id="cb50-4"><a href="#cb50-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zoo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'lion': 'Simba', 'panda': None, 'whale': 'Moby', 'numAnimals': 3, 'bear': 'Yogi', 'killer whale': 'shamu', 'bunny:': 'bugs'}</code></pre>
+</div>
+</div>
+<p>To fix the issue, we can manually break the code into multiple lines, but long output still overflows.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb52"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb52-1"><a href="#cb52-1" aria-hidden="true" tabindex="-1"></a>zoo <span class="op">=</span> {<span class="st">"lion"</span>: <span class="st">"Simba"</span>, <span class="st">"panda"</span>: <span class="va">None</span>, <span class="st">"whale"</span>: <span class="st">"Moby"</span>, </span>
+<span id="cb52-2"><a href="#cb52-2" aria-hidden="true" tabindex="-1"></a>       <span class="st">"numAnimals"</span>: <span class="dv">3</span>, <span class="st">"bear"</span>: <span class="st">"Yogi"</span>, <span class="st">"killer whale"</span>: <span class="st">"shamu"</span>, </span>
+<span id="cb52-3"><a href="#cb52-3" aria-hidden="true" tabindex="-1"></a>       <span class="st">"bunny:"</span>: <span class="st">"bugs"</span>}</span>
+<span id="cb52-4"><a href="#cb52-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(zoo)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>{'lion': 'Simba', 'panda': None, 'whale': 'Moby', 'numAnimals': 3, 'bear': 'Yogi', 'killer whale': 'shamu', 'bunny:': 'bugs'}</code></pre>
+</div>
+</div>
+<p>Long comments overflow as well, but you can always manually break into multiple lines.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb54"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb54-1"><a href="#cb54-1" aria-hidden="true" tabindex="-1"></a><span class="co"># asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl</span></span>
+<span id="cb54-2"><a href="#cb54-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb54-3"><a href="#cb54-3" aria-hidden="true" tabindex="-1"></a><span class="co"># asdl lkjsdf jklsdf kladfj jksfd alkfd klasdf klad kla lakjsdf aljdkfad</span></span>
+<span id="cb54-4"><a href="#cb54-4" aria-hidden="true" tabindex="-1"></a><span class="co"># kljafda kaljdf afdlkja lkajdfsa lajdfa adlfjaf jkladf afdl</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+</section>
+<section id="references" class="level1">
+<h1>9) References</h1>
+<p>We’ll just see how you use BibTeX style references. <span class="citation" data-cites="Bane:etal:2008">Banerjee et al. (<a href="#ref-Bane:etal:2008" role="doc-biblioref">2008</a>)</span> proposed a useful method. This was confirmed <span class="citation" data-cites="Cres:Joha:2008">(<a href="#ref-Cres:Joha:2008" role="doc-biblioref">Cressie and Johannesson 2008</a>)</span>.</p>
+<p>Note the indication of the <code>refs.bib</code> file in the initial lines of this document so that the bibliographic information for these citations can be found.</p>
+<p>The list of references is placed at the end of the document. You’d presumably want a section header like this:</p>
+</section>
+<section id="literature-cited" class="level1">
+
+
+
+
+</section>
+
+<div id="quarto-appendix" class="default"><section class="quarto-appendix-contents" role="doc-bibliography" id="quarto-bibliography"><h2 class="anchored quarto-appendix-heading">Literature cited</h2><div id="refs" class="references csl-bib-body hanging-indent" data-entry-spacing="0" role="list">
+<div id="ref-Bane:etal:2008" class="csl-entry" role="listitem">
+Banerjee, S., A. E. Gelfand, A. O. Finley, and H. Sang. 2008. <span>“Gaussian Predictive Process Models for Large Spatial Data Sets.”</span> <em>Journal of the Royal Statistical Society B</em> 70 (4): 825–48.
+</div>
+<div id="ref-Cres:Joha:2008" class="csl-entry" role="listitem">
+Cressie, N., and G. Johannesson. 2008. <span>“Fixed Rank Kriging for Very Large Spatial Data Sets.”</span> <em>Journal of the Royal Statistical Society B</em> 70 (1): 209–26.
+</div>
+</div></section></div></main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const onCopySuccess = function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  }
+  const getTextToCopy = function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+    text: getTextToCopy
+  });
+  clipboard.on('success', onCopySuccess);
+  if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+    const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+      text: getTextToCopy,
+      container: window.document.getElementById('quarto-embedded-source-code-modal')
+    });
+    clipboardModal.on('success', onCopySuccess);
+  }
+    var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+    var mailtoRegex = new RegExp(/^mailto:/);
+      var filterRegex = new RegExp("https:\/\/computing\.stat\.berkeley\.edu\/tutorial-dynamic-docs");
+    var isInternal = (href) => {
+        return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+    }
+    // Inspect non-navigation links and adorn them if external
+ 	var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+    for (var i=0; i<links.length; i++) {
+      const link = links[i];
+      if (!isInternal(link.href)) {
+        // undo the damage that might have been done by quarto-nav.js in the case of
+        // links that we want to consider external
+        if (link.dataset.originalHref !== undefined) {
+          link.href = link.dataset.originalHref;
+        }
+      }
+    }
+  function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+    const config = {
+      allowHTML: true,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start',
+    };
+    if (contentFn) {
+      config.content = contentFn;
+    }
+    if (onTriggerFn) {
+      config.onTrigger = onTriggerFn;
+    }
+    if (onUntriggerFn) {
+      config.onUntrigger = onUntriggerFn;
+    }
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      if (note) {
+        return note.innerHTML;
+      } else {
+        return "";
+      }
+    });
+  }
+  const xrefs = window.document.querySelectorAll('a.quarto-xref');
+  const processXRef = (id, note) => {
+    // Strip column container classes
+    const stripColumnClz = (el) => {
+      el.classList.remove("page-full", "page-columns");
+      if (el.children) {
+        for (const child of el.children) {
+          stripColumnClz(child);
+        }
+      }
+    }
+    stripColumnClz(note)
+    if (id === null || id.startsWith('sec-')) {
+      // Special case sections, only their first couple elements
+      const container = document.createElement("div");
+      if (note.children && note.children.length > 2) {
+        container.appendChild(note.children[0].cloneNode(true));
+        for (let i = 1; i < note.children.length; i++) {
+          const child = note.children[i];
+          if (child.tagName === "P" && child.innerText === "") {
+            continue;
+          } else {
+            container.appendChild(child.cloneNode(true));
+            break;
+          }
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(container);
+        }
+        return container.innerHTML
+      } else {
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        return note.innerHTML;
+      }
+    } else {
+      // Remove any anchor links if they are present
+      const anchorLink = note.querySelector('a.anchorjs-link');
+      if (anchorLink) {
+        anchorLink.remove();
+      }
+      if (window.Quarto?.typesetMath) {
+        window.Quarto.typesetMath(note);
+      }
+      if (note.classList.contains("callout")) {
+        return note.outerHTML;
+      } else {
+        return note.innerHTML;
+      }
+    }
+  }
+  for (var i=0; i<xrefs.length; i++) {
+    const xref = xrefs[i];
+    tippyHover(xref, undefined, function(instance) {
+      instance.disable();
+      let url = xref.getAttribute('href');
+      let hash = undefined; 
+      if (url.startsWith('#')) {
+        hash = url;
+      } else {
+        try { hash = new URL(url).hash; } catch {}
+      }
+      if (hash) {
+        const id = hash.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note !== null) {
+          try {
+            const html = processXRef(id, note.cloneNode(true));
+            instance.setContent(html);
+          } finally {
+            instance.enable();
+            instance.show();
+          }
+        } else {
+          // See if we can fetch this
+          fetch(url.split('#')[0])
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.getElementById(id);
+            if (note !== null) {
+              const html = processXRef(id, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      } else {
+        // See if we can fetch a full url (with no hash to target)
+        // This is a special case and we should probably do some content thinning / targeting
+        fetch(url)
+        .then(res => res.text())
+        .then(html => {
+          const parser = new DOMParser();
+          const htmlDoc = parser.parseFromString(html, "text/html");
+          const note = htmlDoc.querySelector('main.content');
+          if (note !== null) {
+            // This should only happen for chapter cross references
+            // (since there is no id in the URL)
+            // remove the first header
+            if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+              note.children[0].remove();
+            }
+            const html = processXRef(null, note);
+            instance.setContent(html);
+          } 
+        }).finally(() => {
+          instance.enable();
+          instance.show();
+        });
+      }
+    }, function(instance) {
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            div.style.left = 0;
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+        // Handle positioning of the toggle
+    window.addEventListener(
+      "resize",
+      throttle(() => {
+        elRect = undefined;
+        if (selectedAnnoteEl) {
+          selectCodeLines(selectedAnnoteEl);
+        }
+      }, 10)
+    );
+    function throttle(fn, ms) {
+    let throttle = false;
+    let timer;
+      return (...args) => {
+        if(!throttle) { // first call gets through
+            fn.apply(this, args);
+            throttle = true;
+        } else { // all the others get throttled
+            if(timer) clearTimeout(timer); // cancel #2
+            timer = setTimeout(() => {
+              fn.apply(this, args);
+              timer = throttle = false;
+            }, ms);
+        }
+      };
+    }
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+
+
+
+
+</body></html>
