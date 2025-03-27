@@ -2,8 +2,6 @@
 title: "Notes on using Python within RStudio"
 ---
 
-# Notes on using Python within RStudio
-
 In addition to basic use of Python chunks in R Markdown documents, RStudio has developed the `reticulate` package, which greatly enhances the ability to use both R and Python in a single workflow.
 
 Rmd documents with Python chunks can be rendered to an output file by 'knitting' the document using the `Knit` button (which invokes `rmarkdown::render`) or by invoking `rmarkdown::render` yourself.
