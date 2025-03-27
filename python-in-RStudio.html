@@ -180,14 +180,8 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </nav>
 <div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
 <!-- margin-sidebar -->
-    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
-        <nav id="TOC" role="doc-toc" class="toc-active">
-    <h2 id="toc-title">On this page</h2>
-   
-  <ul>
-  <li><a href="#notes-on-using-python-within-rstudio" id="toc-notes-on-using-python-within-rstudio" class="nav-link active" data-scroll-target="#notes-on-using-python-within-rstudio">Notes on using Python within RStudio</a></li>
-  </ul>
-</nav>
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar zindex-bottom">
+        
     </div>
 <!-- main -->
 <main class="content" id="quarto-document-content">
@@ -211,8 +205,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </header>
 
 
-<section id="notes-on-using-python-within-rstudio" class="level1">
-<h1>Notes on using Python within RStudio</h1>
 <p>In addition to basic use of Python chunks in R Markdown documents, RStudio has developed the <code>reticulate</code> package, which greatly enhances the ability to use both R and Python in a single workflow.</p>
 <p>Rmd documents with Python chunks can be rendered to an output file by ‘knitting’ the document using the <code>Knit</code> button (which invokes <code>rmarkdown::render</code>) or by invoking <code>rmarkdown::render</code> yourself.</p>
 <section id="with-the-notebook-inline-output-functionality-turned-off" class="level4">
@@ -235,7 +227,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">## access the R object in Python code</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>r.devs[<span class="dv">0</span>]</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>0.753787244968848</code></pre>
+<pre><code>1.1057883868038003</code></pre>
 </div>
 <div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>pyvals <span class="op">=</span> {<span class="st">"a"</span>: <span class="dv">0</span>, <span class="st">"b"</span>: <span class="dv">1</span>}</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -251,7 +243,6 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <p>There’s lots more functionality. That’s just a teaser of the cool things you can do.</p>
 
 
-</section>
 </section>
 
 </main> <!-- /main -->
